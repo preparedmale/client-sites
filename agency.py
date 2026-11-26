@@ -2,7 +2,7 @@
 import html
 from pathlib import Path
 
-EMAIL = "seraistudio@gmail.com"
+EMAIL = "seraistudio.web@gmail.com"
 BASE = "https://preparedmale.github.io/client-sites"
 
 T = {
