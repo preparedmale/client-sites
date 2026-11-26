@@ -88,6 +88,8 @@ def render(d, lang, langs, prefix):
     wa = digits(d.get("whatsapp"))
     wa_text = t(d.get("whatsapp_greeting"), lang) or (f"Hello! I found {name} online." if lang == "en" else f"Здравствуйте! Нашёл(ла) {name} в интернете.")
     wa_link = f"https://wa.me/{wa}?text={html.escape(__import__('urllib.parse').parse.quote(wa_text))}" if wa else ""
+    wa_tgt = ' target="_blank" rel="noopener"'
+    if d.get("sample"): wa_link, wa_tgt = "#contact", ""   # fictional samples: no live WhatsApp link to a number that may belong to someone
     cur = d.get("currency", "")
     desc = t(d.get("intro"), lang)
     hero_img = (d.get("photos") or [{}])[0].get("file") if d.get("photos") else None
@@ -106,7 +108,7 @@ def render(d, lang, langs, prefix):
     jsonld = {"@context": "https://schema.org", "@type": d.get("schema_type", "LodgingBusiness"), "name": name,
               "description": desc, "url": page_url(d["slug"], lang, langs),
               "address": {"@type": "PostalAddress", "addressLocality": town, "addressCountry": d.get("country_code", "")}}
-    if d.get("whatsapp"): jsonld["telephone"] = d["whatsapp"]
+    if d.get("whatsapp") and not d.get("sample"): jsonld["telephone"] = d["whatsapp"]
     if d.get("email"): jsonld["email"] = d["email"]
     if d.get("price_range"): jsonld["priceRange"] = d["price_range"]
     if d.get("geo"): jsonld["geo"] = {"@type": "GeoCoordinates", "latitude": d["geo"][0], "longitude": d["geo"][1]}
@@ -120,7 +122,7 @@ def render(d, lang, langs, prefix):
                 f'<svg class="hero-art" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMax slice" aria-hidden="true">{SCENES[th["scene"]]}</svg>')
     s.append(f'<section class="hero">{hero_art}<div class="wrap hero-text"><p class="eyebrow">{e(t(d.get("location_line"), lang))}</p>'
              f'<h1>{e(t(d.get("headline"), lang))}</h1><p class="lead">{e(desc)}</p><div class="cta">'
-             + (f'<a class="btn" href="{wa_link}" target="_blank" rel="noopener">{e(u["book"])}</a>' if wa else "")
+             + (f'<a class="btn" href="{wa_link}"{wa_tgt}>{e(u["book"])}</a>' if wa else "")
              + (f'<span class="from">{e(u["from_"])} <b>{e(d["price_from"])} {e(cur)}</b> {e(u["per_night"]) if d.get("kind") == "lodging" else ""}</span>' if d.get("price_from") else "")
              + "</div></div></section>")
     if d.get("facts"):
@@ -166,10 +168,10 @@ def render(d, lang, langs, prefix):
     if d.get("address"): contact.append(f'<p><span class="k">⌖</span> <span class="v">{e(t(d["address"], lang))}</span></p>')
     if str(d.get("maps_url", "")).startswith("https://"): contact.append(f'<p><a href="{e(d["maps_url"])}" target="_blank" rel="noopener">{e(u["map"])}</a></p>')
     s.append(f'<section id="contact" class="contact"><div class="wrap split"><div><h2>{e(u["contact"])}</h2>{"".join(contact)}<p class="muted">{e(u["reply"])}</p></div>'
-             + (f'<div class="cta-box"><a class="btn big" href="{wa_link}" target="_blank" rel="noopener">{e(u["write"])}</a></div>' if wa else "") + "</div></section>")
+             + (f'<div class="cta-box"><a class="btn big" href="{wa_link}"{wa_tgt}>{e(u["write"])}</a></div>' if wa else "") + "</div></section>")
     s.append(f'<footer><div class="wrap bar"><span>© {e(name)} · {e(town)}</span><span>{e(d.get("credit", ""))}</span></div></footer>')
     if wa:
-        s.append(f'<a class="fab" href="{wa_link}" target="_blank" rel="noopener" aria-label="{e(u["write"])}"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg></a>')
+        s.append(f'<a class="fab" href="{wa_link}"{wa_tgt} aria-label="{e(u["write"])}"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg></a>')
 
     og_img = f'<meta property="og:image" content="{BASE_URL}/{d["slug"]}/{e(hero_img)}">' if hero_img else ""
     css = f"""
