@@ -277,5 +277,35 @@
    }
   }
  ],
- "extra_credits": []
+ "extra_credits": [],
+ "geo": [
+  42.6573,
+  44.644
+ ],
+ "booking": {
+  "type": "stay"
+ },
+ "reviews": [
+  {
+   "text": {
+    "en": "We opened the curtains and Kazbek was right there. Maka's breakfast is worth the trip alone.",
+    "ru": "Открыли шторы, а там Казбек. Ради завтрака Маки стоит приехать."
+   },
+   "author": "Sophie · Lyon"
+  },
+  {
+   "text": {
+    "en": "Quiet, spotless and warm in October. Giorgi's sunrise walk was the highlight.",
+    "ru": "Тихо, чисто и тепло даже в октябре. Рассветная прогулка с Гиорги — лучшее."
+   },
+   "author": "Alexei · Moscow"
+  },
+  {
+   "text": {
+    "en": "They answered on WhatsApp in ten minutes and met us at the marshrutka stop.",
+    "ru": "Ответили в WhatsApp за десять минут и встретили у маршрутки."
+   },
+   "author": "Hana · Seoul"
+  }
+ ]
 }

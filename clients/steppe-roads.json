@@ -83,7 +83,49 @@
      "ru": "Трансфер и обед включены"
     }
    ],
-   "photo": "card-1.jpg"
+   "photo": "card-1.jpg",
+   "itinerary": [
+    {
+     "en": "08:00 pickup at your guesthouse in Karakol",
+     "ru": "08:00 забираем из гостевого дома в Караколе"
+    },
+    {
+     "en": "Walk past the Seven Bulls rocks into the Valley of Flowers",
+     "ru": "Идём мимо скал Семь быков в Долину цветов"
+    },
+    {
+     "en": "Lunch in a herder's yurt, kymyz to try",
+     "ru": "Обед в юрте пастухов, можно попробовать кымыз"
+    },
+    {
+     "en": "17:00 back in Karakol",
+     "ru": "17:00 возвращаемся в Каракол"
+    }
+   ],
+   "included": [
+    {
+     "en": "Transport",
+     "ru": "Трансфер"
+    },
+    {
+     "en": "Guide",
+     "ru": "Гид"
+    },
+    {
+     "en": "Lunch",
+     "ru": "Обед"
+    }
+   ],
+   "excluded": [
+    {
+     "en": "Tips",
+     "ru": "Чаевые"
+    },
+    {
+     "en": "Travel insurance",
+     "ru": "Страховка"
+    }
+   ]
   },
   {
    "name": {
@@ -109,7 +151,49 @@
      "ru": "Палатки, питание и гид включены"
     }
    ],
-   "photo": "card-2.jpg"
+   "photo": "card-2.jpg",
+   "itinerary": [
+    {
+     "en": "Day 1: Karakol gorge to Sirota camp, 6 hours",
+     "ru": "День 1: ущелье Каракол до лагеря Сирота, 6 часов"
+    },
+    {
+     "en": "Day 2: Up to Ala-Kul lake and over the 3,860 m pass",
+     "ru": "День 2: подъём к Ала-Кулю и перевал 3860 м"
+    },
+    {
+     "en": "Day 3: Down to the Altyn-Arashan hot springs and back to Karakol",
+     "ru": "День 3: спуск к горячим источникам Алтын-Арашан и в Каракол"
+    }
+   ],
+   "included": [
+    {
+     "en": "Tents and mats",
+     "ru": "Палатки и коврики"
+    },
+    {
+     "en": "All meals on the trail",
+     "ru": "Питание на маршруте"
+    },
+    {
+     "en": "Guide and cook",
+     "ru": "Гид и повар"
+    },
+    {
+     "en": "Park fees",
+     "ru": "Сборы нацпарка"
+    }
+   ],
+   "excluded": [
+    {
+     "en": "Sleeping bag (rent 300 KGS)",
+     "ru": "Спальник (аренда 300 сом)"
+    },
+    {
+     "en": "Travel insurance",
+     "ru": "Страховка"
+    }
+   ]
   },
   {
    "name": {
@@ -135,7 +219,53 @@
      "ru": "Юрты и всё питание"
     }
    ],
-   "photo": "card-3.jpg"
+   "photo": "card-3.jpg",
+   "itinerary": [
+    {
+     "en": "Day 1: Drive to Kochkor, ride to Kilemche jailoo",
+     "ru": "День 1: переезд в Кочкор, верхом до джайлоо Килемче"
+    },
+    {
+     "en": "Day 2: Over the Jalgyz-Karagai pass to Song-Kul",
+     "ru": "День 2: через перевал Жалгыз-Карагай к Сон-Кулю"
+    },
+    {
+     "en": "Day 3: A free day at the lake with a herding family",
+     "ru": "День 3: свободный день на озере с семьёй пастухов"
+    },
+    {
+     "en": "Day 4: Ride out and drive back to Karakol",
+     "ru": "День 4: выезд верхом и переезд в Каракол"
+    }
+   ],
+   "included": [
+    {
+     "en": "Horses and saddles",
+     "ru": "Лошади и сёдла"
+    },
+    {
+     "en": "Yurt stays",
+     "ru": "Ночёвки в юртах"
+    },
+    {
+     "en": "All meals",
+     "ru": "Всё питание"
+    },
+    {
+     "en": "Guide and transport",
+     "ru": "Гид и трансфер"
+    }
+   ],
+   "excluded": [
+    {
+     "en": "Travel insurance",
+     "ru": "Страховка"
+    },
+    {
+     "en": "Drinks",
+     "ru": "Напитки"
+    }
+   ]
   }
  ],
  "faq": [
@@ -260,5 +390,44 @@
  "story": {
   "en": "Aibek grew up herding horses above Jeti-Oguz and started guiding friends of friends in 2016. Today the team is three local guides, two cooks and a dozen calm horses. We keep groups small so the families who host us in their yurts are glad to see us next year.",
   "ru": "Айбек вырос, перегоняя лошадей над Джети-Огузом, и в 2016 году начал водить друзей своих друзей. Сейчас в команде три местных гида, два повара и дюжина спокойных лошадей. Мы держим группы маленькими, чтобы семьи, принимающие нас в юртах, были рады видеть нас и через год."
- }
+ },
+ "geo": [
+  42.4907,
+  78.3936
+ ],
+ "booking": {
+  "type": "tour",
+  "departures": [
+   "2027-06-12",
+   "2027-06-26",
+   "2027-07-10",
+   "2027-07-24",
+   "2027-08-07",
+   "2027-08-21",
+   "2027-09-04"
+  ]
+ },
+ "reviews": [
+  {
+   "text": {
+    "en": "Six people, two guides, perfect weather on the Ala-Kul pass. Food in camp was better than in Bishkek.",
+    "ru": "Шесть человек, два гида и идеальная погода на перевале. Еда в лагере вкуснее, чем в Бишкеке."
+   },
+   "author": "Tom · Leeds"
+  },
+  {
+   "text": {
+    "en": "I had never ridden a horse. By day two I was relaxed, and Song-Kul at night is unforgettable.",
+    "ru": "Я никогда не ездила верхом. На второй день уже расслабилась, а Сон-Куль ночью незабываем."
+   },
+   "author": "Mira · Tel Aviv"
+  },
+  {
+   "text": {
+    "en": "Clear price, no surprises, pickup on time. Booked by WhatsApp in one evening.",
+    "ru": "Понятная цена, без сюрпризов, забрали вовремя. Забронировали в WhatsApp за вечер."
+   },
+   "author": "Kenji · Osaka"
+  }
+ ]
 }

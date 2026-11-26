@@ -34,6 +34,9 @@ UI = {
     "ka": dict(rooms="ოთახები", stay="განთავსება", experiences="აქტივობები", gallery="ფოტოები", reviews="სტუმრების შეფასებები", faq="სასარგებლო ინფორმაცია", getting_here="როგორ მოგვაგნოთ", contact="კონტაქტი", per_night="ღამეში", guests="სტუმარი", up_to="მაქსიმუმ", write="მოგვწერეთ WhatsApp-ზე", book="თარიღების შემოწმება", map="Google Maps-ზე ნახვა", from_="საწყისი ფასი", reply="ჩვეულებრივ რამდენიმე საათში გპასუხობთ.", email="ელფოსტა", menu="მენიუ", lang_name="ქართული", sample="საცდელი საიტი. ეს ობიექტი გამოგონილია.", story_l="ჩვენი ისტორია", contact_h="მოგვწერეთ", your_wa="თქვენი WhatsApp ნომერი", your_email="თქვენი ელფოსტა", photos_by="ფოტო", greeting="გამარჯობა! {name} ინტერნეტში ვიპოვე."),
 }
 
+for _l, _k in {'en': {'book_h': 'Request a booking', 'f_checkin': 'Check-in', 'f_checkout': 'Check-out', 'f_date': 'Date', 'f_time': 'Time', 'f_guests': 'Guests', 'o_stay': 'Room', 'o_tour': 'Tour', 'o_tasting': 'Tasting', 'o_table': '', 'f_departure': 'Departure', 'f_name': 'Your name', 'f_note': 'Anything we should know?', 'est': 'Estimated total', 'send': 'Send request on WhatsApp', 'pay_note': 'No payment now. We confirm availability in a message, usually within a few hours.', 'demo_h': 'Demo only', 'demo_p': 'On a real site this opens WhatsApp with the message below, ready to send to the owner. Nothing was sent.', 'close': 'Close', 'sample_reviews': 'Sample reviews', 'hours': 'Opening hours', 'wines': 'Our wines', 'bottle': 'bottle', 'included': 'Included', 'excluded': 'Not included', 'itinerary': 'Day by day', 'menu_h': 'Menu', 'nav_book': 'Book', 'sel': 'Choose'}, 'ru': {'book_h': 'Запрос на бронирование', 'f_checkin': 'Заезд', 'f_checkout': 'Выезд', 'f_date': 'Дата', 'f_time': 'Время', 'f_guests': 'Гостей', 'o_stay': 'Номер', 'o_tour': 'Тур', 'o_tasting': 'Дегустация', 'o_table': '', 'f_departure': 'Дата выезда группы', 'f_name': 'Ваше имя', 'f_note': 'Пожелания', 'est': 'Примерная сумма', 'send': 'Отправить запрос в WhatsApp', 'pay_note': 'Сейчас платить не нужно. Мы подтвердим наличие мест в сообщении, обычно в течение нескольких часов.', 'demo_h': 'Только демо', 'demo_p': 'На настоящем сайте откроется WhatsApp с этим сообщением для владельца. Ничего не отправлено.', 'close': 'Закрыть', 'sample_reviews': 'Примеры отзывов', 'hours': 'Часы работы', 'wines': 'Наши вина', 'bottle': 'бутылка', 'included': 'Включено', 'excluded': 'Не включено', 'itinerary': 'По дням', 'menu_h': 'Меню', 'nav_book': 'Бронь', 'sel': 'Выберите'}, 'ka': {'book_h': 'დაჯავშნის მოთხოვნა', 'f_checkin': 'შესვლა', 'f_checkout': 'გასვლა', 'f_date': 'თარიღი', 'f_time': 'დრო', 'f_guests': 'სტუმრები', 'o_stay': 'ოთახი', 'o_tour': 'ტური', 'o_tasting': 'დეგუსტაცია', 'o_table': '', 'f_departure': 'გასვლის თარიღი', 'f_name': 'თქვენი სახელი', 'f_note': 'რამე, რაც უნდა ვიცოდეთ?', 'est': 'სავარაუდო ჯამი', 'send': 'მოთხოვნის გაგზავნა WhatsApp-ზე', 'pay_note': 'ახლა გადახდა არ არის საჭირო. თავისუფალ ადგილებს შეტყობინებით დაგიდასტურებთ, ჩვეულებრივ რამდენიმე საათში.', 'demo_h': 'მხოლოდ დემო', 'demo_p': 'ნამდვილ საიტზე გაიხსნება WhatsApp ამ შეტყობინებით მფლობელისთვის. არაფერი გაგზავნილა.', 'close': 'დახურვა', 'sample_reviews': 'ნიმუში შეფასებები', 'hours': 'სამუშაო საათები', 'wines': 'ჩვენი ღვინოები', 'bottle': 'ბოთლი', 'included': 'შედის', 'excluded': 'არ შედის', 'itinerary': 'დღეების მიხედვით', 'menu_h': 'მენიუ', 'nav_book': 'ჯავშანი', 'sel': 'აირჩიეთ'}}.items():
+    UI[_l].update(_k)
+
 THEMES = {
     # display serif/grotesk, body sans, accent, paper, deep (contact band)
     "valley": dict(display="Cormorant Garamond", dw="300;400;500", body="Manrope", accent="#7b2a3e", paper="#f8f4ee", deep="#2a1a1c"),
@@ -90,6 +93,7 @@ def render(d, lang, langs, prefix):
     if d.get("rooms"): nav.append(("stay", sec_title))
     if d.get("experiences"): nav.append(("experiences", u["experiences"]))
     if len(photos) > 2: nav.append(("gallery", u["gallery"]))
+    if d.get("booking"): nav.append(("book", u["nav_book"]))
     nav.append(("contact", u["contact"]))
 
     alt_links = "".join(f'<link rel="alternate" hreflang="{l}" href="{page_url(d["slug"], l, langs)}">' for l in langs)
@@ -112,13 +116,13 @@ def render(d, lang, langs, prefix):
     if smp: s.append(f'<div class="sample">{e(u["sample"])}</div>')
     s.append(f'<header class="nav" data-solid="0"><div class="pill"><a class="brand" href="{home}">{e(name)}</a>'
              f'<nav aria-label="{e(u["menu"])}">' + "".join(f'<a href="#{k}">{e(v)}</a>' for k, v in nav) + f"</nav>{switch}"
-             + (f'<a class="mini" href="{wa_link}"{wa_tgt}>{e(u["book"])}</a>' if wa else "") + "</div></header>")
+             + (f'<a class="mini" href="#book">{e(u["book"])}</a>' if d.get("booking") else "") + "</div></header>")
 
     # 1. hero
     s.append('<section class="hero">' + (f'<div class="hero-media">{img(photos[0], "kb", lazy=False)}</div>' if hero_img else "")
              + f'<div class="hero-in wrap"><p class="tag rv">{e(t(d.get("location_line"), lang))}</p>'
              f'<h1 class="rv">{e(t(d.get("headline"), lang))}</h1><div class="hero-foot rv"><p class="lead">{e(desc)}</p>'
-             f'<div class="cta">{btn(wa_link, u["book"]) if wa else ""}{price_from}</div></div></div>'
+             f'<div class="cta">{btn("#book" if d.get("booking") else wa_link, u["book"]) if wa else ""}{price_from}</div></div></div>'
              '<span class="scroll-cue" aria-hidden="true"></span></section>')
 
     # 2. facts
@@ -142,14 +146,28 @@ def render(d, lang, langs, prefix):
             meta = f'{e(u["up_to"])} {e(r["guests"])} {e(u["guests"])}' if r.get("guests") else ""
             feats = " · ".join(e(t(x, lang)) for x in (r.get("features") or []))
             price = (f'<p class="price"><b>{e(r["price"])} {e(cur)}</b><span>{e(r.get("unit") and t(r["unit"], lang) or (u["per_night"] if d.get("kind") == "lodging" else ""))}</span></p>' if r.get("price") else "")
+            extra = ""
+            if r.get("itinerary"):
+                li = lambda xs: "".join(f"<li>{e(t(x, lang))}</li>" for x in xs)
+                extra = (f'<details class="more"><summary>{e(u["itinerary"])}{PLUS}</summary><ol class="days">{li(r["itinerary"])}</ol>'
+                         f'<div class="incl"><div><p class="lbl">{e(u["included"])}</p><ul class="yes">{li(r.get("included", []))}</ul></div>'
+                         f'<div><p class="lbl">{e(u["excluded"])}</p><ul class="no">{li(r.get("excluded", []))}</ul></div></div></details>')
             body = (f'<div class="o-body"><p class="num">{i:02d}</p><h3>{e(t(r.get("name"), lang))}</h3>'
-                    f'<p>{e(t(r.get("text"), lang))}</p>' + (f'<p class="feats">{meta + (" · " if meta and feats else "") + feats}</p>' if meta or feats else "") + "</div>")
+                    f'<p>{e(t(r.get("text"), lang))}</p>' + (f'<p class="feats">{meta + (" · " if meta and feats else "") + feats}</p>' if meta or feats else "") + extra + "</div>")
             if with_photos:
                 rows.append(f'<article class="o-card rv"><div class="bezel"><div class="core"><img src="{prefix}{e(r["photo"])}" alt="" loading="lazy" decoding="async"></div></div>{body}{price}</article>')
             else:
                 rows.append(f'<article class="o-row rv">{body}{price}</article>')
         s.append(f'<section id="stay" class="offer wrap"><div class="sec-head rv"><p class="tag dark">{e(name)}</p><h2>{e(sec_title)}</h2></div>'
                  f'<div class="{"o-grid" if with_photos else "o-list"}">{"".join(rows)}</div></section>')
+
+    if d.get("menu"):
+        groups = "".join(f'<div class="m-group rv"><h3>{e(t(g["name"], lang))}</h3><ul>' + "".join(
+            f'<li><span>{e(t(it["name"], lang))}</span><i></i><b>{e(it["price"])} {e(cur)}</b></li>' for it in g["items"]) + "</ul></div>" for g in d["menu"])
+        s.append(f'<section id="menu" class="menu wrap"><div class="sec-head rv"><p class="tag dark">{e(t(d.get("hours"), lang))}</p><h2>{e(u["menu_h"])}</h2></div><div class="m-grid">{groups}</div></section>')
+    if d.get("wines"):
+        ws = "".join(f'<li class="rv"><div><h3>{e(w["name"])}</h3><p>{e(t(w.get("style"), lang))}</p></div><p class="price"><b>{e(w["price"])} {e(cur)}</b><span>{e(u["bottle"])}</span></p></li>' for w in d["wines"])
+        s.append(f'<section id="wines" class="wines wrap"><div class="sec-head rv"><p class="tag dark">Qvevri</p><h2>{e(u["wines"])}</h2></div><ul class="w-list">{ws}</ul></section>')
 
     # 5. experiences
     if d.get("experiences"):
@@ -162,6 +180,31 @@ def render(d, lang, langs, prefix):
         s.append(f'<section id="experiences" class="exp"><div class="wrap"><div class="sec-head rv"><p class="tag">{e(town)}</p><h2>{e(u["experiences"])}</h2></div>'
                  f'<div class="exp-grid{"" if tl else " solo"}"><div class="xs">{items}</div>{tl}</div></div></section>')
 
+    # booking request form: fills a WhatsApp message; on samples it only shows a demo of that message
+    bk = d.get("booking")
+    if bk and d.get("whatsapp"):
+        typ = bk["type"]
+        f_ = lambda lab, inner: f'<label class="fld"><span>{e(lab)}</span>{inner}</label>'
+        num = lambda lab, mx: f_(lab, f'<select name="n" data-l="{e(lab)}">' + "".join(f"<option>{i}</option>" for i in range(1, mx + 1)) + "</select>")
+        opt = ("" if typ == "table" else f_(u["o_" + typ], f'<select name="opt" data-l="{e(u["o_" + typ])}" required>' + "".join(
+            f'<option value="{i}" data-price="{e(r.get("price") or 0)}">{e(t(r.get("name"), lang))} · {e(r.get("price"))} {e(cur)}</option>' for i, r in enumerate(d.get("rooms") or [])) + "</select>"))
+        date = lambda nm, lab: f_(lab, f'<input type="date" name="{nm}" data-l="{e(lab)}" required>')
+        times = lambda: f_(u["f_time"], f'<select name="tm" data-l="{e(u["f_time"])}" required>' + "".join(f"<option>{e(x)}</option>" for x in bk.get("times", [])) + "</select>")
+        if typ == "stay": fields = [opt, date("d1", u["f_checkin"]), date("d2", u["f_checkout"]), num(u["f_guests"], 6)]
+        elif typ == "tour": fields = [opt, f_(u["f_departure"], f'<select name="dep" data-l="{e(u["f_departure"])}" required>' + "".join(f"<option>{e(x)}</option>" for x in bk.get("departures", [])) + "</select>"), num(u["f_guests"], 6)]
+        elif typ == "tasting": fields = [opt, date("d1", u["f_date"]), times(), num(u["f_guests"], 12)]
+        else: fields = [date("d1", u["f_date"]), times(), num(u["f_guests"], 12)]
+        fields += [f_(u["f_name"], f'<input name="nm" autocomplete="name" data-l="{e(u["f_name"])}" required>'),
+                   f'<label class="fld wide"><span>{e(u["f_note"])}</span><textarea name="note" rows="2" data-l="{e(u["f_note"])}"></textarea></label>']
+        cfg = dict(type=typ, cur=cur, wa="" if smp else wa, title=f'{u["book_h"]} · {name}', estl=u["est"])
+        est = "" if typ == "table" else f'<p class="est">{e(u["est"])} <b>—</b></p>'
+        s.append(f'<section id="book" class="book"><div class="wrap b-grid"><div class="rv"><p class="tag">{e(u["nav_book"])}</p><h2>{e(u["book_h"])}</h2>'
+                 f'<p class="b-note">{e(u["pay_note"])}</p>' + (f'<p class="b-hours"><span>{e(u["hours"])}</span>{e(t(d["hours"], lang))}</p>' if d.get("hours") else "")
+                 + f'</div><form class="bk bezel rv" data-cfg="{e(json.dumps(cfg, ensure_ascii=False))}" novalidate><div class="core f-in">{"".join(fields)}{est}'
+                 f'<button class="btn" type="submit"><span>{e(u["send"])}</span>{ARROW}</button>' + (f'<p class="demo-tag">{e(u["demo_h"])}</p>' if smp else "") + "</div></form></div>"
+                 + (f'<dialog id="demo"><p class="tag dark">{e(u["demo_h"])}</p><p>{e(u["demo_p"])}</p><pre></pre><form method="dialog"><button class="btn"><span>{e(u["close"])}</span></button></form></dialog>' if smp else "")
+                 + "</section>")
+
     # 6. gallery bento
     if len(photos) > 2:
         g = photos[2:6]
@@ -169,10 +212,20 @@ def render(d, lang, langs, prefix):
                  + "".join(f'<figure class="bezel rv"><div class="core">{img(p)}</div><figcaption>{e(t(p.get("alt"), lang))}</figcaption></figure>' for p in g)
                  + "</div></section>")
 
+    if d.get("reviews"):
+        s.append(f'<section class="revs wrap"><div class="sec-head rv"><p class="tag dark">{e(u["sample_reviews"]) if smp else "★★★★★"}</p><h2>{e(u["reviews"])}</h2></div><div class="r-grid">' + "".join(
+            f'<figure class="rv"><p class="stars" aria-hidden="true">★★★★★</p><blockquote>{e(t(r.get("text"), lang))}</blockquote><figcaption>{e(r.get("author"))}</figcaption></figure>' for r in d["reviews"]) + "</div></section>")
+
     # 7. faq + route
     if d.get("faq") or d.get("getting_here"):
         faq = "".join(f'<details class="rv"><summary>{e(t(q.get("q"), lang))}{PLUS}</summary><p>{e(t(q.get("a"), lang))}</p></details>' for q in (d.get("faq") or []))
-        route = f'<aside class="route rv"><p class="tag dark">{e(u["getting_here"])}</p><p>{e(t(d["getting_here"], lang))}</p></aside>' if d.get("getting_here") else ""
+        geo = d.get("geo")
+        mp = ""
+        if geo:
+            la, lo = geo
+            mp = (f'<iframe class="map" title="{e(u["map"])}" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox={lo-.025:.4f}%2C{la-.014:.4f}%2C{lo+.025:.4f}%2C{la+.014:.4f}&amp;layer=mapnik&amp;marker={la}%2C{lo}"></iframe>'
+                  f'<a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query={la}%2C{lo}" target="_blank" rel="noopener">{e(u["map"])} ↗</a>')
+        route = f'<aside class="route rv">{mp}<p class="tag dark">{e(u["getting_here"])}</p><p>{e(t(d.get("getting_here"), lang))}</p></aside>' if d.get("getting_here") or geo else ""
         s.append(f'<section class="faq wrap"><div><h2 class="rv">{e(u["faq"])}</h2>{faq}</div>{route}</section>')
 
     # 8. contact band
@@ -296,6 +349,34 @@ details p{{padding:0 0 1.6rem;color:var(--muted);max-width:60ch}}
 .v.ph{{font-style:italic;color:rgba(244,239,232,.55)}}.contact .muted{{color:rgba(244,239,232,.55);border:0;font-size:.9rem;margin-bottom:1.8rem}}
 footer{{padding-block:2rem 2.4rem;border-top:1px solid rgba(255,255,255,.12);color:rgba(244,239,232,.55);font-size:.8rem}}
 .f-row{{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}}.credits{{font-size:.7rem;margin-top:1rem;opacity:.7}}
+/* booking */
+.book{{background:var(--deep);color:#f4efe8;padding-block:clamp(6rem,11vw,10rem)}}.book .tag{{color:#f4efe8}}
+.b-grid{{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(3rem,6vw,6rem);align-items:start}}.book h2{{margin:1.4rem 0 1.6rem}}
+.b-note{{color:rgba(244,239,232,.7);max-width:40ch}}.b-hours{{margin-top:2rem;display:grid;gap:.3rem}}.b-hours span{{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,239,232,.5)}}
+.bk{{background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}}.f-in{{background:#fbf8f3;color:var(--ink);padding:clamp(1.4rem,3vw,2.4rem);display:grid;grid-template-columns:1fr 1fr;gap:1.2rem 1.4rem}}
+.fld{{display:grid;gap:.35rem}}.fld.wide,.f-in .btn,.est,.demo-tag{{grid-column:1/-1}}.fld span{{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}}:lang(ka) .fld span{{text-transform:none;letter-spacing:.02em}}
+.fld input,.fld select,.fld textarea{{font:inherit;color:inherit;background:transparent;border:0;border-bottom:1px solid var(--hair);padding:.55rem 0;border-radius:0;width:100%;min-width:0}}
+.fld input:focus,.fld select:focus,.fld textarea:focus{{outline:none;border-bottom-color:var(--accent)}}
+.est{{display:flex;justify-content:space-between;align-items:baseline;padding-top:.6rem;color:var(--muted)}}.est b{{font-family:var(--display);font-weight:400;font-size:1.8rem;color:var(--ink)}}
+.f-in .btn{{background:var(--ink);color:#fff;justify-content:space-between;border:0;cursor:pointer;font-family:inherit}}.f-in .ic{{background:rgba(255,255,255,.16)}}
+.demo-tag{{text-align:center;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}}
+dialog{{max-width:min(520px,92vw);border:0;border-radius:1.4rem;padding:2rem;background:#fbf8f3;color:var(--ink);box-shadow:0 40px 80px -30px rgba(0,0,0,.5)}}dialog::backdrop{{background:rgba(10,8,6,.55);backdrop-filter:blur(4px)}}
+dialog .tag{{color:var(--accent);background:none;backdrop-filter:none;box-shadow:inset 0 0 0 1px var(--accent)}}dialog pre{{white-space:pre-wrap;font:inherit;font-size:.92rem;background:rgba(29,26,23,.05);border-radius:.8rem;padding:1rem;margin:1.2rem 0}}dialog p{{margin-top:1rem;color:var(--muted)}}dialog .btn{{background:var(--ink);color:#fff;border:0;cursor:pointer;font-family:inherit;padding:.8rem 1.4rem}}
+/* tour details */
+.more{{margin-top:1rem;border:0}}.more summary{{font:600 .85rem/1 var(--body);padding:.8rem 0;justify-content:flex-start;gap:.6rem}}.days{{padding-left:1.1rem;margin:.2rem 0 1rem;color:var(--muted);font-size:.9rem;display:grid;gap:.4rem}}
+.incl{{display:grid;grid-template-columns:1fr 1fr;gap:1rem;font-size:.86rem}}.incl ul{{list-style:none;padding:0;margin:.4rem 0 0;display:grid;gap:.3rem;color:var(--muted)}}
+.yes li::before{{content:"✓ ";color:var(--accent)}}.no li::before{{content:"– ";color:#a04a3a}}.lbl{{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase}}
+/* menu + wines */
+.menu,.wines{{padding-block:clamp(4rem,8vw,7rem)}}.m-grid{{display:grid;grid-template-columns:1fr 1fr;gap:3rem clamp(3rem,6vw,6rem)}}
+.m-group h3{{margin-bottom:1rem;padding-bottom:.8rem;border-bottom:1px solid var(--ink)}}.m-group ul{{list-style:none;padding:0;margin:0;display:grid;gap:.85rem}}
+.m-group li{{display:flex;align-items:baseline;gap:.6rem}}.m-group i{{flex:1;border-bottom:1px dotted var(--hair);transform:translateY(-4px)}}.m-group b{{font-weight:600;white-space:nowrap}}
+.w-list{{list-style:none;padding:0;margin:0;border-top:1px solid var(--hair)}}.w-list li{{display:flex;justify-content:space-between;gap:2rem;padding:1.8rem 0;border-bottom:1px solid var(--hair)}}.w-list li p{{color:var(--muted);margin-top:.4rem}}
+/* reviews + map */
+.revs{{padding-block:clamp(4rem,8vw,7rem)}}.r-grid{{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,2vw,1.6rem)}}
+.r-grid figure{{margin:0;padding:2rem;border-radius:1.6rem;background:#fffdf9;box-shadow:inset 0 0 0 1px rgba(29,26,23,.07)}}.stars{{color:var(--accent);letter-spacing:.2em;font-size:.8rem}}
+.r-grid blockquote{{margin:1rem 0 1.4rem;font-family:var(--display);font-size:1.3rem;line-height:1.35}}.r-grid figcaption{{padding:0}}
+.map{{display:block;width:100%;aspect-ratio:4/3;border:0;border-radius:1rem;margin-bottom:.6rem;filter:saturate(.7)}}.maplink{{display:inline-block;font-size:.85rem;font-weight:600;margin-bottom:1.4rem}}
+@media (max-width:900px){{.b-grid,.m-grid,.r-grid{{grid-template-columns:1fr}}}}@media (max-width:640px){{.f-in,.incl{{grid-template-columns:1fr}}}}
 /* reveal */
 .js .rv{{opacity:0;transform:translateY(40px);filter:blur(6px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease),filter 1.1s var(--ease)}}
 .js .rv.in{{opacity:1;transform:none;filter:none}}
@@ -311,6 +392,17 @@ footer{{padding-block:2rem 2.4rem;border-top:1px solid rgba(255,255,255,.12);col
 const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{rootMargin:'0px 0px -8% 0px'});
 document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(el.closest('.hero')?i*120:((i%3)*90))+'ms';io.observe(el)});
 const nav=document.querySelector('.nav'),hero=document.querySelector('.hero');
+document.querySelectorAll('form.bk').forEach(f=>{const c=JSON.parse(f.dataset.cfg),out=f.querySelector('.est b'),today=new Date().toISOString().slice(0,10);
+f.querySelectorAll('input[type=date]').forEach(i=>i.min=today);
+const nights=()=>f.d1&&f.d2&&f.d1.value&&f.d2.value?Math.round((new Date(f.d2.value)-new Date(f.d1.value))/864e5):0;
+const calc=()=>{if(!out)return;const o=f.opt?f.opt.selectedOptions[0]:null,p=o?+o.dataset.price:0,n=+(f.n?f.n.value:1);
+const tot=c.type==='stay'?(nights()>0?nights()*p:0):p*n;out.textContent=tot?tot+' '+c.cur:'—';
+if(f.d2)f.d2.setCustomValidity(c.type==='stay'&&f.d2.value&&nights()<=0?'>':'')};
+f.addEventListener('input',calc);f.addEventListener('change',calc);calc();
+f.addEventListener('submit',ev=>{ev.preventDefault();calc();if(!f.reportValidity())return;const L=[c.title];
+f.querySelectorAll('[data-l]').forEach(el=>{const v=el.tagName==='SELECT'?el.selectedOptions[0].text:el.value.trim();if(v)L.push(el.dataset.l+': '+v)});
+if(out&&out.textContent!=='—')L.push(c.estl+': '+out.textContent);const m=L.join('\\n');
+if(c.wa)open('https://wa.me/'+c.wa+'?text='+encodeURIComponent(m),'_blank','noopener');else{const d=document.getElementById('demo');d.querySelector('pre').textContent=m;d.showModal()}})});
 if(nav&&hero)new IntersectionObserver(([x])=>nav.dataset.solid=x.isIntersecting?'0':'1',{rootMargin:'-80px 0px 0px 0px'}).observe(hero)});"""
     return f"""<!doctype html>
 <html lang="{lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">

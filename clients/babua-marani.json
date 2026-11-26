@@ -374,5 +374,95 @@
    }
   }
  ],
- "extra_credits": []
+ "extra_credits": [],
+ "geo": [
+  41.9466,
+  45.8155
+ ],
+ "booking": {
+  "type": "tasting",
+  "times": [
+   "11:00",
+   "13:00",
+   "16:00"
+  ]
+ },
+ "hours": {
+  "en": "Every day 10:00–19:00, by booking",
+  "ru": "Ежедневно 10:00–19:00, по записи",
+  "ka": "ყოველდღე 10:00–19:00, წინასწარი ჯავშნით"
+ },
+ "wines": [
+  {
+   "name": "Rkatsiteli Qvevri 2023",
+   "style": {
+    "en": "Amber, dry. Apricot, walnut, black tea.",
+    "ru": "Янтарное, сухое. Абрикос, грецкий орех, чёрный чай.",
+    "ka": "ქარვისფერი, მშრალი. გარგარი, ნიგოზი, შავი ჩაი."
+   },
+   "price": 35
+  },
+  {
+   "name": "Kisi Qvevri 2023",
+   "style": {
+    "en": "Amber, dry. Quince and dried pear.",
+    "ru": "Янтарное, сухое. Айва и сушёная груша.",
+    "ka": "ქარვისფერი, მშრალი. კომში და ჩირი მსხალი."
+   },
+   "price": 40
+  },
+  {
+   "name": "Saperavi 2022",
+   "style": {
+    "en": "Red, dry. Black cherry, plum, soft tannins.",
+    "ru": "Красное, сухое. Чёрная вишня, слива, мягкие танины.",
+    "ka": "წითელი, მშრალი. შავი ალუბალი, ქლიავი, რბილი ტანინი."
+   },
+   "price": 38
+  },
+  {
+   "name": "Saperavi Rosé 2024",
+   "style": {
+    "en": "Rosé, dry. Strawberry and pomegranate.",
+    "ru": "Розовое, сухое. Клубника и гранат.",
+    "ka": "ვარდისფერი, მშრალი. მარწყვი და ბროწეული."
+   },
+   "price": 28
+  },
+  {
+   "name": "Chacha, 5 years",
+   "style": {
+    "en": "Grape brandy aged in oak. 45%.",
+    "ru": "Виноградная водка, выдержка в дубе. 45%.",
+    "ka": "ყურძნის არაყი, მუხაში დაძველებული. 45%."
+   },
+   "price": 45
+  }
+ ],
+ "reviews": [
+  {
+   "text": {
+    "en": "The amber Rkatsiteli was the best wine of our trip, and lunch went on for three hours.",
+    "ru": "Янтарный Ркацители — лучшее вино за всю поездку, а обед длился три часа.",
+    "ka": "ქარვისფერი რქაწითელი მთელი მოგზაურობის საუკეთესო ღვინო იყო, სადილი კი სამ საათს გაგრძელდა."
+   },
+   "author": "Anna · Kraków"
+  },
+  {
+   "text": {
+    "en": "Small, honest and warm. Grandmother taught our kids to make churchkhela.",
+    "ru": "Маленькая, честная и тёплая винодельня. Бабушка научила детей делать чурчхелу.",
+    "ka": "პატარა, გულწრფელი და თბილი. ბებიამ ბავშვებს ჩურჩხელის კეთება ასწავლა."
+   },
+   "author": "Mark · Berlin"
+  },
+  {
+   "text": {
+    "en": "We booked on WhatsApp the evening before. Easy, and the wine travelled home safely.",
+    "ru": "Написали в WhatsApp накануне вечером. Всё просто, вино доехало домой целым.",
+    "ka": "წინა საღამოს WhatsApp-ით დავჯავშნეთ. მარტივია, ღვინოც უვნებლად ჩავიტანეთ სახლში."
+   },
+   "author": "Dmitry · Almaty"
+  }
+ ]
 }

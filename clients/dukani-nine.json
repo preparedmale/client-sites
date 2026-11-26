@@ -136,8 +136,8 @@
   "ru": "Спуститесь по лестнице на углу у серных бань в Абанотубани. От метро Авлабари 10 минут пешком."
  },
  "section_title": {
-  "en": "From the menu",
-  "ru": "Из меню"
+  "en": "House favourites",
+  "ru": "Любимое у гостей"
  },
  "photos": [
   {
@@ -201,5 +201,174 @@
    }
   }
  ],
- "extra_credits": []
+ "extra_credits": [],
+ "geo": [
+  41.6884,
+  44.8104
+ ],
+ "booking": {
+  "type": "table",
+  "times": [
+   "12:00",
+   "13:00",
+   "14:00",
+   "18:00",
+   "19:00",
+   "20:00",
+   "21:00",
+   "22:00"
+  ]
+ },
+ "hours": {
+  "en": "Tuesday to Sunday 12:00–23:00. Closed Mondays.",
+  "ru": "Вторник–воскресенье 12:00–23:00. Понедельник — выходной."
+ },
+ "menu": [
+  {
+   "name": {
+    "en": "Bread and khachapuri",
+    "ru": "Хлеб и хачапури"
+   },
+   "items": [
+    {
+     "name": {
+      "en": "Adjaruli khachapuri",
+      "ru": "Хачапури по-аджарски"
+     },
+     "price": 22
+    },
+    {
+     "name": {
+      "en": "Imeruli khachapuri",
+      "ru": "Хачапури по-имеретински"
+     },
+     "price": 16
+    },
+    {
+     "name": {
+      "en": "Tone bread with herb butter",
+      "ru": "Хлеб из тоне с травяным маслом"
+     },
+     "price": 6
+    }
+   ]
+  },
+  {
+   "name": {
+    "en": "Cold dishes",
+    "ru": "Холодные блюда"
+   },
+   "items": [
+    {
+     "name": {
+      "en": "Pkhali, three kinds",
+      "ru": "Пхали, три вида"
+     },
+     "price": 14
+    },
+    {
+     "name": {
+      "en": "Tomato and cucumber salad with walnuts",
+      "ru": "Салат из помидоров и огурцов с орехами"
+     },
+     "price": 15
+    },
+    {
+     "name": {
+      "en": "Badrijani, aubergine with walnut",
+      "ru": "Бадриджани с орехами"
+     },
+     "price": 14
+    }
+   ]
+  },
+  {
+   "name": {
+    "en": "Hot dishes",
+    "ru": "Горячие блюда"
+   },
+   "items": [
+    {
+     "name": {
+      "en": "Chakapuli, lamb with tarragon",
+      "ru": "Чакапули, баранина с эстрагоном"
+     },
+     "price": 28
+    },
+    {
+     "name": {
+      "en": "Khinkali, five pieces",
+      "ru": "Хинкали, пять штук"
+     },
+     "price": 12
+    },
+    {
+     "name": {
+      "en": "Chicken shkmeruli in garlic milk",
+      "ru": "Шкмерули, курица в чесночном молоке"
+     },
+     "price": 26
+    },
+    {
+     "name": {
+      "en": "Mtsvadi, pork on vine wood",
+      "ru": "Мцвади на виноградной лозе"
+     },
+     "price": 25
+    }
+   ]
+  },
+  {
+   "name": {
+    "en": "Wine and drinks",
+    "ru": "Вино и напитки"
+   },
+   "items": [
+    {
+     "name": {
+      "en": "House qvevri wine, glass",
+      "ru": "Домашнее вино из квеври, бокал"
+     },
+     "price": 9
+    },
+    {
+     "name": {
+      "en": "House qvevri wine, litre jug",
+      "ru": "Домашнее вино из квеври, кувшин 1 л"
+     },
+     "price": 30
+    },
+    {
+     "name": {
+      "en": "Tarragon lemonade",
+      "ru": "Тархуновый лимонад"
+     },
+     "price": 6
+    }
+   ]
+  }
+ ],
+ "reviews": [
+  {
+   "text": {
+    "en": "The chakapuli tasted like someone's grandmother made it, because someone's grandmother did.",
+    "ru": "Чакапули как у бабушки, потому что его и правда готовит бабушка."
+   },
+   "author": "Lena · Riga"
+  },
+  {
+   "text": {
+    "en": "Nine tables, so book. We messaged at noon and had a table at eight.",
+    "ru": "Всего девять столиков, бронируйте. Написали в полдень — столик на восемь вечера был."
+   },
+   "author": "Sam · London"
+  },
+  {
+   "text": {
+    "en": "Cheap jug wine that was better than bottles at twice the price elsewhere.",
+    "ru": "Домашнее вино в кувшине лучше бутылок вдвое дороже в других местах."
+   },
+   "author": "Irakli · Batumi"
+  }
+ ]
 }
