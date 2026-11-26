@@ -23,12 +23,15 @@ UI = {
                faq="Good to know", getting_here="Getting here", contact="Contact", per_night="per night",
                guests="guests", up_to="up to", write="Message us on WhatsApp", book="Check dates",
                map="Open in Google Maps", from_="from", reply="We usually reply within a few hours.",
-               email="Email", menu="Menu", lang_name="English", sample="Sample website. This business is fictional."),
+               greeting="Hello! I found {name} online.", email="Email", menu="Menu", lang_name="English", sample="Sample website. This business is fictional.",
+               your_wa="your WhatsApp number", your_email="your email", photos_by="Photos"),
     "ru": dict(rooms="Номера", stay="Проживание", experiences="Впечатления", gallery="Фото", reviews="Отзывы",
                faq="Полезно знать", getting_here="Как добраться", contact="Контакты", per_night="за ночь",
                guests="гостей", up_to="до", write="Написать в WhatsApp", book="Узнать о датах",
                map="Открыть в Google Maps", from_="от", reply="Обычно отвечаем в течение нескольких часов.",
-               email="Почта", menu="Меню", lang_name="Русский", sample="Пример сайта. Это вымышленное заведение."),
+               greeting="Здравствуйте! Нашёл(ла) {name} в интернете.", email="Почта", menu="Меню", lang_name="Русский", sample="Пример сайта. Это вымышленное заведение.",
+               your_wa="ваш номер WhatsApp", your_email="ваша почта", photos_by="Фото"),
+    "ka": dict(rooms="ოთახები", stay="განთავსება", experiences="აქტივობები", gallery="ფოტოები", reviews="სტუმრების შეფასებები", faq="სასარგებლო ინფორმაცია", getting_here="როგორ მოგვაგნოთ", contact="კონტაქტი", per_night="ღამეში", guests="სტუმარი", up_to="მაქსიმუმ", write="მოგვწერეთ WhatsApp-ზე", book="თარიღების შემოწმება", map="Google Maps-ზე ნახვა", from_="საწყისი ფასი", reply="ჩვეულებრივ რამდენიმე საათში გპასუხობთ.", email="ელფოსტა", menu="მენიუ", lang_name="ქართული", sample="საცდელი საიტი. ეს ობიექტი გამოგონილია.", your_wa="თქვენი WhatsApp ნომერი", your_email="თქვენი ელფოსტა", photos_by="ფოტო", greeting="გამარჯობა! {name} ინტერნეტში ვიპოვე."),
 }
 
 THEMES = {
@@ -86,14 +89,14 @@ def render(d, lang, langs, prefix):
     th = THEMES.get(d.get("theme"), THEMES["valley"])
     name, town = d["name"], d.get("town", "")
     wa = digits(d.get("whatsapp"))
-    wa_text = t(d.get("whatsapp_greeting"), lang) or (f"Hello! I found {name} online." if lang == "en" else f"Здравствуйте! Нашёл(ла) {name} в интернете.")
+    wa_text = t(d.get("whatsapp_greeting"), lang) or u.get("greeting", "Hello! I found {name} online.").format(name=name)
     wa_link = f"https://wa.me/{wa}?text={html.escape(__import__('urllib.parse').parse.quote(wa_text))}" if wa else ""
     wa_tgt = ' target="_blank" rel="noopener"'
     if d.get("sample"): wa_link, wa_tgt = "#contact", ""   # fictional samples: no live WhatsApp link to a number that may belong to someone
     cur = d.get("currency", "")
     desc = t(d.get("intro"), lang)
     hero_img = (d.get("photos") or [{}])[0].get("file") if d.get("photos") else None
-    fonts = "family=" + th["display"].replace(" ", "+") + ":wght@400;600&family=" + th["body"].replace(" ", "+") + ":wght@400;500;600"
+    fonts = "family=" + th["display"].replace(" ", "+") + ":wght@400;600&family=" + th["body"].replace(" ", "+") + ":wght@400;500;600" + ("&family=Noto+Sans+Georgian:wght@400;600&family=Noto+Serif+Georgian:wght@400;600" if "ka" in langs else "")
 
     nav = []
     sec_title = t(d.get("section_title"), lang) or (u["stay"] if d.get("kind") == "lodging" else u["rooms"])
@@ -121,7 +124,7 @@ def render(d, lang, langs, prefix):
              f'<nav aria-label="{e(u["menu"])}">' + "".join(f'<a href="#{k}">{e(v)}</a>' for k, v in nav) + f"</nav>{switch}</div></header>")
     hero_art = (f'<img class="hero-img" src="{prefix}{e(hero_img)}" alt="{e(t(d["photos"][0].get("alt"), lang))}" fetchpriority="high">' if hero_img else
                 f'<svg class="hero-art" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMax slice" aria-hidden="true">{SCENES[th["scene"]]}</svg>')
-    s.append(f'<section class="hero">{hero_art}<div class="wrap hero-text"><p class="eyebrow">{e(t(d.get("location_line"), lang))}</p>'
+    s.append(f'<section class="hero{" has-img" if hero_img else ""}">{hero_art}<div class="wrap hero-text"><p class="eyebrow">{e(t(d.get("location_line"), lang))}</p>'
              f'<h1>{e(t(d.get("headline"), lang))}</h1><p class="lead">{e(desc)}</p><div class="cta">'
              + (f'<a class="btn" href="{wa_link}"{wa_tgt}>{e(u["book"])}</a>' if wa else "")
              + (f'<span class="from">{e(u["from_"])} <b>{e(d["price_from"])} {e(cur)}</b> {e(u["per_night"]) if d.get("kind") == "lodging" else ""}</span>' if d.get("price_from") else "")
@@ -164,13 +167,17 @@ def render(d, lang, langs, prefix):
         route = f'<div><h3>{e(u["getting_here"])}</h3><p>{e(t(d["getting_here"], lang))}</p></div>' if d.get("getting_here") else ""
         s.append(f'<section><div class="wrap split"><div><h2>{e(u["faq"])}</h2>{faq}</div>{route}</div></section>')
     contact = []
-    if d.get("whatsapp"): contact.append(f'<p><span class="k">WhatsApp</span> <span class="v">{e(d["whatsapp"])}</span></p>')
-    if d.get("email"): contact.append(f'<p><span class="k">{e(u["email"])}</span> <span class="v">{e(d["email"])}</span></p>')
+    smp = d.get("sample")  # fictional samples show where the owner's real details will go
+    if d.get("whatsapp"): contact.append(f'<p><span class="k">WhatsApp</span> <span class="v{" ph" if smp else ""}">{e(u["your_wa"] if smp else d["whatsapp"])}</span></p>')
+    if d.get("email"): contact.append(f'<p><span class="k">{e(u["email"])}</span> <span class="v{" ph" if smp else ""}">{e(u["your_email"] if smp else d["email"])}</span></p>')
     if d.get("address"): contact.append(f'<p><span class="k">⌖</span> <span class="v">{e(t(d["address"], lang))}</span></p>')
     if str(d.get("maps_url", "")).startswith("https://"): contact.append(f'<p><a href="{e(d["maps_url"])}" target="_blank" rel="noopener">{e(u["map"])}</a></p>')
     s.append(f'<section id="contact" class="contact"><div class="wrap split"><div><h2>{e(u["contact"])}</h2>{"".join(contact)}<p class="muted">{e(u["reply"])}</p></div>'
              + (f'<div class="cta-box"><a class="btn big" href="{wa_link}"{wa_tgt}>{e(u["write"])}</a></div>' if wa else "") + "</div></section>")
-    s.append(f'<footer><div class="wrap bar"><span>© {e(name)} · {e(town)}</span><span>{e(d.get("credit", ""))}</span></div></footer>')
+    creds = [p["credit"] for p in (d.get("photos") or []) if p.get("credit")] + (d.get("extra_credits") or [])
+    cred_line = ("" if not creds else f'<p class="credits wrap">{e(u["photos_by"])}: ' + ", ".join(
+        f'<a href="{e(c["page"])}" target="_blank" rel="noopener">{e(c["artist"])}</a> ({e(c["license"])})' for c in creds) + "</p>")
+    s.append(f'<footer><div class="wrap bar"><span>© {e(name)} · {e(town)}</span><span>{e(d.get("credit", ""))}</span></div>{cred_line}</footer>')
     if wa:
         s.append(f'<a class="fab" href="{wa_link}"{wa_tgt} aria-label="{e(u["write"])}"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg></a>')
 
@@ -178,7 +185,7 @@ def render(d, lang, langs, prefix):
     css = f"""
 :root{{--bg:{th['bg']};--soft:{th['soft']};--ink:{th['ink']};--muted:color-mix(in srgb,var(--ink) 62%,var(--bg));--line:color-mix(in srgb,var(--ink) 12%,var(--bg));
 --accent:{th['accent']};--on:#fff;--card:#fff;--s1:color-mix(in srgb,var(--accent) 18%,var(--soft));--s2:color-mix(in srgb,var(--accent) 34%,var(--soft));--s3:color-mix(in srgb,var(--accent) 55%,var(--ink));
---display:"{th['display']}",Georgia,serif;--body:"{th['body']}",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}}
+--display:"{th['display']}","Noto Serif Georgian",Georgia,serif;--body:"{th['body']}","Noto Sans Georgian",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}}
 @media (prefers-color-scheme:dark){{:root{{--bg:{th['bg_d']};--soft:{th['soft_d']};--ink:#ece8e3;--accent:{th['accent_d']};--on:#141210;--card:color-mix(in srgb,var(--soft) 70%,#000);color-scheme:dark}}}}
 *{{box-sizing:border-box}}html{{scroll-behavior:smooth;scroll-padding-top:72px}}@media (prefers-reduced-motion:reduce){{html{{scroll-behavior:auto}}}}
 body{{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 var(--body);-webkit-font-smoothing:antialiased}}
@@ -198,6 +205,13 @@ nav{{display:flex;gap:1.2rem;flex-wrap:wrap;font-size:.95rem}}nav a{{color:var(-
 .hero{{position:relative;background:var(--soft);overflow:hidden}}
 .hero-art{{display:block;width:100%;height:clamp(150px,26vw,300px)}}
 .hero-img{{width:100%;height:clamp(240px,48vw,520px);object-fit:cover}}
+.has-img{{padding:0;color:#fff;background:#111}}.has-img .hero-img{{height:min(88svh,760px);min-height:520px;filter:saturate(1.05)}}
+.has-img::after{{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(0,0,0,.7) 100%),linear-gradient(90deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,.15) 55%,rgba(0,0,0,0) 80%);pointer-events:none}}
+@media (max-width:640px){{.has-img .hero-img{{height:76svh;min-height:480px}}.has-img::after{{background:linear-gradient(180deg,rgba(0,0,0,0) 25%,rgba(0,0,0,.78) 100%)}}
+.bar{{row-gap:.4rem}}.top nav{{order:3;width:100%;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;gap:1rem;font-size:.9rem}}.langs{{margin-left:auto}}}}
+.has-img .hero-text{{position:absolute;left:0;right:0;bottom:0;z-index:1;padding-block:0 clamp(2rem,6vw,4rem)}}
+.has-img h1{{color:#fff;text-shadow:0 2px 24px rgba(0,0,0,.35)}}.has-img .lead,.has-img .from{{color:rgba(255,255,255,.88)}}.has-img .from b{{color:#fff}}
+.has-img .eyebrow{{color:#fff;opacity:.9}}:lang(ka) .eyebrow{{text-transform:none;letter-spacing:.03em}}html[lang=ka] h1{{font-size:clamp(2rem,5.4vw,3.4rem)}}.has-img .btn{{background:#fff;color:#141210}}
 .hero-text{{padding-block:2.2rem 3rem}}.eyebrow{{text-transform:uppercase;letter-spacing:.14em;font-size:.78rem;font-weight:600;color:var(--accent)}}
 .lead{{font-size:clamp(1.05rem,2vw,1.2rem);color:var(--muted);max-width:58ch}}
 .cta{{display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap;margin-top:1.2rem}}.from{{color:var(--muted)}}.from b{{color:var(--ink);font-size:1.15rem}}
@@ -223,7 +237,8 @@ figure{{margin:0;background:var(--card);border-radius:14px;padding:1.3rem;border
 details{{border-bottom:1px solid var(--line);padding:.85rem 0}}summary{{cursor:pointer;font-weight:600}}details p{{margin:.6rem 0 0;color:var(--muted)}}
 .contact .k{{display:inline-block;min-width:6rem;color:var(--muted);font-size:.9rem}}.contact .v{{font-weight:600;user-select:all}}
 .cta-box{{display:flex;align-items:center;justify-content:flex-start;min-height:100%}}
-footer{{border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}}
+footer{{border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}}.credits{{font-size:.72rem;padding-bottom:1rem;opacity:.8}}.credits a{{color:inherit}}
+.v.ph{{font-weight:500;font-style:italic;color:var(--muted);border:1px dashed var(--line);border-radius:6px;padding:.1rem .5rem;user-select:none}}
 .fab{{position:fixed;right:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));width:58px;height:58px;border-radius:50%;
 background:#25d366;color:#fff;display:grid;place-items:center;box-shadow:0 6px 20px rgba(0,0,0,.25);z-index:30}}
 """

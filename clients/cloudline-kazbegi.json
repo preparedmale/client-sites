@@ -214,5 +214,68 @@
  "section_title": {
   "en": "Rooms",
   "ru": "Номера"
- }
+ },
+ "photos": [
+  {
+   "file": "hero.jpg",
+   "alt": {
+    "en": "Mount Kazbek above Stepantsminda",
+    "ru": "Гора Казбек над Степанцминдой"
+   },
+   "credit": {
+    "artist": "Vyacheslav Argenberg",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Kazbegi,_Mount_Kazbek,_Georgia.jpg"
+   }
+  },
+  {
+   "file": "photo-1.jpg",
+   "alt": {
+    "en": "Gergeti Trinity Church on the hill",
+    "ru": "Церковь Гергети Самеба на холме"
+   },
+   "credit": {
+    "artist": "Andrzej Wójtowicz from Poznań, Poland",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Kazbegi_-_Gergeti_Trinity_Church_(9458098343).jpg"
+   }
+  },
+  {
+   "file": "photo-2.jpg",
+   "alt": {
+    "en": "Path up to Gergeti church",
+    "ru": "Тропа к церкви Гергети"
+   },
+   "credit": {
+    "artist": "Stefan Wisselink",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Gergeti_Trinity_Church._Kazbegi,_Georgia_(36130111370).jpg"
+   }
+  },
+  {
+   "file": "photo-3.jpg",
+   "alt": {
+    "en": "Hiking the slopes of Kazbek",
+    "ru": "Поход по склонам Казбека"
+   },
+   "credit": {
+    "artist": "Vyacheslav Argenberg",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:The_eastern_slopes_of_Mount_Kazbek,_Georgia.jpg"
+   }
+  },
+  {
+   "file": "photo-4.jpg",
+   "alt": {
+    "en": "Clouds over the Kazbek range",
+    "ru": "Облака над хребтом Казбек"
+   },
+   "credit": {
+    "artist": "Vyacheslav Argenberg",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:%22Kazbegi%22,_Panoramic_view_of_Mount_Kazbek_range,_Caucasus,_Georgia.jpg"
+   }
+  }
+ ],
+ "extra_credits": []
 }

@@ -138,5 +138,68 @@
  "section_title": {
   "en": "From the menu",
   "ru": "Из меню"
- }
+ },
+ "photos": [
+  {
+   "file": "hero.jpg",
+   "alt": {
+    "en": "Old Tbilisi rooftops below Narikala",
+    "ru": "Крыши Старого Тбилиси под Нарикалой"
+   },
+   "credit": {
+    "artist": "Kober",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Parts_of_Old_Tbilisi,_historical_center_of_Tbilisi,_Georgia.jpg"
+   }
+  },
+  {
+   "file": "photo-1.jpg",
+   "alt": {
+    "en": "Adjaruli khachapuri with egg and butter",
+    "ru": "Хачапури по-аджарски с яйцом и маслом"
+   },
+   "credit": {
+    "artist": "Eugene Krasnaok",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Khachapuri_Adjaruli_with_egg_and_butter_2016.jpg"
+   }
+  },
+  {
+   "file": "photo-2.jpg",
+   "alt": {
+    "en": "Chakapuli, lamb stewed with tarragon",
+    "ru": "Чакапули, баранина с эстрагоном"
+   },
+   "credit": {
+    "artist": "Georgian Recipes at Georgia About",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Chakapuli.jpg"
+   }
+  },
+  {
+   "file": "photo-3.jpg",
+   "alt": {
+    "en": "A cobbled street in Old Tbilisi",
+    "ru": "Мощёная улица Старого Тбилиси"
+   },
+   "credit": {
+    "artist": "Vyacheslav Argenberg",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Tbilisi,_Old_town,_Georgia.jpg"
+   }
+  },
+  {
+   "file": "photo-4.jpg",
+   "alt": {
+    "en": "Old Tbilisi and the Kura river",
+    "ru": "Старый Тбилиси и Кура"
+   },
+   "credit": {
+    "artist": "Vyacheslav Argenberg",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Tbilisi,_Old_Tbilisi,_Kura_River_2,_Georgia.jpg"
+   }
+  }
+ ],
+ "extra_credits": []
 }

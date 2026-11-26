@@ -10,7 +10,8 @@
  "schema_type": "Winery",
  "languages": [
   "en",
-  "ru"
+  "ru",
+  "ka"
  ],
  "currency": "GEL",
  "price_from": 45,
@@ -18,123 +19,146 @@
  "email": "cellar@babua.example",
  "location_line": {
   "en": "Kvareli, Kakheti · Georgia",
-  "ru": "Кварели, Кахетия · Грузия"
+  "ru": "Кварели, Кахетия · Грузия",
+  "ka": "ყვარელი, კახეთი · საქართველო"
  },
  "headline": {
   "en": "Taste wine the way our grandfather made it",
-  "ru": "Вино, как его делал наш дедушка"
+  "ru": "Вино, как его делал наш дедушка",
+  "ka": "ღვინო, როგორც ჩვენი ბაბუა აყენებდა"
  },
  "intro": {
   "en": "A family cellar with eleven qvevri buried in the ground. Come for a tasting, stay for lunch, and leave with a bottle you will not find in any shop.",
-  "ru": "Семейный погреб с одиннадцатью квеври в земле. Приезжайте на дегустацию, оставайтесь на обед и увезите бутылку, которой нет ни в одном магазине."
+  "ru": "Семейный погреб с одиннадцатью квеври в земле. Приезжайте на дегустацию, оставайтесь на обед и увезите бутылку, которой нет ни в одном магазине.",
+  "ka": "საოჯახო მარანი თერთმეტი ქვევრით მიწაში. მოდით დეგუსტაციაზე, დარჩით სადილზე და წაიღეთ ღვინო, რომელსაც მაღაზიაში ვერ იპოვით."
  },
  "facts": [
   {
    "value": "11",
    "label": {
     "en": "qvevri in our cellar",
-    "ru": "квеври в погребе"
+    "ru": "квеври в погребе",
+    "ka": "ქვევრი ჩვენს მარანში"
    }
   },
   {
    "value": "4",
    "label": {
     "en": "grape varieties",
-    "ru": "сорта винограда"
+    "ru": "сорта винограда",
+    "ka": "ყურძნის ჯიში"
    }
   },
   {
    "value": "1952",
    "label": {
     "en": "first vintage",
-    "ru": "первый урожай"
+    "ru": "первый урожай",
+    "ka": "პირველი მოსავალი"
    }
   },
   {
    "value": "EN · RU · KA",
    "label": {
     "en": "tastings in",
-    "ru": "дегустации на"
+    "ru": "дегустации на",
+    "ka": "დეგუსტაციის ენები"
    }
   }
  ],
  "story": {
   "en": "Babua means grandfather. Ours planted the first Saperavi rows here in 1952, and we still use his qvevri. We make about 3,000 bottles a year and sell most of them right here, at the cellar door.",
-  "ru": "Бабуа значит дедушка. Наш посадил здесь первые лозы Саперави в 1952 году, и мы до сих пор пользуемся его квеври. Мы делаем около 3 000 бутылок в год и продаём почти всё прямо в погребе."
+  "ru": "Бабуа значит дедушка. Наш посадил здесь первые лозы Саперави в 1952 году, и мы до сих пор пользуемся его квеври. Мы делаем около 3 000 бутылок в год и продаём почти всё прямо в погребе.",
+  "ka": "ჩვენმა ბაბუამ აქ საფერავის პირველი რიგები 1952 წელს დარგო და მის ქვევრებს დღესაც ვიყენებთ. წელიწადში დაახლოებით 3 000 ბოთლ ღვინოს ვაწარმოებთ და უმეტესობას აქვე, მარანში ვყიდით."
  },
  "rooms": [
   {
    "name": {
     "en": "Classic tasting",
-    "ru": "Классическая дегустация"
+    "ru": "Классическая дегустация",
+    "ka": "კლასიკური დეგუსტაცია"
    },
    "price": 45,
    "unit": {
     "en": "per person",
-    "ru": "с человека"
+    "ru": "с человека",
+    "ka": "ერთ ადამიანზე"
    },
    "text": {
     "en": "Four wines from qvevri with bread, cheese and churchkhela. About one hour.",
-    "ru": "Четыре вина из квеври с хлебом, сыром и чурчхелой. Около часа."
+    "ru": "Четыре вина из квеври с хлебом, сыром и чурчхелой. Около часа.",
+    "ka": "ქვევრის ოთხი ღვინო პურით, ყველით და ჩურჩხელით. დაახლოებით ერთი საათი."
    },
    "features": [
     {
      "en": "Rkatsiteli, Kisi, Saperavi, Rosé",
-     "ru": "Ркацители, Киси, Саперави, розе"
+     "ru": "Ркацители, Киси, Саперави, розе",
+     "ka": "რქაწითელი, ქისი, საფერავი, როზე"
     },
     {
      "en": "Walk through the vineyard",
-     "ru": "Прогулка по винограднику"
+     "ru": "Прогулка по винограднику",
+     "ka": "გასეირნება ვენახში"
     }
    ]
   },
   {
    "name": {
     "en": "Tasting and family lunch",
-    "ru": "Дегустация и семейный обед"
+    "ru": "Дегустация и семейный обед",
+    "ka": "დეგუსტაცია და საოჯახო სადილი"
    },
    "price": 90,
    "unit": {
     "en": "per person",
-    "ru": "с человека"
+    "ru": "с человека",
+    "ka": "ერთ ადამიანზე"
    },
    "text": {
     "en": "The classic tasting followed by a long Kakhetian lunch at our table.",
-    "ru": "Классическая дегустация и долгий кахетинский обед за нашим столом."
+    "ru": "Классическая дегустация и долгий кахетинский обед за нашим столом.",
+    "ka": "კლასიკური დეგუსტაცია და შემდეგ გრძელი კახური სადილი ჩვენს სუფრასთან."
    },
    "features": [
     {
      "en": "Mtsvadi, pkhali, fresh tone bread",
-     "ru": "Мцвади, пхали, свежий хлеб из тоне"
+     "ru": "Мцвади, пхали, свежий хлеб из тоне",
+     "ka": "მწვადი, ფხალი, ახალი თონის პური"
     },
     {
      "en": "Chacha to finish",
-     "ru": "Чача на завершение"
+     "ru": "Чача на завершение",
+     "ka": "ბოლოს ჭაჭა"
     }
    ]
   },
   {
    "name": {
     "en": "Harvest day (September)",
-    "ru": "День ртвели (сентябрь)"
+    "ru": "День ртвели (сентябрь)",
+    "ka": "რთველი (სექტემბერი)"
    },
    "price": 120,
    "unit": {
     "en": "per person",
-    "ru": "с человека"
+    "ru": "с человека",
+    "ka": "ერთ ადამიანზე"
    },
    "text": {
     "en": "Pick grapes with the family, press them in the satsnakheli and celebrate with dinner.",
-    "ru": "Собирайте виноград вместе с семьёй, давите его в сацнахели и празднуйте за ужином."
+    "ru": "Собирайте виноград вместе с семьёй, давите его в сацнахели и празднуйте за ужином.",
+    "ka": "დაკრიფეთ ყურძენი ოჯახთან ერთად, დაწურეთ საწნახელში და იზეიმეთ ვახშმით."
    },
    "features": [
     {
      "en": "Only during harvest",
-     "ru": "Только во время ртвели"
+     "ru": "Только во время ртвели",
+     "ka": "მხოლოდ რთველის დროს"
     },
     {
      "en": "Book two weeks ahead",
-     "ru": "Бронь за две недели"
+     "ru": "Бронь за две недели",
+     "ka": "დაჯავშნეთ ორი კვირით ადრე"
     }
    ]
   }
@@ -144,40 +168,82 @@
    "11:00",
    {
     "en": "Vineyard walk",
-    "ru": "Прогулка по винограднику"
+    "ru": "Прогулка по винограднику",
+    "ka": "გასეირნება ვენახში"
    }
   ],
   [
    "11:30",
    {
     "en": "Tasting in the marani",
-    "ru": "Дегустация в марани"
+    "ru": "Дегустация в марани",
+    "ka": "დეგუსტაცია მარანში"
    }
   ],
   [
    "13:00",
    {
     "en": "Family lunch",
-    "ru": "Семейный обед"
+    "ru": "Семейный обед",
+    "ka": "საოჯახო სადილი"
    }
   ],
   [
    "15:00",
    {
     "en": "Bottles to take home",
-    "ru": "Вино с собой"
+    "ru": "Вино с собой",
+    "ka": "ღვინო თან წასაღებად"
    }
   ]
  ],
  "experiences": [
   {
    "name": {
+    "en": "Make your own churchkhela",
+    "ru": "Сделайте свою чурчхелу",
+    "ka": "გააკეთეთ საკუთარი ჩურჩხელა"
+   },
+   "text": {
+    "en": "Thread walnuts on a string and dip them in warm grape must with our grandmother. Takes about 40 minutes, and you take them home.",
+    "ru": "Нанижите орехи на нитку и окуните в тёплое виноградное сусло вместе с бабушкой. Около 40 минут, чурчхела — ваша.",
+    "ka": "ბებიასთან ერთად ააწყვეთ ნიგოზი ძაფზე და ჩაავლეთ თბილ ტკბილში. დაახლოებით 40 წუთი, ჩურჩხელას თან წაიღებთ."
+   },
+   "price": 20,
+   "unit": {
+    "en": "per person",
+    "ru": "с человека",
+    "ka": "ერთ ადამიანზე"
+   }
+  },
+  {
+   "name": {
+    "en": "Chacha at the still",
+    "ru": "Чача у перегонного куба",
+    "ka": "ჭაჭა სახდელთან"
+   },
+   "text": {
+    "en": "See how grape pomace becomes chacha in our copper still, then taste three ages side by side.",
+    "ru": "Посмотрите, как из виноградных выжимок в медном кубе получается чача, и попробуйте три выдержки.",
+    "ka": "ნახეთ, როგორ იხდება ჭაჭა ჩვენს სპილენძის სახდელში, და დააგემოვნეთ სამი სხვადასხვა ასაკის ჭაჭა."
+   },
+   "price": 25,
+   "unit": {
+    "en": "per person",
+    "ru": "с человека",
+    "ka": "ერთ ადამიანზე"
+   }
+  },
+  {
+   "name": {
     "en": "Wine to take home",
-    "ru": "Вино с собой"
+    "ru": "Вино с собой",
+    "ka": "ღვინო თან წასაღებად"
    },
    "text": {
     "en": "Bottles from 25 GEL. We pack them for flights.",
-    "ru": "Бутылки от 25 лари. Упакуем для перелёта."
+    "ru": "Бутылки от 25 лари. Упакуем для перелёта.",
+    "ka": "ბოთლები 25 ლარიდან. ფრენისთვის შეგიფუთავთ."
    }
   }
  ],
@@ -185,30 +251,128 @@
   {
    "q": {
     "en": "Do I need to book?",
-    "ru": "Нужно ли бронировать?"
+    "ru": "Нужно ли бронировать?",
+    "ka": "საჭიროა დაჯავშნა?"
    },
    "a": {
     "en": "Yes, please message us at least one day ahead so someone from the family is at the cellar.",
-    "ru": "Да, напишите хотя бы за день, чтобы кто-то из семьи был в погребе."
+    "ru": "Да, напишите хотя бы за день, чтобы кто-то из семьи был в погребе.",
+    "ka": "დიახ, მოგვწერეთ მინიმუმ ერთი დღით ადრე, რომ ოჯახიდან ვინმე მარანში დაგხვდეთ."
    }
   },
   {
    "q": {
     "en": "Can children come?",
-    "ru": "Можно с детьми?"
+    "ru": "Можно с детьми?",
+    "ka": "შეიძლება ბავშვებთან ერთად მოსვლა?"
    },
    "a": {
     "en": "Of course. They get grape juice and a walk with our dog.",
-    "ru": "Конечно. Детям — виноградный сок и прогулка с нашей собакой."
+    "ru": "Конечно. Детям — виноградный сок и прогулка с нашей собакой.",
+    "ka": "რა თქმა უნდა. ბავშვებს ყურძნის წვენს და ჩვენს ძაღლთან გასეირნებას ვთავაზობთ."
+   }
+  },
+  {
+   "q": {
+    "en": "Can you pick us up?",
+    "ru": "Можете нас забрать?",
+    "ka": "შეგიძლიათ წაგვიყვანოთ?"
+   },
+   "a": {
+    "en": "Yes, from Telavi or Kvareli centre for 30 GEL per car. Ask when you book.",
+    "ru": "Да, из Телави или центра Кварели за 30 лари с машины. Скажите при бронировании.",
+    "ka": "დიახ, თელავიდან ან ყვარლის ცენტრიდან, 30 ლარი მანქანაზე. დაჯავშნისას გვითხარით."
+   }
+  },
+  {
+   "q": {
+    "en": "Do you ship wine abroad?",
+    "ru": "Отправляете вино за границу?",
+    "ka": "ღვინოს საზღვარგარეთ აგზავნით?"
+   },
+   "a": {
+    "en": "We do not ship, but we pack bottles safely for checked luggage.",
+    "ru": "Мы не отправляем, но надёжно упакуем бутылки для багажа.",
+    "ka": "არ ვაგზავნით, მაგრამ ბოთლებს ბარგისთვის უსაფრთხოდ შევფუთავთ."
    }
   }
  ],
  "getting_here": {
   "en": "Kvareli is about 2.5 hours from Tbilisi by car. Many Kakheti wine tours can stop here: ask your driver for Babua's Marani.",
-  "ru": "Кварели примерно в 2,5 часах езды от Тбилиси. Многие винные туры по Кахетии могут заехать к нам: попросите водителя."
+  "ru": "Кварели примерно в 2,5 часах езды от Тбилиси. Многие винные туры по Кахетии могут заехать к нам: попросите водителя.",
+  "ka": "ყვარელი თბილისიდან მანქანით დაახლოებით 2,5 საათის სავალზეა. კახეთის ბევრ ღვინის ტურს შეუძლია აქ გაჩერება: სთხოვეთ მძღოლს, მოგიყვანოთ „ბაბუას მარანში“."
  },
  "section_title": {
   "en": "Tastings",
-  "ru": "Дегустации"
- }
+  "ru": "Дегустации",
+  "ka": "დეგუსტაციები"
+ },
+ "photos": [
+  {
+   "file": "hero.jpg",
+   "alt": {
+    "en": "Vineyard rows under a rainbow in Kakheti",
+    "ru": "Виноградник под радугой в Кахетии",
+    "ka": "ვენახი ცისარტყელის ქვეშ, კახეთი"
+   },
+   "credit": {
+    "artist": "Vladimir Pankratov",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Rainbow_in_Kakheti.jpg"
+   }
+  },
+  {
+   "file": "photo-1.jpg",
+   "alt": {
+    "en": "Two qvevri clay jars on the grass",
+    "ru": "Два глиняных квеври на траве",
+    "ka": "ორი ქვევრი ბალახზე"
+   },
+   "credit": {
+    "artist": "Levan Totosashvili",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Georgian_Kvevri.jpg"
+   }
+  },
+  {
+   "file": "photo-2.jpg",
+   "alt": {
+    "en": "Ripe white grapes on the vine",
+    "ru": "Спелый белый виноград на лозе",
+    "ka": "მწიფე თეთრი ყურძენი ვაზზე"
+   },
+   "credit": {
+    "artist": "Levan Gokadze (uploaded by Giorgi Balakhadze)",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Kakheti,_Georgia_%E2%80%94_Vines.jpg"
+   }
+  },
+  {
+   "file": "photo-3.jpg",
+   "alt": {
+    "en": "Churchkhela drying in the sun",
+    "ru": "Чурчхела сохнет на солнце",
+    "ka": "ჩურჩხელა მზეზე შრება"
+   },
+   "credit": {
+    "artist": "Jon Gudorf Photography",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Churchkhela_-_grape_and_nut_dried_on_string_in_sun.jpg"
+   }
+  },
+  {
+   "file": "photo-4.jpg",
+   "alt": {
+    "en": "Vineyard with the Caucasus behind",
+    "ru": "Виноградник на фоне Кавказа",
+    "ka": "ვენახი კავკასიონის ფონზე"
+   },
+   "credit": {
+    "artist": "Levan Gokadze from Tbilisi, Georgia",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Kakheti_(10065023153).jpg"
+   }
+  }
+ ],
+ "extra_credits": []
 }

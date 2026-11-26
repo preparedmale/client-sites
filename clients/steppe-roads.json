@@ -82,7 +82,8 @@
      "en": "Transport and lunch included",
      "ru": "Трансфер и обед включены"
     }
-   ]
+   ],
+   "photo": "card-1.jpg"
   },
   {
    "name": {
@@ -107,7 +108,8 @@
      "en": "Tents, food and guide included",
      "ru": "Палатки, питание и гид включены"
     }
-   ]
+   ],
+   "photo": "card-2.jpg"
   },
   {
    "name": {
@@ -132,7 +134,8 @@
      "en": "Yurt stays and all meals",
      "ru": "Юрты и всё питание"
     }
-   ]
+   ],
+   "photo": "card-3.jpg"
   }
  ],
  "faq": [
@@ -174,5 +177,84 @@
  "section_title": {
   "en": "Tours",
   "ru": "Туры"
- }
+ },
+ "photos": [
+  {
+   "file": "hero.jpg",
+   "alt": {
+    "en": "Ala-Kul lake below snowy peaks",
+    "ru": "Озеро Ала-Куль под снежными пиками"
+   },
+   "credit": {
+    "artist": "Ekrem Canli",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Ala-Kul_lake.jpg"
+   }
+  },
+  {
+   "file": "photo-1.jpg",
+   "alt": {
+    "en": "Horses grazing by the Jeti-Oguz red rocks",
+    "ru": "Лошади у красных скал Джети-Огуз"
+   },
+   "credit": {
+    "artist": "Bgag",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Horses_in_Jeti-%C3%96g%C3%BCz_Rocks.jpg"
+   }
+  },
+  {
+   "file": "photo-2.jpg",
+   "alt": {
+    "en": "Karakol valley and river",
+    "ru": "Долина и река Каракол"
+   },
+   "credit": {
+    "artist": "Ondřej Žváček",
+    "license": "CC BY 2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:Karakol_Valley.jpg"
+   }
+  },
+  {
+   "file": "photo-3.jpg",
+   "alt": {
+    "en": "Horses on the Ala-Kul trail",
+    "ru": "Лошади на тропе к Ала-Кулю"
+   },
+   "credit": {
+    "artist": "Bruno Rijsman",
+    "license": "CC BY-SA 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Lake_Ala_Kul_Trek_(Kyrgyzstan,_August_2019)_-_34_(50565180213).jpg"
+   }
+  },
+  {
+   "file": "photo-4.jpg",
+   "alt": {
+    "en": "Yurt camp on the Song-Kul shore",
+    "ru": "Юрточный лагерь на Сон-Куле"
+   },
+   "credit": {
+    "artist": "Ninara from Helsinki, Finland",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Song-Kul,_Kyrgyzstan_(43669860135).jpg"
+   }
+  }
+ ],
+ "extra_credits": [
+  {
+   "artist": "Bernard Gagnon",
+   "license": "CC0",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Seven_Bulls.jpg"
+  },
+  {
+   "artist": "Bruno Rijsman",
+   "license": "CC BY-SA 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Trek-ala-kul-lake-10_(50565902501).jpg"
+  },
+  {
+   "artist": "Ninara from Helsinki, Finland",
+   "license": "CC BY 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Song-Kul,_Kyrgyzstan_(30709627198).jpg"
+  }
+ ]
 }
