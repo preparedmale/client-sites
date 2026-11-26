@@ -1,0 +1,210 @@
+{
+ "slug": "babua-marani",
+ "sample": true,
+ "credit": "Website by Serai Studio",
+ "name": "Babua's Marani",
+ "town": "Kvareli",
+ "country_code": "GE",
+ "kind": "winery",
+ "theme": "valley",
+ "schema_type": "Winery",
+ "languages": [
+  "en",
+  "ru"
+ ],
+ "currency": "GEL",
+ "price_from": 45,
+ "whatsapp": "+995 500 000 002",
+ "email": "cellar@babua.example",
+ "location_line": {
+  "en": "Kvareli, Kakheti · Georgia",
+  "ru": "Кварели, Кахетия · Грузия"
+ },
+ "headline": {
+  "en": "Taste wine the way our grandfather made it",
+  "ru": "Вино, как его делал наш дедушка"
+ },
+ "intro": {
+  "en": "A family cellar with eleven qvevri buried in the ground. Come for a tasting, stay for lunch, and leave with a bottle you will not find in any shop.",
+  "ru": "Семейный погреб с одиннадцатью квеври в земле. Приезжайте на дегустацию, оставайтесь на обед и увезите бутылку, которой нет ни в одном магазине."
+ },
+ "facts": [
+  {
+   "value": "11",
+   "label": {
+    "en": "qvevri in our cellar",
+    "ru": "квеври в погребе"
+   }
+  },
+  {
+   "value": "4",
+   "label": {
+    "en": "grape varieties",
+    "ru": "сорта винограда"
+   }
+  },
+  {
+   "value": "1952",
+   "label": {
+    "en": "first vintage",
+    "ru": "первый урожай"
+   }
+  },
+  {
+   "value": "EN · RU · KA",
+   "label": {
+    "en": "tastings in",
+    "ru": "дегустации на"
+   }
+  }
+ ],
+ "story": {
+  "en": "Babua means grandfather. Ours planted the first Saperavi rows here in 1952, and we still use his qvevri. We make about 3,000 bottles a year and sell most of them right here, at the cellar door.",
+  "ru": "Бабуа значит дедушка. Наш посадил здесь первые лозы Саперави в 1952 году, и мы до сих пор пользуемся его квеври. Мы делаем около 3 000 бутылок в год и продаём почти всё прямо в погребе."
+ },
+ "rooms": [
+  {
+   "name": {
+    "en": "Classic tasting",
+    "ru": "Классическая дегустация"
+   },
+   "price": 45,
+   "unit": {
+    "en": "per person",
+    "ru": "с человека"
+   },
+   "text": {
+    "en": "Four wines from qvevri with bread, cheese and churchkhela. About one hour.",
+    "ru": "Четыре вина из квеври с хлебом, сыром и чурчхелой. Около часа."
+   },
+   "features": [
+    {
+     "en": "Rkatsiteli, Kisi, Saperavi, Rosé",
+     "ru": "Ркацители, Киси, Саперави, розе"
+    },
+    {
+     "en": "Walk through the vineyard",
+     "ru": "Прогулка по винограднику"
+    }
+   ]
+  },
+  {
+   "name": {
+    "en": "Tasting and family lunch",
+    "ru": "Дегустация и семейный обед"
+   },
+   "price": 90,
+   "unit": {
+    "en": "per person",
+    "ru": "с человека"
+   },
+   "text": {
+    "en": "The classic tasting followed by a long Kakhetian lunch at our table.",
+    "ru": "Классическая дегустация и долгий кахетинский обед за нашим столом."
+   },
+   "features": [
+    {
+     "en": "Mtsvadi, pkhali, fresh tone bread",
+     "ru": "Мцвади, пхали, свежий хлеб из тоне"
+    },
+    {
+     "en": "Chacha to finish",
+     "ru": "Чача на завершение"
+    }
+   ]
+  },
+  {
+   "name": {
+    "en": "Harvest day (September)",
+    "ru": "День ртвели (сентябрь)"
+   },
+   "price": 120,
+   "unit": {
+    "en": "per person",
+    "ru": "с человека"
+   },
+   "text": {
+    "en": "Pick grapes with the family, press them in the satsnakheli and celebrate with dinner.",
+    "ru": "Собирайте виноград вместе с семьёй, давите его в сацнахели и празднуйте за ужином."
+   },
+   "features": [
+    {
+     "en": "Only during harvest",
+     "ru": "Только во время ртвели"
+    },
+    {
+     "en": "Book two weeks ahead",
+     "ru": "Бронь за две недели"
+    }
+   ]
+  }
+ ],
+ "schedule": [
+  [
+   "11:00",
+   {
+    "en": "Vineyard walk",
+    "ru": "Прогулка по винограднику"
+   }
+  ],
+  [
+   "11:30",
+   {
+    "en": "Tasting in the marani",
+    "ru": "Дегустация в марани"
+   }
+  ],
+  [
+   "13:00",
+   {
+    "en": "Family lunch",
+    "ru": "Семейный обед"
+   }
+  ],
+  [
+   "15:00",
+   {
+    "en": "Bottles to take home",
+    "ru": "Вино с собой"
+   }
+  ]
+ ],
+ "experiences": [
+  {
+   "name": {
+    "en": "Wine to take home",
+    "ru": "Вино с собой"
+   },
+   "text": {
+    "en": "Bottles from 25 GEL. We pack them for flights.",
+    "ru": "Бутылки от 25 лари. Упакуем для перелёта."
+   }
+  }
+ ],
+ "faq": [
+  {
+   "q": {
+    "en": "Do I need to book?",
+    "ru": "Нужно ли бронировать?"
+   },
+   "a": {
+    "en": "Yes, please message us at least one day ahead so someone from the family is at the cellar.",
+    "ru": "Да, напишите хотя бы за день, чтобы кто-то из семьи был в погребе."
+   }
+  },
+  {
+   "q": {
+    "en": "Can children come?",
+    "ru": "Можно с детьми?"
+   },
+   "a": {
+    "en": "Of course. They get grape juice and a walk with our dog.",
+    "ru": "Конечно. Детям — виноградный сок и прогулка с нашей собакой."
+   }
+  }
+ ],
+ "getting_here": {
+  "en": "Kvareli is about 2.5 hours from Tbilisi by car. Many Kakheti wine tours can stop here: ask your driver for Babua's Marani.",
+  "ru": "Кварели примерно в 2,5 часах езды от Тбилиси. Многие винные туры по Кахетии могут заехать к нам: попросите водителя."
+ }
+}

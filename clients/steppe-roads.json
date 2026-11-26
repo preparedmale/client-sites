@@ -1,0 +1,174 @@
+{
+ "slug": "steppe-roads",
+ "sample": true,
+ "credit": "Website by Serai Studio",
+ "name": "Steppe Roads",
+ "town": "Karakol",
+ "country_code": "KG",
+ "kind": "tour",
+ "theme": "steppe",
+ "schema_type": "TravelAgency",
+ "languages": [
+  "en",
+  "ru"
+ ],
+ "currency": "USD",
+ "price_from": 45,
+ "whatsapp": "+996 500 000 003",
+ "email": "go@steppe-roads.example",
+ "location_line": {
+  "en": "Karakol, Issyk-Kul · Kyrgyzstan",
+  "ru": "Каракол, Иссык-Куль · Кыргызстан"
+ },
+ "headline": {
+  "en": "Small-group treks and horse trips from Karakol",
+  "ru": "Треккинг и конные туры из Каракола в малых группах"
+ },
+ "intro": {
+  "en": "Local guides, honest prices, and nights in yurts with herding families. Groups of up to six, departing every week from June to September.",
+  "ru": "Местные гиды, честные цены и ночёвки в юртах у чабанов. Группы до шести человек, выезды каждую неделю с июня по сентябрь."
+ },
+ "facts": [
+  {
+   "value": "≤ 6",
+   "label": {
+    "en": "people per group",
+    "ru": "человек в группе"
+   }
+  },
+  {
+   "value": "9",
+   "label": {
+    "en": "years guiding",
+    "ru": "лет водим туры"
+   }
+  },
+  {
+   "value": "3,200 m",
+   "label": {
+    "en": "highest camp",
+    "ru": "высший лагерь"
+   }
+  },
+  {
+   "value": "EN · RU · KG",
+   "label": {
+    "en": "guides speak",
+    "ru": "гиды говорят"
+   }
+  }
+ ],
+ "rooms": [
+  {
+   "name": {
+    "en": "Jeti-Oguz day hike",
+    "ru": "Однодневный поход в Джети-Огуз"
+   },
+   "price": 45,
+   "unit": {
+    "en": "per person",
+    "ru": "с человека"
+   },
+   "text": {
+    "en": "Red rocks, the Valley of Flowers and lunch in a herder's yurt.",
+    "ru": "Красные скалы, Долина цветов и обед в юрте у чабана."
+   },
+   "features": [
+    {
+     "en": "8 hours, easy",
+     "ru": "8 часов, легко"
+    },
+    {
+     "en": "Transport and lunch included",
+     "ru": "Трансфер и обед включены"
+    }
+   ]
+  },
+  {
+   "name": {
+    "en": "Ala-Kul 3-day trek",
+    "ru": "Трек к Ала-Кулю, 3 дня"
+   },
+   "price": 240,
+   "unit": {
+    "en": "per person",
+    "ru": "с человека"
+   },
+   "text": {
+    "en": "The turquoise lake at 3,500 m, hot springs at Altyn-Arashan, two nights in camp.",
+    "ru": "Бирюзовое озеро на высоте 3 500 м, горячие источники Алтын-Арашана, две ночи в лагере."
+   },
+   "features": [
+    {
+     "en": "Moderate to hard",
+     "ru": "Средне–сложно"
+    },
+    {
+     "en": "Tents, food and guide included",
+     "ru": "Палатки, питание и гид включены"
+    }
+   ]
+  },
+  {
+   "name": {
+    "en": "Song-Kul by horse, 4 days",
+    "ru": "Сон-Куль верхом, 4 дня"
+   },
+   "price": 390,
+   "unit": {
+    "en": "per person",
+    "ru": "с человека"
+   },
+   "text": {
+    "en": "Ride over the pass to the high lake and sleep in yurts with nomad families.",
+    "ru": "Верхом через перевал к высокогорному озеру, ночёвки в юртах у кочевников."
+   },
+   "features": [
+    {
+     "en": "No riding experience needed",
+     "ru": "Опыт верховой езды не нужен"
+    },
+    {
+     "en": "Yurt stays and all meals",
+     "ru": "Юрты и всё питание"
+    }
+   ]
+  }
+ ],
+ "faq": [
+  {
+   "q": {
+    "en": "How fit do I need to be?",
+    "ru": "Какая нужна подготовка?"
+   },
+   "a": {
+    "en": "The day hike suits anyone who walks regularly. For Ala-Kul you should be comfortable hiking 6 to 7 hours with a small backpack.",
+    "ru": "Однодневный поход подойдёт всем, кто регулярно гуляет. Для Ала-Куля нужно спокойно проходить 6–7 часов с небольшим рюкзаком."
+   }
+  },
+  {
+   "q": {
+    "en": "What if the weather turns?",
+    "ru": "А если испортится погода?"
+   },
+   "a": {
+    "en": "Our guides decide on the day. If we cancel for safety, you get a full refund or a new date.",
+    "ru": "Решение принимает гид в день похода. Если мы отменяем ради безопасности, вернём деньги или перенесём дату."
+   }
+  },
+  {
+   "q": {
+    "en": "How do I pay?",
+    "ru": "Как оплатить?"
+   },
+   "a": {
+    "en": "A 20% deposit by card link to hold the date, the rest in cash (USD or som) on the day.",
+    "ru": "Предоплата 20% по ссылке на карту, остальное наличными (доллары или сомы) в день тура."
+   }
+  }
+ ],
+ "getting_here": {
+  "en": "We pick you up from any guesthouse in Karakol. Karakol is about 6 hours by marshrutka from Bishkek's Western bus station.",
+  "ru": "Забираем из любого гостевого дома в Караколе. Из Бишкека (Западный автовокзал) до Каракола около 6 часов на маршрутке."
+ }
+}

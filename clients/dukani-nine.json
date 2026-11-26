@@ -1,0 +1,138 @@
+{
+ "slug": "dukani-nine",
+ "sample": true,
+ "credit": "Website by Serai Studio",
+ "name": "Dukani Nine",
+ "town": "Tbilisi",
+ "country_code": "GE",
+ "kind": "restaurant",
+ "theme": "oldtown",
+ "schema_type": "Restaurant",
+ "languages": [
+  "en",
+  "ru"
+ ],
+ "currency": "GEL",
+ "price_from": 18,
+ "whatsapp": "+995 500 000 004",
+ "email": "table@dukani9.example",
+ "location_line": {
+  "en": "Old Tbilisi · Georgia",
+  "ru": "Старый Тбилиси · Грузия"
+ },
+ "headline": {
+  "en": "A cellar kitchen in Old Tbilisi",
+  "ru": "Погребок-кухня в Старом Тбилиси"
+ },
+ "intro": {
+  "en": "Nine tables under a brick vault. Khachapuri from the oven, wine from small family cellars, and a menu that changes with the market.",
+  "ru": "Девять столов под кирпичным сводом. Хачапури из печи, вино из маленьких семейных погребов и меню, которое меняется вместе с рынком."
+ },
+ "facts": [
+  {
+   "value": "9",
+   "label": {
+    "en": "tables",
+    "ru": "столов"
+   }
+  },
+  {
+   "value": "12–23",
+   "label": {
+    "en": "open daily",
+    "ru": "ежедневно"
+   }
+  },
+  {
+   "value": "30+",
+   "label": {
+    "en": "family wines",
+    "ru": "семейных вин"
+   }
+  },
+  {
+   "value": "5 min",
+   "label": {
+    "en": "walk from the sulfur baths",
+    "ru": "от серных бань"
+   }
+  }
+ ],
+ "story": {
+  "en": "Dukani is the old word for a small tavern. We cook what our grandmothers cooked, with produce from Dezerter Bazaar, and pour wines from families we know by name.",
+  "ru": "Дукани — старое слово для маленькой таверны. Мы готовим то, что готовили наши бабушки, из продуктов с Дезертирского рынка, и наливаем вина семей, которых знаем по именам."
+ },
+ "rooms": [
+  {
+   "name": {
+    "en": "Adjaruli khachapuri",
+    "ru": "Хачапури по-аджарски"
+   },
+   "price": 22,
+   "unit": {
+    "en": "",
+    "ru": ""
+   },
+   "text": {
+    "en": "Baked to order, with Imeretian cheese, butter and a farm egg.",
+    "ru": "Выпекаем на заказ, с имеретинским сыром, маслом и деревенским яйцом."
+   }
+  },
+  {
+   "name": {
+    "en": "Chakapuli",
+    "ru": "Чакапули"
+   },
+   "price": 28,
+   "unit": {
+    "en": "",
+    "ru": ""
+   },
+   "text": {
+    "en": "Lamb stewed with tarragon, green plums and white wine. Spring and summer only.",
+    "ru": "Баранина, тушённая с тархуном, ткемали и белым вином. Только весной и летом."
+   }
+  },
+  {
+   "name": {
+    "en": "Supra for two",
+    "ru": "Супра на двоих"
+   },
+   "price": 95,
+   "unit": {
+    "en": "for two",
+    "ru": "на двоих"
+   },
+   "text": {
+    "en": "Seven dishes from the kitchen and a bottle of family wine.",
+    "ru": "Семь блюд от кухни и бутылка семейного вина."
+   }
+  }
+ ],
+ "faq": [
+  {
+   "q": {
+    "en": "Do you take reservations?",
+    "ru": "Можно забронировать стол?"
+   },
+   "a": {
+    "en": "Yes, on WhatsApp. For groups of six or more, please write a day ahead.",
+    "ru": "Да, в WhatsApp. Для компаний от шести человек напишите за день."
+   }
+  },
+  {
+   "q": {
+    "en": "Vegetarian options?",
+    "ru": "Есть вегетарианские блюда?"
+   },
+   "a": {
+    "en": "Plenty: pkhali, badrijani, lobio and every khachapuri.",
+    "ru": "Много: пхали, бадриджани, лобио и все хачапури."
+   }
+  }
+ ],
+ "getting_here": {
+  "en": "Down the stairs at the corner by the sulfur baths in Abanotubani. Avlabari metro is a 10-minute walk.",
+  "ru": "Спуститесь по лестнице на углу у серных бань в Абанотубани. От метро Авлабари 10 минут пешком."
+ }
+}

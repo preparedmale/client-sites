@@ -1,0 +1,214 @@
+{
+ "slug": "cloudline-kazbegi",
+ "sample": true,
+ "credit": "Website by Serai Studio",
+ "name": "Cloudline Guesthouse",
+ "town": "Stepantsminda",
+ "country_code": "GE",
+ "kind": "lodging",
+ "theme": "mountain",
+ "schema_type": "LodgingBusiness",
+ "languages": [
+  "en",
+  "ru"
+ ],
+ "currency": "GEL",
+ "price_from": 120,
+ "price_range": "₾₾",
+ "whatsapp": "+995 500 000 001",
+ "email": "stay@cloudline.example",
+ "location_line": {
+  "en": "Stepantsminda, Kazbegi · Georgia",
+  "ru": "Степанцминда, Казбеги · Грузия"
+ },
+ "headline": {
+  "en": "Wake up facing Mount Kazbek",
+  "ru": "Просыпайтесь с видом на Казбек"
+ },
+ "intro": {
+  "en": "A family guesthouse on the quiet edge of Stepantsminda. Five rooms, a terrace that looks straight at the glacier, and breakfast made by Maka every morning.",
+  "ru": "Семейный гостевой дом на тихой окраине Степанцминды. Пять номеров, терраса с видом прямо на ледник и завтрак, который каждое утро готовит Мака."
+ },
+ "facts": [
+  {
+   "value": "5",
+   "label": {
+    "en": "rooms with mountain view",
+    "ru": "номеров с видом на горы"
+   }
+  },
+  {
+   "value": "15 min",
+   "label": {
+    "en": "walk to the Gergeti trail",
+    "ru": "пешком до тропы к Гергети"
+   }
+  },
+  {
+   "value": "3 h",
+   "label": {
+    "en": "by road from Tbilisi",
+    "ru": "на машине от Тбилиси"
+   }
+  },
+  {
+   "value": "EN · RU · KA",
+   "label": {
+    "en": "we speak",
+    "ru": "говорим"
+   }
+  }
+ ],
+ "story": {
+  "en": "Our family has lived under Kazbek for four generations. We opened the house to travellers in 2016, and most of our guests still find us the old way: a friend told them about the terrace.",
+  "ru": "Наша семья живёт под Казбеком уже четыре поколения. Мы открыли дом для путешественников в 2016 году, и большинство гостей до сих пор находят нас по совету друзей, которые сидели на этой террасе."
+ },
+ "rooms": [
+  {
+   "name": {
+    "en": "Glacier Room",
+    "ru": "Номер «Ледник»"
+   },
+   "guests": 2,
+   "price": 160,
+   "text": {
+    "en": "Our best view. Floor-to-ceiling window facing Kazbek and Gergeti Trinity Church.",
+    "ru": "Лучший вид в доме. Панорамное окно на Казбек и церковь Гергети."
+   },
+   "features": [
+    {
+     "en": "Double bed",
+     "ru": "Двуспальная кровать"
+    },
+    {
+     "en": "Private bathroom",
+     "ru": "Своя ванная"
+    },
+    {
+     "en": "Breakfast included",
+     "ru": "Завтрак включён"
+    }
+   ]
+  },
+  {
+   "name": {
+    "en": "Terrace Twin",
+    "ru": "Twin с террасой"
+   },
+   "guests": 2,
+   "price": 130,
+   "text": {
+    "en": "Two beds and a door straight onto the shared terrace.",
+    "ru": "Две кровати и выход прямо на общую террасу."
+   },
+   "features": [
+    {
+     "en": "Two single beds",
+     "ru": "Две односпальные кровати"
+    },
+    {
+     "en": "Private bathroom",
+     "ru": "Своя ванная"
+    },
+    {
+     "en": "Breakfast included",
+     "ru": "Завтрак включён"
+    }
+   ]
+  },
+  {
+   "name": {
+    "en": "Family Room",
+    "ru": "Семейный номер"
+   },
+   "guests": 4,
+   "price": 210,
+   "text": {
+    "en": "A double and two singles, with a small sitting area for long evenings.",
+    "ru": "Двуспальная и две односпальные кровати, уголок отдыха для долгих вечеров."
+   },
+   "features": [
+    {
+     "en": "Sleeps 4",
+     "ru": "До 4 гостей"
+    },
+    {
+     "en": "Private bathroom",
+     "ru": "Своя ванная"
+    },
+    {
+     "en": "Breakfast included",
+     "ru": "Завтрак включён"
+    }
+   ]
+  }
+ ],
+ "experiences": [
+  {
+   "name": {
+    "en": "Gergeti sunrise walk",
+    "ru": "Рассвет у Гергети"
+   },
+   "text": {
+    "en": "Giorgi walks you up to Gergeti Trinity before the tour buses arrive. Back in time for breakfast.",
+    "ru": "Гиорги проведёт вас к Гергетской Троице до прихода туристических автобусов. Вернётесь к завтраку."
+   },
+   "price": 40,
+   "unit": {
+    "en": "per group",
+    "ru": "за группу"
+   }
+  },
+  {
+   "name": {
+    "en": "Home dinner",
+    "ru": "Домашний ужин"
+   },
+   "text": {
+    "en": "Khinkali, mountain cheese and herb salads, served on the terrace from June to September.",
+    "ru": "Хинкали, горный сыр и салаты из трав. С июня по сентябрь подаём на террасе."
+   },
+   "price": 35,
+   "unit": {
+    "en": "per person",
+    "ru": "с человека"
+   }
+  }
+ ],
+ "faq": [
+  {
+   "q": {
+    "en": "Is the road open in winter?",
+    "ru": "Открыта ли дорога зимой?"
+   },
+   "a": {
+    "en": "Usually yes, but the Jvari Pass can close for a day or two after heavy snow. Write to us before you travel and we will tell you the current state.",
+    "ru": "Обычно да, но после сильного снегопада перевал Джвари может закрыться на день-два. Напишите нам перед поездкой, и мы расскажем, как обстановка."
+   }
+  },
+  {
+   "q": {
+    "en": "Do you have parking?",
+    "ru": "Есть ли парковка?"
+   },
+   "a": {
+    "en": "Yes, free parking in our yard for three cars.",
+    "ru": "Да, бесплатная парковка во дворе на три машины."
+   }
+  },
+  {
+   "q": {
+    "en": "How do I pay?",
+    "ru": "Как оплатить?"
+   },
+   "a": {
+    "en": "Cash in lari or by card on arrival. No prepayment needed for direct bookings.",
+    "ru": "Наличными в лари или картой при заезде. Для прямых бронирований предоплата не нужна."
+   }
+  }
+ ],
+ "getting_here": {
+  "en": "Marshrutkas leave Tbilisi's Didube station for Stepantsminda several times a day and take about 3 hours. Send us your arrival time and we will meet you at the central square.",
+  "ru": "Маршрутки из Тбилиси (станция Дидубе) ходят в Степанцминду несколько раз в день, дорога около 3 часов. Напишите время приезда, и мы встретим вас на центральной площади."
+ }
+}
