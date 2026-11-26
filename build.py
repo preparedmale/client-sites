@@ -96,7 +96,8 @@ def render(d, lang, langs, prefix):
     fonts = "family=" + th["display"].replace(" ", "+") + ":wght@400;600&family=" + th["body"].replace(" ", "+") + ":wght@400;500;600"
 
     nav = []
-    if d.get("rooms"): nav.append(("stay", u["stay"] if d.get("kind") == "lodging" else u["rooms"]))
+    sec_title = t(d.get("section_title"), lang) or (u["stay"] if d.get("kind") == "lodging" else u["rooms"])
+    if d.get("rooms"): nav.append(("stay", sec_title))
     if d.get("experiences"): nav.append(("experiences", u["experiences"]))
     if d.get("photos") and len(d["photos"]) > 1: nav.append(("gallery", u["gallery"]))
     nav.append(("contact", u["contact"]))
@@ -131,7 +132,7 @@ def render(d, lang, langs, prefix):
     if d.get("story"):
         s.append(f'<section class="story"><div class="wrap narrow"><p>{e(t(d["story"], lang))}</p></div></section>')
     if d.get("rooms"):
-        title = u["stay"] if d.get("kind") == "lodging" else u["rooms"]
+        title = sec_title
         cards = []
         for r in d["rooms"]:
             img = f'<img src="{prefix}{e(r["photo"])}" alt="" loading="lazy">' if r.get("photo") else ""
@@ -272,4 +273,5 @@ if __name__ == "__main__":
     OUT.mkdir(exist_ok=True)
     built = [build(f) for f in files]
     if not sys.argv[1:]:
-        index_page(built)
+        import agency
+        agency.write(OUT)

@@ -210,5 +210,9 @@
  "getting_here": {
   "en": "Marshrutkas leave Tbilisi's Didube station for Stepantsminda several times a day and take about 3 hours. Send us your arrival time and we will meet you at the central square.",
   "ru": "Маршрутки из Тбилиси (станция Дидубе) ходят в Степанцминду несколько раз в день, дорога около 3 часов. Напишите время приезда, и мы встретим вас на центральной площади."
+ },
+ "section_title": {
+  "en": "Rooms",
+  "ru": "Номера"
  }
 }

@@ -170,5 +170,9 @@
  "getting_here": {
   "en": "We pick you up from any guesthouse in Karakol. Karakol is about 6 hours by marshrutka from Bishkek's Western bus station.",
   "ru": "Забираем из любого гостевого дома в Караколе. Из Бишкека (Западный автовокзал) до Каракола около 6 часов на маршрутке."
+ },
+ "section_title": {
+  "en": "Tours",
+  "ru": "Туры"
  }
 }
