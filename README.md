@@ -1,5 +1,7 @@
 # Serai Studio · client sites
 
+The old GitHub Pages address only forwards visitors to the new one (`.github/workflows/deploy.yml`, `tools/redirect_stub.py`).
+
 One JSON file per client in `clients/`. Push to `main` and Cloudflare Pages builds every site and publishes it:
 
     https://serai-studio.pages.dev/<slug>/        (first language)
