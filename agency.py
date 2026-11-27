@@ -119,6 +119,7 @@ def render(lang):
     js = """document.documentElement.classList.add('js');addEventListener('DOMContentLoaded',()=>{
 const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{rootMargin:'0px 0px -8% 0px'});
 document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(el.closest('.hero')?i*110:((i%4)*80))+'ms';io.observe(el)});
+const pl=document.querySelector('.pill'),mb=document.querySelector('.menu-btn');if(pl&&mb){const set=o=>{pl.classList.toggle('open',o);mb.setAttribute('aria-expanded',o)};mb.addEventListener('click',()=>set(!pl.classList.contains('open')));pl.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>set(false)));addEventListener('keydown',ev=>{if(ev.key==='Escape')set(false)});document.addEventListener('click',ev=>{if(!pl.contains(ev.target))set(false)})}
 const nav=document.querySelector('.nav'),hero=document.querySelector('.hero');
 new IntersectionObserver(([x])=>nav.dataset.solid=x.isIntersecting?'0':'1',{rootMargin:'-120px 0px 0px 0px'}).observe(hero)});"""
     return f'''<!doctype html><html lang="{lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -202,9 +203,10 @@ footer{{border-top:1px solid rgba(239,233,224,.14);padding-block:2rem;color:rgba
 @media (max-width:960px){{.hero,.faq-grid,.c-grid{{grid-template-columns:1fr}}.hero{{padding-top:7rem;min-height:auto}}.stack{{height:min(110vw,560px)}}.faq-grid .head{{position:static}}
 .steps{{grid-template-columns:1fr 1fr}}.plans{{grid-template-columns:1fr}}.pill nav{{display:none}}.works .w{{grid-column:span 12!important;height:clamp(300px,90vw,480px)!important}}.proof{{grid-template-columns:1fr 1fr}}}}
 @media (max-width:640px){{.mini{{display:none}}.steps{{grid-template-columns:1fr}}.st{{transform:none!important}}.pill{{padding-right:.6rem}}}}
+.menu-btn{{display:none}}@media (max-width:900px){{.pill{{position:relative}}.menu-btn{{display:grid;place-content:center;gap:5px;flex:none;width:2.5rem;height:2.5rem;margin-left:auto;border:0;border-radius:50%;background:rgba(255,255,255,.16);color:inherit;cursor:pointer}}.nav[data-solid="1"] .menu-btn{{background:rgba(29,26,23,.07)}}.menu-btn span{{display:block;width:16px;height:1.5px;background:currentColor;transition:transform .35s var(--ease)}}.pill.open .menu-btn span:first-child{{transform:translateY(3.25px) rotate(45deg)}}.pill.open .menu-btn span:last-child{{transform:translateY(-3.25px) rotate(-45deg)}}.pill.open nav{{display:flex;position:absolute;top:calc(100% + 8px);left:0;right:0;flex-direction:column;gap:0;padding:.5rem;border-radius:1.4rem;background:rgba(250,247,242,.98);color:var(--ink);box-shadow:inset 0 0 0 1px rgba(29,26,23,.08),0 24px 48px -20px rgba(20,14,10,.35)}}.pill.open nav a{{padding:.9rem 1rem;font-size:1rem;opacity:1;border-radius:1rem}}.pill.open nav a:active{{background:rgba(29,26,23,.06)}}}}
 </style></head><body>
 <header class="nav" data-solid="0"><div class="pill"><a class="logo" href="{pre}{sub_dir(lang)}">{LOGO}Serai Studio</a>
-<nav aria-label="Main">{"".join(f'<a href="#{i}">{e(n)}</a>' for i, n in zip(ids, c["nav"]))}</nav>{switch}<a class="mini" href="#contact">{e(c["nav"][4])}</a></div></header>
+<nav id="mnav" aria-label="Main">{"".join(f'<a href="#{i}">{e(n)}</a>' for i, n in zip(ids, c["nav"]))}</nav>{switch}<a class="mini" href="#contact">{e(c["nav"][4])}</a><button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><span></span><span></span></button></div></header>
 <main>
 <section class="hero wrap"><div><p class="tag rv">{e(c["eyebrow"])}</p><h1 class="rv">{e(c["h1"])}</h1><p class="lead rv">{e(c["lead"])}</p>
 <div class="ctas rv"><a class="btn" href="#contact"><span>{e(c["cta"])}</span>{ARROW}</a><a class="ghost" href="#work">{e(c["cta2"])}</a></div></div>

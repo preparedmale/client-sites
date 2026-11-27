@@ -36,6 +36,10 @@ UI = {
 
 for _l, _k in {'en': {'book_h': 'Request a booking', 'f_checkin': 'Check-in', 'f_checkout': 'Check-out', 'f_date': 'Date', 'f_time': 'Time', 'f_guests': 'Guests', 'o_stay': 'Room', 'o_tour': 'Tour', 'o_tasting': 'Tasting', 'o_table': '', 'f_departure': 'Departure', 'f_name': 'Your name', 'f_note': 'Anything we should know?', 'est': 'Estimated total', 'send': 'Send request on WhatsApp', 'pay_note': 'No payment now. We confirm availability in a message, usually within a few hours.', 'demo_h': 'Demo only', 'demo_p': 'On a real site this opens WhatsApp with the message below, ready to send to the owner. Nothing was sent.', 'close': 'Close', 'sample_reviews': 'Sample reviews', 'hours': 'Opening hours', 'wines': 'Our wines', 'bottle': 'bottle', 'included': 'Included', 'excluded': 'Not included', 'itinerary': 'Day by day', 'menu_h': 'Menu', 'nav_book': 'Book', 'sel': 'Choose'}, 'ru': {'book_h': 'Запрос на бронирование', 'f_checkin': 'Заезд', 'f_checkout': 'Выезд', 'f_date': 'Дата', 'f_time': 'Время', 'f_guests': 'Гостей', 'o_stay': 'Номер', 'o_tour': 'Тур', 'o_tasting': 'Дегустация', 'o_table': '', 'f_departure': 'Дата выезда группы', 'f_name': 'Ваше имя', 'f_note': 'Пожелания', 'est': 'Примерная сумма', 'send': 'Отправить запрос в WhatsApp', 'pay_note': 'Сейчас платить не нужно. Мы подтвердим наличие мест в сообщении, обычно в течение нескольких часов.', 'demo_h': 'Только демо', 'demo_p': 'На настоящем сайте откроется WhatsApp с этим сообщением для владельца. Ничего не отправлено.', 'close': 'Закрыть', 'sample_reviews': 'Примеры отзывов', 'hours': 'Часы работы', 'wines': 'Наши вина', 'bottle': 'бутылка', 'included': 'Включено', 'excluded': 'Не включено', 'itinerary': 'По дням', 'menu_h': 'Меню', 'nav_book': 'Бронь', 'sel': 'Выберите'}, 'ka': {'book_h': 'დაჯავშნის მოთხოვნა', 'f_checkin': 'შესვლა', 'f_checkout': 'გასვლა', 'f_date': 'თარიღი', 'f_time': 'დრო', 'f_guests': 'სტუმრები', 'o_stay': 'ოთახი', 'o_tour': 'ტური', 'o_tasting': 'დეგუსტაცია', 'o_table': '', 'f_departure': 'გასვლის თარიღი', 'f_name': 'თქვენი სახელი', 'f_note': 'რამე, რაც უნდა ვიცოდეთ?', 'est': 'სავარაუდო ჯამი', 'send': 'მოთხოვნის გაგზავნა WhatsApp-ზე', 'pay_note': 'ახლა გადახდა არ არის საჭირო. თავისუფალ ადგილებს შეტყობინებით დაგიდასტურებთ, ჩვეულებრივ რამდენიმე საათში.', 'demo_h': 'მხოლოდ დემო', 'demo_p': 'ნამდვილ საიტზე გაიხსნება WhatsApp ამ შეტყობინებით მფლობელისთვის. არაფერი გაგზავნილა.', 'close': 'დახურვა', 'sample_reviews': 'ნიმუში შეფასებები', 'hours': 'სამუშაო საათები', 'wines': 'ჩვენი ღვინოები', 'bottle': 'ბოთლი', 'included': 'შედის', 'excluded': 'არ შედის', 'itinerary': 'დღეების მიხედვით', 'menu_h': 'მენიუ', 'nav_book': 'ჯავშანი', 'sel': 'აირჩიეთ'}}.items():
     UI[_l].update(_k)
+# sample sites: the WhatsApp demo dialog (no owner number exists, so the try button lets the visitor pick any chat)
+UI["en"].update(demo_p="On a real site this button opens a WhatsApp chat with the owner, with this message already typed. This is a sample business with no real number, so nothing was sent.", try_wa="Try it in WhatsApp", try_note="Opens WhatsApp with this message. You choose the chat (try your own number). Nothing is sent until you press send.")
+UI["ru"].update(demo_p="На настоящем сайте эта кнопка открывает чат WhatsApp с владельцем, и это сообщение уже набрано. Это пример, у него нет настоящего номера, поэтому ничего не отправлено.", try_wa="Попробовать в WhatsApp", try_note="Откроет WhatsApp с этим сообщением. Чат выбираете вы (например, свой номер). Ничего не отправится, пока вы не нажмёте «отправить».")
+UI["ka"].update(demo_p="ნამდვილ საიტზე ეს ღილაკი ხსნის WhatsApp ჩატს მფლობელთან და ეს შეტყობინება უკვე აკრეფილია. ეს საცდელი ობიექტია ნამდვილი ნომრის გარეშე, ამიტომ არაფერი გაგზავნილა.", try_wa="სცადეთ WhatsApp-ში", try_note="გაიხსნება WhatsApp ამ შეტყობინებით. ჩატს თქვენ ირჩევთ (მაგალითად, საკუთარ ნომერს). არაფერი გაიგზავნება, სანამ გაგზავნას არ დააჭერთ.")
 
 THEMES = {
     # display serif/grotesk, body sans, accent, paper, deep (contact band)
@@ -78,7 +82,9 @@ def render(d, lang, langs, prefix):
     wa_text = t(d.get("whatsapp_greeting"), lang) or u.get("greeting", "Hello! I found {name} online.").format(name=name)
     wa_link = f"https://wa.me/{wa}?text={html.escape(__import__('urllib.parse').parse.quote(wa_text))}" if wa else ""
     wa_tgt = ' target="_blank" rel="noopener"'
-    if smp: wa_link, wa_tgt = "#contact", ""   # fictional samples: no live WhatsApp link to a number that may belong to someone
+    if smp:   # fictional samples: never link a number that may belong to someone. wa.me/?text= opens WhatsApp and lets the visitor pick the chat
+        wa_link = f"https://wa.me/?text={html.escape(__import__('urllib.parse').parse.quote(wa_text))}" if wa else ""
+        wa_tgt += f' data-wa-demo="{e(wa_text)}"'
     cur = d.get("currency", "")
     desc = t(d.get("intro"), lang)
     photos = d.get("photos") or []
@@ -115,8 +121,8 @@ def render(d, lang, langs, prefix):
     s = []
     if smp: s.append(f'<div class="sample">{e(u["sample"])}</div>')
     s.append(f'<header class="nav" data-solid="0"><div class="pill"><a class="brand" href="{home}">{e(name)}</a>'
-             f'<nav aria-label="{e(u["menu"])}">' + "".join(f'<a href="#{k}">{e(v)}</a>' for k, v in nav) + f"</nav>{switch}"
-             + (f'<a class="mini" href="#book">{e(u["book"])}</a>' if d.get("booking") else "") + "</div></header>")
+             f'<nav id="mnav" aria-label="{e(u["menu"])}">' + "".join(f'<a href="#{k}">{e(v)}</a>' for k, v in nav) + f"</nav>{switch}"
+             + (f'<a class="mini" href="#book">{e(u["book"])}</a>' if d.get("booking") else "") + '<button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="{e(u["menu"])}"><span></span><span></span></button></div></header>')
 
     # 1. hero
     s.append('<section class="hero">' + (f'<div class="hero-media">{img(photos[0], "kb", lazy=False)}</div>' if hero_img else "")
@@ -202,7 +208,6 @@ def render(d, lang, langs, prefix):
                  f'<p class="b-note">{e(u["pay_note"])}</p>' + (f'<p class="b-hours"><span>{e(u["hours"])}</span>{e(t(d["hours"], lang))}</p>' if d.get("hours") else "")
                  + f'</div><form class="bk bezel rv" data-cfg="{e(json.dumps(cfg, ensure_ascii=False))}" novalidate><div class="core f-in">{"".join(fields)}{est}'
                  f'<button class="btn" type="submit"><span>{e(u["send"])}</span>{ARROW}</button>' + (f'<p class="demo-tag">{e(u["demo_h"])}</p>' if smp else "") + "</div></form></div>"
-                 + (f'<dialog id="demo"><p class="tag dark">{e(u["demo_h"])}</p><p>{e(u["demo_p"])}</p><pre></pre><form method="dialog"><button class="btn"><span>{e(u["close"])}</span></button></form></dialog>' if smp else "")
                  + "</section>")
 
     # 6. gallery bento
@@ -234,6 +239,10 @@ def render(d, lang, langs, prefix):
     if d.get("email"): rows.append(f'<p><span class="k">{e(u["email"])}</span><span class="v{" ph" if smp else ""}">{e(u["your_email"] if smp else d["email"])}</span></p>')
     if d.get("address"): rows.append(f'<p><span class="k">⌖</span><span class="v">{e(t(d["address"], lang))}</span></p>')
     if str(d.get("maps_url", "")).startswith("https://"): rows.append(f'<p><a href="{e(d["maps_url"])}" target="_blank" rel="noopener">{e(u["map"])}</a></p>')
+    if smp and wa:
+        s.append(f'<dialog id="demo"><p class="tag dark">{e(u["demo_h"])}</p><p>{e(u["demo_p"])}</p><pre></pre>'
+                 f'<div class="d-act"><a class="btn" id="try-wa" href="https://wa.me/" target="_blank" rel="noopener"><span>{e(u["try_wa"])}</span>{ARROW}</a>'
+                 f'<form method="dialog"><button class="ghost-btn">{e(u["close"])}</button></form></div><p class="d-note">{e(u["try_note"])}</p></dialog>')
     s.append(f'<section id="contact" class="contact"><div class="wrap c-grid"><h2 class="rv">{e(u["contact_h"])}</h2>'
              f'<div class="rv">{"".join(rows)}<p class="muted">{e(u["reply"])}</p>{btn(wa_link, u["write"], "btn light") if wa else ""}</div></div>')
     creds = [p["credit"] for p in photos if p.get("credit")] + (d.get("extra_credits") or [])
@@ -272,6 +281,7 @@ background:rgba(20,16,14,.28);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);b
 .langs a[aria-current]{{opacity:1;box-shadow:inset 0 0 0 1px currentColor}}
 .mini{{font-size:.82rem;font-weight:600;text-decoration:none;padding:.65rem 1.1rem;border-radius:99px;background:#fff;color:var(--ink);white-space:nowrap}}
 .nav[data-solid="1"] .mini{{background:var(--ink);color:#fff}}
+.menu-btn{{display:none}}@media (max-width:900px){{.pill{{position:relative}}.menu-btn{{display:grid;place-content:center;gap:5px;flex:none;width:2.5rem;height:2.5rem;margin-left:auto;border:0;border-radius:50%;background:rgba(255,255,255,.16);color:inherit;cursor:pointer}}.nav[data-solid="1"] .menu-btn{{background:rgba(29,26,23,.07)}}.menu-btn span{{display:block;width:16px;height:1.5px;background:currentColor;transition:transform .35s var(--ease)}}.pill.open .menu-btn span:first-child{{transform:translateY(3.25px) rotate(45deg)}}.pill.open .menu-btn span:last-child{{transform:translateY(-3.25px) rotate(-45deg)}}.pill.open nav{{display:flex;position:absolute;top:calc(100% + 8px);left:0;right:0;flex-direction:column;gap:0;padding:.5rem;border-radius:1.4rem;background:rgba(250,247,242,.98);color:var(--ink);box-shadow:inset 0 0 0 1px rgba(29,26,23,.08),0 24px 48px -20px rgba(20,14,10,.35)}}.pill.open nav a{{padding:.9rem 1rem;font-size:1rem;opacity:1;border-radius:1rem}}.pill.open nav a:active{{background:rgba(29,26,23,.06)}}}}
 /* hero */
 .hero{{position:relative;min-height:100svh;display:flex;align-items:flex-end;color:#fff;background:var(--deep);overflow:hidden;margin-top:-1px}}
 .hero-media{{position:absolute;inset:0}}.hero-media img{{width:100%;height:100%;object-fit:cover}}
@@ -360,7 +370,7 @@ footer{{padding-block:2rem 2.4rem;border-top:1px solid rgba(255,255,255,.12);col
 .est{{display:flex;justify-content:space-between;align-items:baseline;padding-top:.6rem;color:var(--muted)}}.est b{{font-family:var(--display);font-weight:400;font-size:1.8rem;color:var(--ink)}}
 .f-in .btn{{background:var(--ink);color:#fff;justify-content:space-between;border:0;cursor:pointer;font-family:inherit}}.f-in .ic{{background:rgba(255,255,255,.16)}}
 .demo-tag{{text-align:center;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}}
-dialog{{max-width:min(520px,92vw);border:0;border-radius:1.4rem;padding:2rem;background:#fbf8f3;color:var(--ink);box-shadow:0 40px 80px -30px rgba(0,0,0,.5)}}dialog::backdrop{{background:rgba(10,8,6,.55);backdrop-filter:blur(4px)}}
+dialog{{max-width:min(520px,92vw);border:0;border-radius:1.4rem;padding:2rem;background:#fbf8f3;color:var(--ink);box-shadow:0 40px 80px -30px rgba(0,0,0,.5)}}.d-act{{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-top:1.2rem}}.d-act form{{margin:0}}.ghost-btn{{font:inherit;font-weight:600;background:none;border:0;padding:.8rem 1rem;color:var(--ink);text-decoration:underline;cursor:pointer}}.d-note{{font-size:.82rem;opacity:.7;margin-top:.9rem}}dialog::backdrop{{background:rgba(10,8,6,.55);backdrop-filter:blur(4px)}}
 #demo .tag{{color:var(--accent);background:none;backdrop-filter:none;box-shadow:inset 0 0 0 1px var(--accent)}}dialog pre{{white-space:pre-wrap;font:inherit;font-size:.92rem;background:rgba(29,26,23,.05);border-radius:.8rem;padding:1rem;margin:1.2rem 0}}dialog p{{margin-top:1rem;color:var(--muted)}}dialog .btn{{background:var(--ink);color:#fff;border:0;cursor:pointer;font-family:inherit;padding:.8rem 1.4rem}}
 /* tour details */
 .more{{margin-top:1rem;border:0}}.more summary{{font:600 .85rem/1 var(--body);padding:.8rem 0;justify-content:flex-start;gap:.6rem}}.days{{padding-left:1.1rem;margin:.2rem 0 1rem;color:var(--muted);font-size:.9rem;display:grid;gap:.4rem}}
@@ -391,7 +401,10 @@ dialog{{max-width:min(520px,92vw);border:0;border-radius:1.4rem;padding:2rem;bac
     js = """document.documentElement.classList.add('js');addEventListener('DOMContentLoaded',()=>{
 const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{rootMargin:'0px 0px -8% 0px'});
 document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(el.closest('.hero')?i*120:((i%3)*90))+'ms';io.observe(el)});
-const nav=document.querySelector('.nav'),hero=document.querySelector('.hero');
+const pl=document.querySelector('.pill'),mb=document.querySelector('.menu-btn');if(pl&&mb){const set=o=>{pl.classList.toggle('open',o);mb.setAttribute('aria-expanded',o)};mb.addEventListener('click',()=>set(!pl.classList.contains('open')));pl.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>set(false)));addEventListener('keydown',ev=>{if(ev.key==='Escape')set(false)});document.addEventListener('click',ev=>{if(!pl.contains(ev.target))set(false)})}
+const nav=document.querySelector('.nav'),hero=document.querySelector('.hero'),dlg=document.getElementById('demo');
+const demo=m=>{if(!dlg||!dlg.showModal)return false;dlg.querySelector('pre').textContent=m;dlg.querySelector('#try-wa').href='https://wa.me/?text='+encodeURIComponent(m);dlg.showModal();return true};
+document.querySelectorAll('[data-wa-demo]').forEach(a=>a.addEventListener('click',ev=>{if(demo(a.dataset.waDemo))ev.preventDefault()}));
 document.querySelectorAll('form.bk').forEach(f=>{const c=JSON.parse(f.dataset.cfg),out=f.querySelector('.est b'),today=new Date().toISOString().slice(0,10);
 f.querySelectorAll('input[type=date]').forEach(i=>i.min=today);
 const nights=()=>f.d1&&f.d2&&f.d1.value&&f.d2.value?Math.round((new Date(f.d2.value)-new Date(f.d1.value))/864e5):0;
@@ -402,7 +415,7 @@ f.addEventListener('input',calc);f.addEventListener('change',calc);calc();
 f.addEventListener('submit',ev=>{ev.preventDefault();calc();if(!f.reportValidity())return;const L=[c.title];
 f.querySelectorAll('[data-l]').forEach(el=>{const v=el.tagName==='SELECT'?el.selectedOptions[0].text:el.value.trim();if(v)L.push(el.dataset.l+': '+v)});
 if(out&&out.textContent!=='—')L.push(c.estl+': '+out.textContent);const m=L.join('\\n');
-if(c.wa)open('https://wa.me/'+c.wa+'?text='+encodeURIComponent(m),'_blank','noopener');else{const d=document.getElementById('demo');d.querySelector('pre').textContent=m;d.showModal()}})});
+if(c.wa)open('https://wa.me/'+c.wa+'?text='+encodeURIComponent(m),'_blank','noopener');else demo(m)})});
 if(nav&&hero)new IntersectionObserver(([x])=>nav.dataset.solid=x.isIntersecting?'0':'1',{rootMargin:'-80px 0px 0px 0px'}).observe(hero)});"""
     return f"""<!doctype html>
 <html lang="{lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
