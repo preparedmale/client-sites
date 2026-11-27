@@ -141,7 +141,7 @@ new IntersectionObserver(([x])=>nav.dataset.solid=x.isIntersecting?'0':'1',{root
 <script type="application/ld+json">{{"@context":"https://schema.org","@type":"ProfessionalService","name":"Serai Studio","email":"{EMAIL}","areaServed":["Georgia","Armenia","Kyrgyzstan","Uzbekistan","Kazakhstan"],"url":"{BASE}/"}}</script>
 <script>{js}</script>
 <style>
-:root{{--paper:#f6f3ed;--ink:#191714;--muted:#6b665d;--hair:rgba(25,23,20,.12);--accent:#14524b;--gold:#b5873a;--deep:#14201d;
+:root{{--gold-t:#86601f;--paper:#f6f3ed;--ink:#191714;--muted:#6b665d;--hair:rgba(25,23,20,.12);--accent:#14524b;--gold:#b5873a;--deep:#14201d;
 --serif:"Instrument Serif","Noto Serif Georgian",Georgia,serif;--sans:"Hanken Grotesk","Noto Sans Georgian",system-ui,-apple-system,"Segoe UI",sans-serif;--ease:cubic-bezier(.32,.72,0,1)}}
 *{{box-sizing:border-box}}html{{scroll-behavior:smooth;scroll-padding-top:90px}}
 body{{margin:0;background:var(--paper);color:var(--ink);font:400 16.5px/1.7 var(--sans);-webkit-font-smoothing:antialiased}}
@@ -151,7 +151,7 @@ img{{display:block;max-width:100%}}a{{color:inherit}}:focus-visible{{outline:2px
 h1,h2,h3{{font-family:var(--serif);font-weight:400;letter-spacing:-.015em;margin:0;text-wrap:balance}}
 h2{{font-size:clamp(2.6rem,6vw,5.2rem);line-height:.98}}h3{{font-size:1.6rem;line-height:1.1}}
 html[lang=ka] h1,html[lang=ka] h2,html[lang=ka] h3{{font-weight:300;letter-spacing:0}}html[lang=ka] h2{{font-size:clamp(2rem,4.4vw,3.6rem);line-height:1.15}}
-.tag{{display:inline-flex;font:500 .7rem/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;padding:.55rem .9rem;border-radius:99px;color:var(--gold);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold) 40%,transparent)}}
+.tag{{display:inline-flex;font:500 .7rem/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;padding:.55rem .9rem;border-radius:99px;color:var(--gold-t);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold) 40%,transparent)}}.how .tag{{color:var(--gold)}}
 :lang(ka) .tag{{text-transform:none;letter-spacing:.04em}}
 .nav{{position:fixed;top:18px;left:0;right:0;z-index:50;display:flex;justify-content:center;pointer-events:none}}
 .pill{{pointer-events:auto;display:flex;align-items:center;gap:clamp(.8rem,2vw,1.8rem);padding:.45rem .45rem .45rem 1.3rem;border-radius:99px;background:rgba(246,243,237,.72);
@@ -188,8 +188,8 @@ section{{padding-block:clamp(5rem,10vw,9rem)}}.head{{display:flex;flex-direction
 .plans{{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1rem,2vw,1.6rem);align-items:stretch}}
 .plan{{padding:.45rem;border-radius:1.9rem;background:rgba(25,23,20,.04);box-shadow:inset 0 0 0 1px rgba(25,23,20,.06)}}
 .p-in{{height:100%;border-radius:calc(1.9rem - .45rem);background:#fffdf9;padding:clamp(1.8rem,3.4vw,3rem);display:flex;flex-direction:column;box-shadow:inset 0 1px 1px rgba(255,255,255,.6)}}
-.plan.dark .p-in{{background:var(--deep);color:#efe9e0}}.plan.dark .amt span,.plan.dark li{{color:rgba(239,233,224,.72)}}.plan.dark .btn{{background:#efe9e0;color:var(--ink);margin-top:2rem;align-self:flex-start}}.plan.dark .ic{{background:var(--ink);color:#fff}}
-.p-name{{font:500 .72rem/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}}:lang(ka) .p-name{{text-transform:none;letter-spacing:.04em}}
+.plan.dark .p-in{{background:var(--deep);color:#efe9e0}}.dark .p-name{{color:var(--gold)}}.plan.dark .amt span,.plan.dark li{{color:rgba(239,233,224,.72)}}.plan.dark .btn{{background:#efe9e0;color:var(--ink);margin-top:2rem;align-self:flex-start}}.plan.dark .ic{{background:var(--ink);color:#fff}}
+.p-name{{font:500 .72rem/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--gold-t)}}:lang(ka) .p-name{{text-transform:none;letter-spacing:.04em}}
 .amt{{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap;margin:1.2rem 0 1.6rem}}.amt b{{font-family:var(--serif);font-weight:400;font-size:clamp(3.6rem,6vw,5.2rem);line-height:.9}}.amt span{{color:var(--muted);font-size:.92rem}}
 .plan ul{{list-style:none;padding:0;margin:0;display:grid;gap:.7rem}}.plan li{{padding-left:1.6rem;position:relative;color:var(--muted)}}
 .plan li::before{{content:"";position:absolute;left:0;top:.8em;width:.8rem;height:1px;background:var(--gold)}}
@@ -206,7 +206,7 @@ summary::-webkit-details-marker{{display:none}}.pl{{flex:none;color:var(--gold);
 .c-grid{{display:grid;grid-template-columns:1.2fr .8fr;gap:3rem;align-items:end;padding-bottom:clamp(5rem,9vw,8rem)}}
 .c-grid p{{color:rgba(239,233,224,.7);max-width:44ch}}.mail{{display:block;font-family:var(--serif);font-size:clamp(1.5rem,2.6vw,2.2rem);color:#efe9e0;margin:1.6rem 0 2rem;user-select:all;overflow-wrap:anywhere}}
 .contact .btn{{background:#efe9e0;color:var(--ink)}}.contact .ic{{background:var(--accent);color:#fff}}
-footer{{border-top:1px solid rgba(239,233,224,.14);padding-block:2rem;color:rgba(239,233,224,.5);font-size:.82rem}}.credits{{margin-top:1rem;font-size:.72rem;color:rgba(239,233,224,.72)}}
+footer{{border-top:1px solid rgba(239,233,224,.14);padding-block:2rem;color:rgba(239,233,224,.66);font-size:.82rem}}.credits{{margin-top:1rem;font-size:.72rem;color:rgba(239,233,224,.72)}}
 .js .rv{{opacity:0;transform:translateY(40px);filter:blur(6px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease),filter 1.1s var(--ease)}}.js .rv.in{{opacity:1;transform:none;filter:none}}
 @media (prefers-reduced-motion:reduce){{.js .rv{{opacity:1;transform:none;filter:none;transition:none}}html{{scroll-behavior:auto}}}}
 @media (max-width:960px){{.hero,.faq-grid,.c-grid{{grid-template-columns:1fr}}.hero{{padding-top:7rem;min-height:auto}}.stack{{height:min(110vw,560px)}}.faq-grid .head{{position:static}}
