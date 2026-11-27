@@ -462,7 +462,7 @@ document.querySelectorAll('#book,#contact').forEach(el=>dio.observe(el))}
 <script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False).replace("<", "\\u003c")}</script>
 <script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('fx')</script>
 <link rel="stylesheet" href="{prefix}motion.css">
-<script defer src="{prefix}gsap.min.js"></script><script defer src="{prefix}ScrollTrigger.min.js"></script><script defer src="{prefix}SplitText.min.js"></script><script defer src="{prefix}lenis.min.js"></script><script defer src="{prefix}motion.js"></script>
+<script>if(document.documentElement.classList.contains('fx'))['gsap.min.js','ScrollTrigger.min.js','SplitText.min.js','lenis.min.js','motion.js'].forEach(f=>{{const s=document.createElement('script');s.src='{prefix}'+f;s.async=false;document.head.appendChild(s)}})</script>
 <script>{js}</script>
 <style>{css}</style></head><body>
 {''.join(s)}

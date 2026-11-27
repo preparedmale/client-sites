@@ -18,8 +18,10 @@ html.lenis, html.lenis body { height: auto }
 
 /* rows that come into focus as they pass the middle of the screen */
 @media (min-width: 901px) and (pointer: fine) {
-  html.fx .o-list .o-row.rv, html.fx .w-list li.rv, html.fx .m-group li { opacity: var(--f, 1); transform: none; filter: none; transition: opacity .25s linear }
-  html.fx .o-list .o-row:is(:hover, :focus-within), html.fx .w-list li:is(:hover, :focus-within) { opacity: 1 }
+  html.fx .o-list .o-row.rv, html.fx .w-list li.rv { opacity: 1; transform: none; filter: none; transition: none }
+  /* only the large name and price fade; small muted text always stays at full strength */
+  html.fx .o-row h3, html.fx .o-row .price b, html.fx .w-list li h3, html.fx .w-list li .price b { opacity: var(--f, 1); transition: opacity .25s linear }
+  html.fx .o-row:is(:hover, :focus-within) :is(h3, .price b), html.fx .w-list li:is(:hover, :focus-within) :is(h3, .price b) { opacity: 1 }
 }
 
 /* desktop: section title stays while its list scrolls past */
@@ -42,3 +44,7 @@ html.lenis, html.lenis body { height: auto }
 
 /* magnetic buttons */
 .fx .btn { will-change: transform }
+
+/* studio homepage: list rows and cards are revealed by GSAP, not the CSS fade */
+.fx .plan.rv, .fx .steps li.rv, .fx .proof .rv { opacity: 1; transform: none; filter: none; transition: none }
+.fx .slide, .fx .slide img { will-change: clip-path, transform }

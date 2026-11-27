@@ -1,7 +1,8 @@
 /* Scroll choreography for Serai Studio sample sites.
    Needs gsap, ScrollTrigger, SplitText (and Lenis on desktop). If any of them
    failed to load, or the visitor prefers reduced motion, the page stays static. */
-(function () {
+(function run() {
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', run); return; }
   var H = document.documentElement;
   if (!H.classList.contains('fx')) return;
   if (!window.gsap || !window.ScrollTrigger || !window.SplitText) { H.classList.remove('fx'); return; }
@@ -54,9 +55,10 @@
     H.classList.remove('pre');
     if (media) intro.from(media, { scale: 1.1, duration: 2.6 }, 0);
     if (h1) intro.from(lines(h1), { yPercent: 110, duration: 1.3, stagger: 0.07 }, 0.25);
-    intro.from($$('.hero .tag, .hero-foot > *'), { y: 32, duration: 1.2, stagger: 0.06 }, 0.6)
-         .from($$('.hero .tag, .hero-foot > *'), { autoAlpha: 0, duration: 0.5, ease: 'power1.out', stagger: 0.06 }, 0.6)
-         .from(nav, { autoAlpha: 0, y: -20, duration: 1, clearProps: 'transform' }, 0.9);
+    var heroBits = $$('.hero .tag, .hero-foot > *, .hero .lead, .hero .ctas');
+    intro.from(heroBits, { y: 32, duration: 1.2, stagger: 0.06 }, 0.6)
+         .from(heroBits, { autoAlpha: 0, duration: 0.5, ease: 'power1.out', stagger: 0.06 }, 0.6)
+         .from(nav, { autoAlpha: 0, y: -20, duration: 0.8, clearProps: 'transform' }, 0.1);
 
     /* 2. leaving the hero: the photo shrinks into a rounded card, text lifts away */
     if (hero && media) {
@@ -75,7 +77,7 @@
     });
 
     /* 4. section titles rise out of a mask */
-    $$('.sec-head h2, .faq h2, .book h2, .contact h2, .gal h2').forEach(function (h) {
+    $$('.sec-head h2, .faq h2, .book h2, .contact h2, .gal h2, main .head h2').forEach(function (h) {
       gsap.from(lines(h), { yPercent: 105, duration: 1.1, ease: EASE, stagger: 0.06, scrollTrigger: { trigger: h, start: 'top 85%', once: true } });
     });
 
@@ -91,10 +93,10 @@
     });
 
     /* 6. list rows come into focus as they cross the middle of the screen */
-    if (desktop) $$('.o-list .o-row, .w-list li, .m-group li').forEach(function (r) {
+    if (desktop) $$('.o-list .o-row, .w-list li').forEach(function (r) {
       ScrollTrigger.create({ trigger: r, start: 'top bottom', end: 'bottom top', onUpdate: function () {
         var b = r.getBoundingClientRect(), d = Math.abs(b.top + b.height / 2 - innerHeight * 0.45) / (innerHeight * 0.5);
-        r.style.setProperty('--f', Math.max(0.6, 1 - d * d * 0.6).toFixed(3));
+        r.style.setProperty('--f', Math.max(0.75, 1 - d * d * 0.4).toFixed(3));
       } });
     });
 
@@ -118,8 +120,63 @@
         scrollTrigger: { trigger: sec, start: 'top bottom', end: 'top 35%', scrub: true } });
     });
 
+    /* studio homepage: showreel of the samples. The first frame opens out to full screen,
+       then each sample wipes up over the last one while the counter ticks. */
+    var stage = $('.reel-stage'), slides = stage ? $$('.slide', stage) : [];
+    if (stage && slides.length && matchMedia('(min-width: 961px)').matches) {
+      var cur = $('.count .cur', stage);
+      var tl = gsap.timeline({ scrollTrigger: { trigger: stage, start: 'top top', end: '+=' + (slides.length * 90) + '%', pin: true, scrub: 0.6,
+        onUpdate: function (st) { if (cur) cur.textContent = String(Math.min(slides.length, 1 + Math.floor(st.progress * slides.length * 0.999))).padStart(2, '0'); } } });
+      slides.forEach(function (sl, n) {
+        var im = $('img', sl), cap = $('.cap', sl);
+        if (n === 0) {
+          tl.fromTo(sl, { clipPath: 'inset(16% 24% 16% 24% round 28px)' }, { clipPath: 'inset(0% 0% 0% 0% round 0px)', ease: 'none', duration: 1 }, 0)
+            .fromTo(im, { scale: 1.3 }, { scale: 1, ease: 'none', duration: 1 }, 0)
+            .from(cap, { autoAlpha: 0, y: 40, duration: 0.4 }, 0.6);
+        } else {
+          tl.fromTo(sl, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'power2.inOut', duration: 1 }, n + 0.2)
+            .fromTo(im, { scale: 1.35, yPercent: 8 }, { scale: 1, yPercent: 0, ease: 'none', duration: 1.2 }, n + 0.2)
+            .from(cap, { autoAlpha: 0, y: 50, duration: 0.5 }, n + 0.8)
+            .to($('img', slides[n - 1]), { scale: 0.92, yPercent: -6, ease: 'none', duration: 1 }, n + 0.2);
+        }
+      });
+      tl.to({}, { duration: 0.4 });
+    } else if (slides.length) {
+      slides.forEach(function (sl) {
+        gsap.fromTo($('img', sl), { scale: 1.25, yPercent: -6 }, { scale: 1.05, yPercent: 6, ease: 'none', scrollTrigger: { trigger: sl, start: 'top bottom', end: 'bottom top', scrub: true } });
+        gsap.from(sl, { y: 50, autoAlpha: 0, duration: 1.1, ease: EASE, scrollTrigger: { trigger: sl, start: 'top 90%', once: true } });
+      });
+    }
+    /* band of business types: drifts on its own, speeds up and leans with the scroll */
+    var band = $('.band-track');
+    if (band) {
+      var loop = gsap.to(band, { xPercent: -50, ease: 'none', duration: 28, repeat: -1 });
+      var skew = gsap.quickTo(band, 'skewX', { duration: 0.5, ease: 'power3' });
+      ScrollTrigger.create({ trigger: band, start: 'top bottom', end: 'bottom top', onUpdate: function (st) {
+        var v = st.getVelocity() / 600; loop.timeScale(1 + Math.min(6, Math.abs(v))); skew(gsap.utils.clamp(-8, 8, -v * 1.2));
+      }, onLeave: function () { loop.timeScale(1); skew(0); }, onLeaveBack: function () { loop.timeScale(1); skew(0); } });
+    }
+    /* price cards rise in sequence */
+    [['.plans', '.plan'], ['.proof', 'div']].forEach(function (p) {
+      var box = $(p[0]); if (!box) return;
+      gsap.from($$(p[1], box), { y: 48, autoAlpha: 0, duration: 1.1, ease: EASE, stagger: 0.08, scrollTrigger: { trigger: box, start: 'top 85%', once: true } });
+    });
+    /* how it works: a gold line fills and each step lights as you pass it */
+    var how = $('.how'), steps = how ? $$('.steps li', how) : [];
+    if (how) gsap.fromTo(how, { clipPath: 'inset(0% 4% 0% 4% round 36px)' }, { clipPath: 'inset(0% 0% 0% 0% round 0px)', ease: 'none',
+      scrollTrigger: { trigger: how, start: 'top bottom', end: 'top 35%', scrub: true } });
+    if (steps.length && matchMedia('(min-width: 961px)').matches) {
+      var wrapS = $('.steps-wrap', how);
+      gsap.to($('.bar i', how), { scaleY: 1, ease: 'none', scrollTrigger: { trigger: wrapS, start: 'top 60%', end: 'bottom 60%', scrub: true } });
+      steps.forEach(function (li) {
+        gsap.fromTo(li, { opacity: 0.3 }, { opacity: 1, ease: 'none', scrollTrigger: { trigger: li, start: 'top 75%', end: 'top 55%', scrub: true } });
+      });
+    } else if (steps.length) {
+      gsap.from(steps, { y: 40, autoAlpha: 0, duration: 1, ease: EASE, stagger: 0.08, scrollTrigger: { trigger: how, start: 'top 70%', once: true } });
+    }
+
     /* 9. buttons lean towards the cursor */
-    if (desktop) $$('.btn, .mini').forEach(function (b) {
+    if (desktop) $$('.btn, .mini, .ghost').forEach(function (b) {
       var x = gsap.quickTo(b, 'x', { duration: 0.4, ease: 'power3' }), y = gsap.quickTo(b, 'y', { duration: 0.4, ease: 'power3' });
       b.addEventListener('mousemove', function (e) { var r = b.getBoundingClientRect(); x((e.clientX - r.left - r.width / 2) * 0.25); y((e.clientY - r.top - r.height / 2) * 0.35); });
       b.addEventListener('mouseleave', function () { x(0); y(0); });

@@ -103,7 +103,7 @@ def render(lang):
     mail = f"mailto:{EMAIL}?subject=" + urllib.parse.quote(c["mail_subject"])
 
     from build import UI as SUI, lic_url
-    cards, heroes, creds = [], [], []
+    cards, heroes, creds, labels = [], [], [], []
     for slug, name, sub in WORK:
         cl = json.loads((HERE / "clients" / f"{slug}.json").read_text(encoding="utf-8"))
         langs = cl.get("languages") or ["en"]
@@ -114,9 +114,9 @@ def render(lang):
         src = f"{pre}{slug}/{photo}" if photo else ""
         heroes.append(src)
         label = c.get("work_sub", {}).get(slug) or sub.get(lang) or sub["en"]
-        cards.append(f'<a class="w bezel rv" href="{href}"><div class="core"><img src="{src}" alt="" loading="lazy" decoding="async">'
-                     f'<div class="w-cap"><p class="w-sub">{e(label)}</p><h3>{e(name)}</h3><span class="w-go">{e(c["sample_l"])} {ARROW}</span></div></div></a>')
-    stack = "".join(f'<div class="st st{i} bezel"><div class="core"><img src="{h}" alt="" decoding="async"{"" if i == 0 else " loading=\"lazy\""}></div></div>' for i, h in enumerate(heroes[:3]))
+        cards.append(f'<a class="slide" href="{href}"><img src="{src}" alt="" loading="lazy" decoding="async">'
+                     f'<div class="cap"><div><p class="w-sub">{e(label)}</p><h3>{e(name)}</h3></div><span class="go">{e(c["sample_l"])} {ARROW}</span></div></a>')
+        labels.append(label)
 
     plans = "".join(f'''<article class="plan{" dark" if i == 0 else ""} rv"><div class="p-in"><p class="p-name">{e(n)}</p><p class="amt"><b>{e(p)}</b><span>{e(unit)}</span></p>
 <ul>{"".join(f"<li>{e(x)}</li>" for x in items)}</ul>{f'<a class="btn" href="{mail}"><span>{e(c["cta"])}</span>{ARROW}</a>' if i == 0 else ""}</div></article>''' for i, (n, p, unit, items) in enumerate(c["plans"]))
@@ -127,6 +127,8 @@ def render(lang):
     steps = "".join(f'<li class="rv"><span class="n">0{i}</span><h3>{e(a)}</h3><p>{e(b)}</p></li>' for i, (a, b) in enumerate(c["steps"], 1))
     faq = "".join(f'<details class="rv"><summary>{e(q)}{PLUS}</summary><p>{e(a)}</p></details>' for q, a in c["faq"])
     proof = "".join(f'<div class="rv"><b>{e(a)}</b><span>{e(b)}</span></div>' for a, b in c["proof"])
+    kinds = [l.split(" · ")[0] for l in labels]
+    band = "".join(f"<span>{e(k)}</span>" for k in kinds * 2)
     js = """document.documentElement.classList.add('js');addEventListener('DOMContentLoaded',()=>{
 const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{rootMargin:'0px 0px -8% 0px'});
 document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(el.closest('.hero')?i*110:((i%4)*80))+'ms';io.observe(el)});
@@ -141,13 +143,15 @@ new IntersectionObserver(([x])=>nav.dataset.solid=x.isIntersecting?'0':'1',{root
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600&family=Noto+Sans+Georgian:wght@400;500;600&family=Noto+Serif+Georgian:wght@300;400{'&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;500' if lang == 'ko' else ''}&display=swap">
 <script type="application/ld+json">{{"@context":"https://schema.org","@type":"ProfessionalService","name":"Serai Studio","email":"{EMAIL}","areaServed":{'["South Korea"]' if lang == "ko" else '["Georgia","Armenia","Kyrgyzstan","Uzbekistan","Kazakhstan"]'},"url":"{BASE}/"}}</script>
+<script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('fx')</script>
+<link rel="stylesheet" href="{pre}motion.css">
+<script>if(document.documentElement.classList.contains('fx'))['gsap.min.js','ScrollTrigger.min.js','SplitText.min.js','lenis.min.js','motion.js'].forEach(f=>{{const s=document.createElement('script');s.src='{pre}'+f;s.async=false;document.head.appendChild(s)}})</script>
 <script>{js}</script>
 <style>
 :root{{--gold-t:#86601f;--paper:#f6f3ed;--ink:#191714;--muted:#6b665d;--hair:rgba(25,23,20,.12);--accent:#14524b;--gold:#b5873a;--deep:#14201d;
 --serif:"Instrument Serif","Noto Serif Georgian",Georgia,serif;--sans:"Hanken Grotesk","Noto Sans Georgian",system-ui,-apple-system,"Segoe UI",sans-serif;--ease:cubic-bezier(.32,.72,0,1)}}
 *{{box-sizing:border-box}}html{{scroll-behavior:smooth;scroll-padding-top:90px}}
 body{{margin:0;background:var(--paper);color:var(--ink);font:400 16.5px/1.7 var(--sans);-webkit-font-smoothing:antialiased}}
-body::after{{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}}
 img{{display:block;max-width:100%}}a{{color:inherit}}:focus-visible{{outline:2px solid var(--accent);outline-offset:4px;border-radius:6px}}p{{margin:0}}
 .wrap{{width:min(1240px,100% - 2*clamp(20px,5vw,64px));margin-inline:auto}}
 h1,h2,h3{{font-family:var(--serif);font-weight:400;letter-spacing:-.015em;margin:0;text-wrap:balance}}
@@ -170,24 +174,7 @@ box-shadow:inset 0 0 0 1px var(--hair);backdrop-filter:blur(18px) saturate(1.4);
 .ghost{{display:inline-flex;align-items:center;padding:.95rem 1.4rem;border-radius:99px;text-decoration:none;font-weight:600;font-size:.95rem;box-shadow:inset 0 0 0 1px var(--hair)}}
 .bezel{{padding:.45rem;border-radius:1.7rem;background:rgba(25,23,20,.04);box-shadow:inset 0 0 0 1px rgba(25,23,20,.06)}}
 .core{{position:relative;border-radius:calc(1.7rem - .45rem);overflow:hidden;height:100%}}.core img{{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}}
-.hero{{min-height:100svh;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,5rem);align-items:center;padding-block:8rem 4rem}}
-.hero h1{{font-size:clamp(3.2rem,7.4vw,7.4rem);line-height:.92;margin:1.6rem 0 2rem}}
-html[lang=ka] .hero h1{{font-size:clamp(2.2rem,4.6vw,4.4rem);line-height:1.12}}html[lang=ru] .hero h1{{font-size:clamp(2.8rem,6vw,6rem)}}
-.lead{{max-width:48ch;font-size:clamp(1.02rem,1.4vw,1.15rem);color:var(--muted)}}.ctas{{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2.2rem}}
-.stack{{position:relative;height:min(78svh,680px)}}.st{{position:absolute;width:62%;aspect-ratio:3/4;transition:transform 1.2s var(--ease)}}
-.st0{{right:0;top:4%;z-index:3;transform:rotate(2deg)}}.st1{{left:4%;top:18%;z-index:2;transform:rotate(-4deg);width:52%}}.st2{{right:22%;bottom:0;z-index:1;transform:rotate(-1deg);width:46%}}
-.st{{background:rgba(246,243,237,.9);box-shadow:inset 0 0 0 1px rgba(25,23,20,.08),0 40px 80px -40px rgba(30,20,10,.45)}}
-.stack:hover .st0{{transform:rotate(0) translateY(-6px)}}.stack:hover .st1{{transform:rotate(-6deg) translateX(-10px)}}
-.proof{{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;padding-block:3rem 4rem;border-top:1px solid var(--hair)}}
-.proof b{{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,4vw,3.4rem);line-height:1;margin-bottom:.5rem}}.proof span{{color:var(--muted);font-size:.9rem}}
 section{{padding-block:clamp(5rem,10vw,9rem)}}.head{{display:flex;flex-direction:column;align-items:flex-start;gap:1.3rem;margin-bottom:clamp(2.5rem,5vw,4rem)}}.note{{color:var(--muted);max-width:60ch}}
-.works{{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(1rem,2vw,1.6rem)}}
-.w{{text-decoration:none;color:#fff;display:block}}.w:nth-child(1){{grid-column:span 7;height:clamp(360px,40vw,560px)}}.w:nth-child(2){{grid-column:span 5;height:clamp(360px,40vw,560px)}}
-.w:nth-child(3){{grid-column:span 5;height:clamp(300px,32vw,460px)}}.w:nth-child(4){{grid-column:span 7;height:clamp(300px,32vw,460px)}}
-.w .core::after{{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(10,8,6,.72))}}.w:hover .core img{{transform:scale(1.05)}}
-.w-cap{{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:clamp(1.2rem,2.4vw,2rem);display:grid;gap:.3rem}}
-.w h3{{font-size:clamp(1.8rem,3vw,2.6rem)}}.w-sub{{font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;opacity:.8}}:lang(ka) .w-sub{{text-transform:none;letter-spacing:.02em}}
-.w-go{{display:inline-flex;align-items:center;gap:.6rem;font-weight:600;font-size:.9rem;margin-top:.6rem}}.w-go .ic{{width:2rem;height:2rem;background:rgba(255,255,255,.18)}}
 .plans{{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1rem,2vw,1.6rem);align-items:stretch}}
 .plan{{padding:.45rem;border-radius:1.9rem;background:rgba(25,23,20,.04);box-shadow:inset 0 0 0 1px rgba(25,23,20,.06)}}
 .p-in{{height:100%;border-radius:calc(1.9rem - .45rem);background:#fffdf9;padding:clamp(1.8rem,3.4vw,3rem);display:flex;flex-direction:column;box-shadow:inset 0 1px 1px rgba(255,255,255,.6)}}
@@ -212,21 +199,62 @@ summary::-webkit-details-marker{{display:none}}.pl{{flex:none;color:var(--gold);
 footer{{border-top:1px solid rgba(239,233,224,.14);padding-block:2rem;color:rgba(239,233,224,.66);font-size:.82rem}}.credits{{margin-top:1rem;font-size:.72rem;color:rgba(239,233,224,.72)}}
 .js .rv{{opacity:0;transform:translateY(40px);filter:blur(6px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease),filter 1.1s var(--ease)}}.js .rv.in{{opacity:1;transform:none;filter:none}}
 @media (prefers-reduced-motion:reduce){{.js .rv{{opacity:1;transform:none;filter:none;transition:none}}html{{scroll-behavior:auto}}}}
-@media (max-width:960px){{.hero,.faq-grid,.c-grid{{grid-template-columns:1fr}}.hero{{padding-top:7rem;min-height:auto}}.stack{{height:min(110vw,560px)}}.faq-grid .head{{position:static}}
-.steps{{grid-template-columns:1fr 1fr}}.plans{{grid-template-columns:1fr}}.pill nav{{display:none}}.works .w{{grid-column:span 12!important;height:clamp(300px,90vw,480px)!important}}.proof{{grid-template-columns:1fr 1fr}}}}
+/* ---------- v2 homepage ---------- */
+.hero{{position:relative;min-height:100svh;display:flex;align-items:flex-end;background:var(--deep);color:#efe9e0;padding:9rem 0 clamp(3rem,6vw,5rem);overflow:hidden}}
+.hero::before{{content:"";position:absolute;inset:-20% -10% auto auto;width:70vw;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(181,135,58,.22),transparent);pointer-events:none}}
+.hero .tag{{color:#d7b57a;box-shadow:inset 0 0 0 1px rgba(215,181,122,.35)}}
+.hero h1{{font-size:clamp(3.4rem,9.4vw,10.5rem);line-height:.9;letter-spacing:-.03em;margin:1.6rem 0 clamp(2rem,4vw,3.4rem);max-width:12ch}}
+html[lang=ru] .hero h1{{font-size:clamp(2.2rem,7vw,7.6rem);max-width:14ch;hyphens:auto}}html[lang=ka] .hero h1{{font-size:clamp(1.85rem,5.6vw,5.6rem);line-height:1.1;max-width:20ch;letter-spacing:0;overflow-wrap:break-word}}
+.hero-row{{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem 4rem;flex-wrap:wrap;padding-top:2rem;border-top:1px solid rgba(239,233,224,.16)}}
+.hero .lead{{max-width:46ch;color:rgba(239,233,224,.74)}}.ctas{{display:flex;gap:.8rem;flex-wrap:wrap}}
+.hero .btn{{background:#efe9e0;color:var(--ink)}}.hero .btn .ic{{background:var(--gold);color:#fff}}.hero .ghost{{color:#efe9e0;box-shadow:inset 0 0 0 1px rgba(239,233,224,.3)}}
+.lead{{font-size:clamp(1.02rem,1.4vw,1.15rem)}}
+/* showreel of the samples */
+.reel{{padding-block:clamp(5rem,9vw,8rem) 0}}
+.reel-head{{margin-bottom:clamp(2rem,4vw,3rem)}}
+.reel-stage{{display:grid;gap:clamp(1rem,2vw,1.6rem);width:min(1240px,100% - 2*clamp(20px,5vw,64px));margin-inline:auto}}
+.slide{{position:relative;display:block;height:clamp(380px,62vw,720px);border-radius:1.6rem;overflow:hidden;color:#fff;text-decoration:none;background:var(--deep)}}
+.slide img{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
+.slide::after{{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,8,.1) 40%,rgba(10,10,8,.72))}}
+.cap{{position:absolute;left:0;right:0;bottom:0;z-index:2;display:flex;justify-content:space-between;align-items:flex-end;gap:1rem 2rem;flex-wrap:wrap;padding:clamp(1.4rem,3.4vw,3rem)}}
+.cap h3{{font-size:clamp(2.4rem,6vw,5.6rem);line-height:.95;letter-spacing:-.02em}}.w-sub{{font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;opacity:.85;margin-bottom:.8rem}}:lang(ka) .w-sub{{text-transform:none;letter-spacing:.02em}}
+.go{{display:inline-flex;align-items:center;gap:.7rem;font-weight:600;padding:.4rem .4rem .4rem 1.2rem;border-radius:99px;background:rgba(255,255,255,.14);backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.24)}}
+.slide:hover .ic{{transform:translate(2px,-2px) scale(1.06)}}
+.count{{display:none}}
+/* moving band of what we build for */
+.band{{overflow:hidden;padding-block:clamp(2.5rem,5vw,4rem);border-bottom:1px solid var(--hair)}}
+.band-track{{display:flex;width:max-content;gap:3rem;font-family:var(--serif);font-size:clamp(2.2rem,5.4vw,4.8rem);line-height:1;white-space:nowrap}}
+.band-track span{{display:inline-flex;align-items:center;gap:3rem}}.band-track span::after{{content:"";width:.5em;height:.5em;border-radius:50%;background:var(--gold);opacity:.8}}
+/* proof numbers */
+.proof{{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;padding-block:clamp(3rem,6vw,5rem)}}
+.proof b{{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(2.8rem,5vw,4.6rem);line-height:1;margin-bottom:.6rem}}.proof span{{font-size:.85rem;color:var(--muted)}}
+/* steps with a progress line */
+.steps-wrap{{position:relative}}.bar{{display:none}}
+@media (min-width:961px){{
+ html.fx .reel-stage{{position:relative;display:block;height:100svh;width:100%;}}
+ html.fx .slide{{position:absolute;inset:0;height:auto;border-radius:0}}
+ html.fx .count{{display:block;position:absolute;right:clamp(20px,5vw,64px);top:7.5rem;z-index:5;color:#fff;font:500 .8rem/1 var(--sans);letter-spacing:.2em}}
+ html.fx .how .steps{{grid-template-columns:1fr;gap:0;max-width:760px;margin-left:auto}}
+ html.fx .how .steps li{{display:grid;grid-template-columns:6rem 1fr;column-gap:2rem;padding-block:2rem}}html.fx .how .n{{grid-row:span 2;margin:0}}
+ html.fx .how .bar{{display:block;position:absolute;left:-2rem;top:0;bottom:0;width:1px;background:rgba(239,233,224,.16)}}html.fx .how .bar i{{display:block;height:100%;background:var(--gold);transform-origin:top;transform:scaleY(0)}}
+ html.fx .how .wrap{{display:grid;grid-template-columns:.8fr 1.2fr;gap:4rem;align-items:start}}html.fx .how .head{{position:sticky;top:8rem}}
+}}
+@media (max-width:960px){{.faq-grid,.c-grid{{grid-template-columns:1fr}}.faq-grid .head{{position:static}}
+.steps{{grid-template-columns:1fr 1fr}}.plans{{grid-template-columns:1fr}}.pill nav{{display:none}}.proof{{grid-template-columns:1fr 1fr}}.hero-row{{align-items:flex-start}}}}
 @media (max-width:640px){{.mini{{display:none}}.steps{{grid-template-columns:1fr}}.st{{transform:none!important}}.pill{{padding-right:.6rem}}}}
 .menu-btn{{display:none}}@media (max-width:900px){{.pill{{position:relative}}.menu-btn{{display:grid;place-content:center;gap:5px;flex:none;width:2.5rem;height:2.5rem;margin-left:auto;border:0;border-radius:50%;background:rgba(255,255,255,.16);color:inherit;cursor:pointer}}.nav[data-solid="1"] .menu-btn{{background:rgba(29,26,23,.07)}}.menu-btn span{{display:block;width:16px;height:1.5px;background:currentColor;transition:transform .35s var(--ease)}}.pill.open .menu-btn span:first-child{{transform:translateY(3.25px) rotate(45deg)}}.pill.open .menu-btn span:last-child{{transform:translateY(-3.25px) rotate(-45deg)}}.pill.open nav{{display:flex;position:absolute;top:calc(100% + 8px);left:0;right:0;flex-direction:column;gap:0;padding:.5rem;border-radius:1.4rem;background:rgba(250,247,242,.98);color:var(--ink);box-shadow:inset 0 0 0 1px rgba(29,26,23,.08),0 24px 48px -20px rgba(20,14,10,.35)}}.pill.open nav a{{padding:.9rem 1rem;font-size:1rem;opacity:1;border-radius:1rem}}.pill.open nav a:active{{background:rgba(29,26,23,.06)}}}}
 </style></head><body>
 <header class="nav" data-solid="0"><div class="pill"><a class="logo" href="{pre}{sub_dir(lang)}">{LOGO}Serai Studio</a>
 <nav id="mnav" aria-label="Main">{"".join(f'<a href="#{i}">{e(n)}</a>' for i, n in zip(ids, c["nav"]))}</nav>{switch}<a class="mini" href="#contact">{e(c["nav"][4])}</a><button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><span></span><span></span></button></div></header>
 <main>
-<section class="hero wrap"><div><p class="tag rv">{e(c["eyebrow"])}</p><h1 class="rv">{e(c["h1"])}</h1><p class="lead rv">{e(c["lead"])}</p>
-<div class="ctas rv"><a class="btn" href="#contact"><span>{e(c["cta"])}</span>{ARROW}</a><a class="ghost" href="#work">{e(c["cta2"])}</a></div></div>
-<div class="stack rv" aria-hidden="true">{stack}</div></section>
+<section class="hero"><div class="wrap"><p class="tag rv">{e(c["eyebrow"])}</p><h1 class="rv">{e(c["h1"])}</h1>
+<div class="hero-row"><p class="lead rv">{e(c["lead"])}</p><div class="ctas rv"><a class="btn" href="#contact"><span>{e(c["cta"])}</span>{ARROW}</a><a class="ghost" href="#work">{e(c["cta2"])}</a></div></div></div></section>
+<section id="work" class="reel"><div class="wrap head reel-head rv"><p class="tag">{e(c["sample_l"])}</p><h2>{e(c["work_h"])}</h2><p class="note">{e(c["work_note"])}</p></div>
+<div class="reel-stage">{"".join(cards)}<p class="count" aria-hidden="true"><span class="cur">01</span> / {len(cards):02d}</p></div></section>
+<div class="band" aria-hidden="true"><div class="band-track">{band}</div></div>
 <div class="wrap proof">{proof}</div>
-<section id="work" class="wrap"><div class="head rv"><p class="tag">{e(c["sample_l"])}</p><h2>{e(c["work_h"])}</h2><p class="note">{e(c["work_note"])}</p></div><div class="works">{"".join(cards)}</div></section>
 <section id="prices" class="wrap prices"><div class="head rv"><p class="tag">{"KRW" if lang == "ko" else "GEL · USD"}</p><h2>{e(c["prices_h"])}</h2></div><div class="plans">{plans}</div><p class="note rv">{e(c["prices_note"])}</p></section>
-<section id="how" class="how"><div class="wrap"><div class="head rv"><p class="tag">{e(c["hero_tag"])}</p><h2>{e(c["steps_h"])}</h2></div><ol class="steps">{steps}</ol></div></section>
+<section id="how" class="how"><div class="wrap"><div class="head rv"><p class="tag">{e(c["hero_tag"])}</p><h2>{e(c["steps_h"])}</h2></div><div class="steps-wrap"><span class="bar" aria-hidden="true"><i></i></span><ol class="steps">{steps}</ol></div></div></section>
 <section id="faq" class="wrap faq-grid"><div class="head rv"><h2>{e(c["faq_h"])}</h2></div><div>{faq}</div></section>
 <section id="contact" class="contact"><div class="wrap c-grid"><h2 class="rv">{e(c["contact_h"])}</h2><div class="rv"><p>{e(c["contact_p"])}</p>
 <span class="mail">{EMAIL}</span><a class="btn" href="{mail}"><span>{e(c["cta"])}</span>{ARROW}</a></div></div>
@@ -240,3 +268,8 @@ def write(out: Path):
         d.mkdir(exist_ok=True)
         (d / "index.html").write_text(render(l), encoding="utf-8")
     (out / ".nojekyll").write_text("")
+    from build import VENDOR
+    for f, head in VENDOR.items():  # same motion kit as the samples, with licence notices
+        (out / f).write_text(head + (HERE / "vendor" / f).read_text(encoding="utf-8"), encoding="utf-8")
+    for f in ("motion.js", "motion.css"):
+        (out / f).write_text((HERE / "assets" / f).read_text(encoding="utf-8"), encoding="utf-8")
