@@ -522,3 +522,5 @@ if __name__ == "__main__":
     if not sys.argv[1:]:
         import agency
         agency.write(OUT)
+        # the retired Korean page (/ko/, product dropped 2026-11-27) forwards to the home page
+        (OUT / "_redirects").write_text("/ko / 301\n/ko/* / 301\n", encoding="utf-8")
