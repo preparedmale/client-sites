@@ -91,8 +91,15 @@ def digits(s):
     return "".join(ch for ch in str(s or "") if ch.isdigit())
 
 
-def page_url(slug, lang, langs):
-    return f"{BASE_URL}/{slug}/" + ("" if lang == langs[0] else f"{lang}/")
+def site_root(d):
+    # A real client's site lives at the root of its own address (their domain or their own
+    # pages.dev, in their Cloudflare account): "base_url" in the client JSON. Samples live
+    # under our address.
+    return d["base_url"].rstrip("/") if d.get("base_url") else f"{BASE_URL}/{d['slug']}"
+
+
+def page_url(d, lang, langs):
+    return f"{site_root(d)}/" + ("" if lang == langs[0] else f"{lang}/")
 
 
 def render(d, lang, langs, prefix):
@@ -125,17 +132,17 @@ def render(d, lang, langs, prefix):
     if d.get("booking"): nav.append(("book", u["nav_book"]))
     nav.append(("contact", u["contact"]))
 
-    alt_links = "".join(f'<link rel="alternate" hreflang="{l}" href="{page_url(d["slug"], l, langs)}">' for l in langs)
+    alt_links = "".join(f'<link rel="alternate" hreflang="{l}" href="{page_url(d, l, langs)}">' for l in langs)
     switch = "" if len(langs) < 2 else '<div class="langs">' + "".join(
         f'<a href="{prefix}{"" if l == langs[0] else l + "/"}" lang="{l}"{" aria-current=\"page\"" if l == lang else ""}>{l.upper()}</a>' for l in langs) + "</div>"
 
     jsonld = {"@context": "https://schema.org", "@type": d.get("schema_type", "LodgingBusiness"), "name": name,
-              "description": desc, "url": page_url(d["slug"], lang, langs),
+              "description": desc, "url": page_url(d, lang, langs),
               "address": {"@type": "PostalAddress", "addressLocality": town, "addressCountry": d.get("country_code", "")}}
     if d.get("whatsapp") and not smp: jsonld["telephone"] = d["whatsapp"]
     if d.get("email") and not smp: jsonld["email"] = d["email"]
     if d.get("price_range"): jsonld["priceRange"] = d["price_range"]
-    if hero_img: jsonld["image"] = f"{BASE_URL}/{d['slug']}/{hero_img}"
+    if hero_img: jsonld["image"] = f"{site_root(d)}/{hero_img}"
 
     img = lambda p, cls="", lazy=True: f'<img class="{cls}" src="{prefix}{e(p["file"])}" alt="{e(t(p.get("alt"), lang))}"{" loading=\"lazy\"" if lazy else ""} decoding="async">'
     btn = lambda href, label, cls="btn": f'<a class="{cls}" href="{href}"{wa_tgt if href == wa_link else ""}><span>{e(label)}</span>{ARROW}</a>'
@@ -274,7 +281,7 @@ def render(d, lang, langs, prefix):
         f'<a href="{e(c["page"])}" target="_blank" rel="noopener">{e(c["artist"])}</a> (' + (f'<a href="{e(lic_url(c["license"]))}" target="_blank" rel="noopener license">{e(c["license"])}</a>' if lic_url(c["license"]) else e(c["license"])) + ')' for c in creds) + f'. {e(u["modified"])}</p>')
     s.append(f'<footer class="wrap"><div class="f-row"><span>© {e(name)} · {e(town)}</span><span>{e(d.get("credit", ""))}</span></div>{cred_line}</footer></section>')
 
-    og_img = f'<meta property="og:image" content="{BASE_URL}/{d["slug"]}/{e(hero_img)}">' if hero_img else ""
+    og_img = f'<meta property="og:image" content="{site_root(d)}/{e(hero_img)}">' if hero_img else ""
     ka = '"Noto Serif Georgian",' if "ka" in langs else ""
     kb = '"Noto Sans Georgian",' if "ka" in langs else ""
     css = f"""
@@ -452,7 +459,7 @@ document.querySelectorAll('#book,#contact').forEach(el=>dio.observe(el))}
     return f"""<!doctype html>
 <html lang="{lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{e(name)} · {e(town)}</title><meta name="description" content="{e(desc[:160])}"><meta name="theme-color" content="{th['deep']}">
-<link rel="canonical" href="{page_url(d['slug'], lang, langs)}">{alt_links}
+<link rel="canonical" href="{page_url(d, lang, langs)}">{alt_links}
 <meta property="og:type" content="website"><meta property="og:title" content="{e(name)}"><meta property="og:description" content="{e(desc[:200])}">{og_img}
 {'<meta name="robots" content="noindex">' if smp else ''}
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23{th['accent'][1:]}'/%3E%3C/svg%3E">
