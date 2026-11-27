@@ -141,20 +141,26 @@
         }
       });
       tl.to({}, { duration: 0.4 });
+      slides.forEach(function (sl, n) {
+        sl.addEventListener('focusin', function () {
+          var st = tl.scrollTrigger, at = n === 0 ? 1 : n + 1.3;
+          var y = st.start + (st.end - st.start) * Math.min(1, at / tl.duration());
+          if (lenis) lenis.scrollTo(y, { immediate: true }); else window.scrollTo(0, y);
+          tl.progress(at / tl.duration());
+        });
+      });
     } else if (slides.length) {
       slides.forEach(function (sl) {
         gsap.fromTo($('img', sl), { scale: 1.25, yPercent: -6 }, { scale: 1.05, yPercent: 6, ease: 'none', scrollTrigger: { trigger: sl, start: 'top bottom', end: 'bottom top', scrub: true } });
         gsap.from(sl, { y: 50, autoAlpha: 0, duration: 1.1, ease: EASE, scrollTrigger: { trigger: sl, start: 'top 90%', once: true } });
       });
     }
-    /* band of business types: drifts on its own, speeds up and leans with the scroll */
+    /* band of business types: slides only while you scroll, leaning with the scroll speed; it never moves on its own */
     var band = $('.band-track');
     if (band) {
-      var loop = gsap.to(band, { xPercent: -50, ease: 'none', duration: 28, repeat: -1 });
       var skew = gsap.quickTo(band, 'skewX', { duration: 0.5, ease: 'power3' });
-      ScrollTrigger.create({ trigger: band, start: 'top bottom', end: 'bottom top', onUpdate: function (st) {
-        var v = st.getVelocity() / 600; loop.timeScale(1 + Math.min(6, Math.abs(v))); skew(gsap.utils.clamp(-8, 8, -v * 1.2));
-      }, onLeave: function () { loop.timeScale(1); skew(0); }, onLeaveBack: function () { loop.timeScale(1); skew(0); } });
+      gsap.fromTo(band, { xPercent: 0 }, { xPercent: -35, ease: 'none', scrollTrigger: { trigger: band, start: 'top bottom', end: 'bottom top', scrub: 0.4,
+        onUpdate: function (st) { skew(gsap.utils.clamp(-8, 8, -st.getVelocity() / 500)); }, onLeave: function () { skew(0); }, onLeaveBack: function () { skew(0); } } });
     }
     /* price cards rise in sequence */
     [['.plans', '.plan'], ['.proof', 'div']].forEach(function (p) {
@@ -169,7 +175,7 @@
       var wrapS = $('.steps-wrap', how);
       gsap.to($('.bar i', how), { scaleY: 1, ease: 'none', scrollTrigger: { trigger: wrapS, start: 'top 60%', end: 'bottom 60%', scrub: true } });
       steps.forEach(function (li) {
-        gsap.fromTo(li, { opacity: 0.3 }, { opacity: 1, ease: 'none', scrollTrigger: { trigger: li, start: 'top 75%', end: 'top 55%', scrub: true } });
+        gsap.fromTo($('.n', li), { opacity: 0.3, x: -12 }, { opacity: 1, x: 0, ease: 'none', scrollTrigger: { trigger: li, start: 'top 75%', end: 'top 55%', scrub: true } });
       });
     } else if (steps.length) {
       gsap.from(steps, { y: 40, autoAlpha: 0, duration: 1, ease: EASE, stagger: 0.08, scrollTrigger: { trigger: how, start: 'top 70%', once: true } });

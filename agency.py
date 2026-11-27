@@ -239,6 +239,8 @@ html[lang=ru] .hero h1{{font-size:clamp(2.2rem,7vw,7.6rem);max-width:14ch;hyphen
  html.fx .how .bar{{display:block;position:absolute;left:-2rem;top:0;bottom:0;width:1px;background:rgba(239,233,224,.16)}}html.fx .how .bar i{{display:block;height:100%;background:var(--gold);transform-origin:top;transform:scaleY(0)}}
  html.fx .how .wrap{{display:grid;grid-template-columns:.8fr 1.2fr;gap:4rem;align-items:start}}html.fx .how .head{{position:sticky;top:8rem}}
 }}
+@media (max-width:400px){{.pill{{gap:.45rem;padding-left:.9rem}}.logo{{font-size:1.1rem;gap:.35rem}}.logo svg{{width:18px;height:18px}}.langs a{{padding:.3rem .32rem}}
+.proof b{{font-size:clamp(1.9rem,9vw,2.6rem)}}.proof>*{{min-width:0;overflow-wrap:anywhere}}}}
 @media (max-width:960px){{.faq-grid,.c-grid{{grid-template-columns:1fr}}.faq-grid .head{{position:static}}
 .steps{{grid-template-columns:1fr 1fr}}.plans{{grid-template-columns:1fr}}.pill nav{{display:none}}.proof{{grid-template-columns:1fr 1fr}}.hero-row{{align-items:flex-start}}}}
 @media (max-width:640px){{.mini{{display:none}}.steps{{grid-template-columns:1fr}}.st{{transform:none!important}}.pill{{padding-right:.6rem}}}}
