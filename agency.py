@@ -29,18 +29,18 @@ T = {
   steps_h="How it works",
   steps=[("Write to us", "Send your business name and a link to your Google Maps, Instagram or Booking.com page."),
          ("Free preview", "Within 3 working days after we get your info and photos, we send a private preview that search engines do not show."),
-         ("Your changes", "Tell us what to change in a message. We fix it, usually the same day."),
+         ("Your changes", "Tell us what to change in a message. One round of changes is included before launch."),
          ("Go live", "You pay only when you are happy. We connect your domain and the site goes live.")],
   faq_h="Questions",
   faq=[("Why do I need a website if I am on Booking.com?", "Booking.com takes a commission on every booking and shows guests your competitors next to you. Your own site lets guests contact you directly and see everything you offer."),
-       ("How do we talk?", "We work in writing, by email and WhatsApp messages. Every price and change is written down, nothing gets lost in translation, and you can answer when it suits you. We work remotely from Seoul. You may also write to us in Georgian."),
-       ("How do I pay?", "By bank transfer or card payment link, after you approve the preview."),
+       ("How do we talk?", "We work in writing, by email. Every price and change is written down, nothing gets lost in translation, and you can answer when it suits you. We work remotely from Seoul. You may also write to us in Georgian."),
+       ("How do I pay?", "By PayPal payment link (you can pay by card), after you approve the preview."),
        ("What happens after the first year?", "You choose: the Care plan at $150 a year, or we hand over all site files for free."),
        ("Can you use photos from my Booking.com or Google page?", "Only photos you own or have permission to use. Please send the original files and tell us who took them."),
        ("Who owns the website?", "You do. The domain and the hosting account are registered in your name."),
        ("Can you add Georgian, Armenian or another language?", "Every site is in English and Russian. Georgian is added at no cost, after you check the Georgian text.")],
   contact_h="Let's make your preview", contact_p="Send us your business name and one link where guests can find you today. We answer within one working day.",
-  email_l="Email", sample_l="Open sample", mail_subject="Website preview", langs="Language", hero_tag="Serai Studio"),
+  email_l="Email", sample_l="Open sample", mail_subject="Website preview", privacy="We use what you send us only to answer you and build your site.", langs="Language", hero_tag="Serai Studio"),
  "ru": dict(
   title="Serai Studio · Сайты для гостевых домов, виноделен и туров",
   desc="Serai Studio делает быстрые многоязычные сайты для небольшого гостеприимного бизнеса в Грузии, Армении и Центральной Азии. Фиксированные цены, бесплатный закрытый пример, оплата только если понравится.",
@@ -59,18 +59,18 @@ T = {
   steps_h="Как это работает",
   steps=[("Напишите нам", "Пришлите название и ссылку на вашу страницу в Google Maps, Instagram или Booking.com."),
          ("Бесплатный пример", "Через 3 рабочих дня после получения данных и фото мы пришлём закрытый пример, который не видят поисковики."),
-         ("Ваши правки", "Напишите, что изменить. Обычно исправляем в тот же день."),
+         ("Ваши правки", "Напишите, что изменить. До запуска включён один круг правок."),
          ("Запуск", "Оплата только когда вам всё нравится. Подключаем домен, и сайт работает.")],
   faq_h="Вопросы",
   faq=[("Зачем сайт, если я есть на Booking.com?", "Booking.com берёт комиссию с каждой брони и показывает гостям конкурентов рядом с вами. Свой сайт позволяет гостям писать вам напрямую и видеть всё, что вы предлагаете."),
-       ("Как мы общаемся?", "Мы работаем письменно: почта и сообщения в WhatsApp. Все цены и правки записаны, ничего не теряется при переводе, и вы отвечаете, когда удобно. Мы работаем удалённо из Сеула. Можно писать и по-грузински."),
-       ("Как оплатить?", "Банковским переводом или по ссылке на оплату картой, после того как вы одобрите пример."),
+       ("Как мы общаемся?", "Мы работаем письменно, по электронной почте. Все цены и правки записаны, ничего не теряется при переводе, и вы отвечаете, когда удобно. Мы работаем удалённо из Сеула. Можно писать и по-грузински."),
+       ("Как оплатить?", "Через ссылку на оплату PayPal (можно картой), после того как вы одобрите пример."),
        ("Что после первого года?", "Выбираете вы: «Поддержка» за $150 в год или бесплатная передача всех файлов сайта."),
        ("Можно взять фото с моей страницы Booking.com или Google?", "Только фото, которые принадлежат вам или на которые у вас есть разрешение. Пришлите оригиналы и напишите, кто снимал."),
        ("Кому принадлежит сайт?", "Вам. Домен и аккаунт хостинга регистрируются на ваше имя."),
        ("Можно добавить грузинский, армянский или другой язык?", "Каждый сайт на английском и русском. Грузинский добавляем бесплатно, после того как вы проверите текст.")],
   contact_h="Сделаем ваш пример", contact_p="Пришлите название и одну ссылку, где гости находят вас сейчас. Отвечаем в течение рабочего дня.",
-  email_l="Почта", sample_l="Открыть пример", mail_subject="Пример сайта", langs="Язык", hero_tag="Serai Studio"),
+  email_l="Почта", sample_l="Открыть пример", mail_subject="Пример сайта", privacy="Всё, что вы нам присылаете, мы используем только чтобы ответить вам и сделать ваш сайт.", langs="Язык", hero_tag="Serai Studio"),
 }
 T["ka"] = json.loads((HERE / "i18n" / "agency_ka.json").read_text(encoding="utf-8"))
 LANGS = ["en", "ru", "ka"]
@@ -260,12 +260,12 @@ html[lang=ru] .hero h1{{font-size:clamp(2.2rem,7vw,7.6rem);max-width:14ch;hyphen
 <section id="faq" class="wrap faq-grid"><div class="head rv"><h2>{e(c["faq_h"])}</h2></div><div>{faq}</div></section>
 <section id="contact" class="contact"><div class="wrap c-grid"><h2 class="rv">{e(c["contact_h"])}</h2><div class="rv"><p>{e(c["contact_p"])}</p>
 <span class="mail">{EMAIL}</span><a class="btn" href="{mail}"><span>{e(c["cta"])}</span>{ARROW}</a></div></div>
-<footer class="wrap">© Serai Studio{credits}</footer></section>
+<footer class="wrap">© Serai Studio<p class="credits">{e(c.get("privacy", T["en"]["privacy"]))}</p>{credits}</footer></section>
 </main></body></html>'''
 
 
 def write(out: Path):
-    for l in LANGS + ["ko"]:
+    for l in LANGS:  # Korean page (/ko/) dropped 2026-11-27: overseas only
         d = out if l == "en" else out / l
         d.mkdir(exist_ok=True)
         (d / "index.html").write_text(render(l), encoding="utf-8")
