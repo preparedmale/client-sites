@@ -74,6 +74,8 @@ T = {
 }
 T["ka"] = json.loads((HERE / "i18n" / "agency_ka.json").read_text(encoding="utf-8"))
 LANGS = ["en", "ru", "ka"]
+# Korean page: a separate offer for shops in Korea (KRW price), so it is not in the language switcher or hreflang set.
+T["ko"] = json.loads((HERE / "i18n" / "agency_ko.json").read_text(encoding="utf-8"))
 
 WORK = [("babua-marani", "Babua's Marani", {"en": "Family winery · Kakheti, Georgia", "ru": "Семейная винодельня · Кахетия, Грузия"}),
         ("cloudline-kazbegi", "Cloudline Guesthouse", {"en": "Guesthouse · Kazbegi, Georgia", "ru": "Гостевой дом · Казбеги, Грузия"}),
@@ -97,7 +99,7 @@ def render(lang):
     c = T[lang]
     pre = "./" if lang == "en" else "../"
     ids = ["work", "prices", "how", "faq", "contact"]
-    switch = '<div class="langs">' + "".join(f'<a href="{pre}{sub_dir(l)}" hreflang="{l}"{" aria-current=\"page\"" if l == lang else ""}>{l.upper()}</a>' for l in LANGS) + "</div>"
+    switch = "" if lang == "ko" else '<div class="langs">' + "".join(f'<a href="{pre}{sub_dir(l)}" hreflang="{l}"{" aria-current=\"page\"" if l == lang else ""}>{l.upper()}</a>' for l in LANGS) + "</div>"
     mail = f"mailto:{EMAIL}?subject=" + urllib.parse.quote(c["mail_subject"])
 
     from build import UI as SUI, lic_url
@@ -133,12 +135,12 @@ const nav=document.querySelector('.nav'),hero=document.querySelector('.hero');
 new IntersectionObserver(([x])=>nav.dataset.solid=x.isIntersecting?'0':'1',{rootMargin:'-120px 0px 0px 0px'}).observe(hero)});"""
     return f'''<!doctype html><html lang="{lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{e(c["title"])}</title><meta name="description" content="{e(c["desc"])}"><meta name="theme-color" content="#14201d">
-<link rel="canonical" href="{BASE}/{sub_dir(lang)}">{"".join(f'<link rel="alternate" hreflang="{l}" href="{BASE}/{sub_dir(l)}">' for l in LANGS)}
+<link rel="canonical" href="{BASE}/{sub_dir(lang)}">{"" if lang == "ko" else "".join(f'<link rel="alternate" hreflang="{l}" href="{BASE}/{sub_dir(l)}">' for l in LANGS)}
 <meta property="og:title" content="Serai Studio"><meta property="og:description" content="{e(c["desc"])}"><meta property="og:image" content="{BASE}/babua-marani/hero.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Cpath d='M3 24V12a10 10 0 0 1 20 0v12M8 24v-9a5 5 0 0 1 10 0v9' fill='none' stroke='%23b5873a' stroke-width='2.4'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600&family=Noto+Sans+Georgian:wght@400;500;600&family=Noto+Serif+Georgian:wght@300;400&display=swap">
-<script type="application/ld+json">{{"@context":"https://schema.org","@type":"ProfessionalService","name":"Serai Studio","email":"{EMAIL}","areaServed":["Georgia","Armenia","Kyrgyzstan","Uzbekistan","Kazakhstan"],"url":"{BASE}/"}}</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600&family=Noto+Sans+Georgian:wght@400;500;600&family=Noto+Serif+Georgian:wght@300;400{'&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;500' if lang == 'ko' else ''}&display=swap">
+<script type="application/ld+json">{{"@context":"https://schema.org","@type":"ProfessionalService","name":"Serai Studio","email":"{EMAIL}","areaServed":{'["South Korea"]' if lang == "ko" else '["Georgia","Armenia","Kyrgyzstan","Uzbekistan","Kazakhstan"]'},"url":"{BASE}/"}}</script>
 <script>{js}</script>
 <style>
 :root{{--gold-t:#86601f;--paper:#f6f3ed;--ink:#191714;--muted:#6b665d;--hair:rgba(25,23,20,.12);--accent:#14524b;--gold:#b5873a;--deep:#14201d;
@@ -150,6 +152,7 @@ img{{display:block;max-width:100%}}a{{color:inherit}}:focus-visible{{outline:2px
 .wrap{{width:min(1240px,100% - 2*clamp(20px,5vw,64px));margin-inline:auto}}
 h1,h2,h3{{font-family:var(--serif);font-weight:400;letter-spacing:-.015em;margin:0;text-wrap:balance}}
 h2{{font-size:clamp(2.6rem,6vw,5.2rem);line-height:.98}}h3{{font-size:1.6rem;line-height:1.1}}
+html[lang=ko]{{--serif:"Noto Serif KR","Instrument Serif",serif;--sans:"Noto Sans KR","Hanken Grotesk",system-ui,sans-serif}}html[lang=ko] body{{word-break:keep-all}}html[lang=ko] h1,html[lang=ko] h2,html[lang=ko] h3{{font-weight:500;letter-spacing:-.02em}}html[lang=ko] h2{{font-size:clamp(2rem,4.4vw,3.6rem);line-height:1.18}}html[lang=ko] .hero h1{{font-size:clamp(2.2rem,4.8vw,4.4rem);line-height:1.18}}html[lang=ko] .contact h2{{font-size:clamp(2.2rem,5vw,4.4rem);line-height:1.18}}html[lang=ko] summary{{font-size:clamp(1.1rem,1.6vw,1.35rem)}}html[lang=ko] .mail{{font-size:clamp(1.15rem,1.9vw,1.6rem)}}html[lang=ko] .amt b{{font-size:clamp(2.8rem,5vw,4.2rem)}}:lang(ko) .tag,:lang(ko) .p-name,:lang(ko) .w-sub{{text-transform:none;letter-spacing:.04em}}
 html[lang=ka] h1,html[lang=ka] h2,html[lang=ka] h3{{font-weight:300;letter-spacing:0}}html[lang=ka] h2{{font-size:clamp(2rem,4.4vw,3.6rem);line-height:1.15}}
 .tag{{display:inline-flex;font:500 .7rem/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;padding:.55rem .9rem;border-radius:99px;color:var(--gold-t);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold) 40%,transparent)}}.how .tag{{color:var(--gold)}}
 :lang(ka) .tag{{text-transform:none;letter-spacing:.04em}}
@@ -222,7 +225,7 @@ footer{{border-top:1px solid rgba(239,233,224,.14);padding-block:2rem;color:rgba
 <div class="stack rv" aria-hidden="true">{stack}</div></section>
 <div class="wrap proof">{proof}</div>
 <section id="work" class="wrap"><div class="head rv"><p class="tag">{e(c["sample_l"])}</p><h2>{e(c["work_h"])}</h2><p class="note">{e(c["work_note"])}</p></div><div class="works">{"".join(cards)}</div></section>
-<section id="prices" class="wrap prices"><div class="head rv"><p class="tag">GEL · USD</p><h2>{e(c["prices_h"])}</h2></div><div class="plans">{plans}</div><p class="note rv">{e(c["prices_note"])}</p></section>
+<section id="prices" class="wrap prices"><div class="head rv"><p class="tag">{"KRW" if lang == "ko" else "GEL · USD"}</p><h2>{e(c["prices_h"])}</h2></div><div class="plans">{plans}</div><p class="note rv">{e(c["prices_note"])}</p></section>
 <section id="how" class="how"><div class="wrap"><div class="head rv"><p class="tag">{e(c["hero_tag"])}</p><h2>{e(c["steps_h"])}</h2></div><ol class="steps">{steps}</ol></div></section>
 <section id="faq" class="wrap faq-grid"><div class="head rv"><h2>{e(c["faq_h"])}</h2></div><div>{faq}</div></section>
 <section id="contact" class="contact"><div class="wrap c-grid"><h2 class="rv">{e(c["contact_h"])}</h2><div class="rv"><p>{e(c["contact_p"])}</p>
@@ -232,7 +235,7 @@ footer{{border-top:1px solid rgba(239,233,224,.14);padding-block:2rem;color:rgba
 
 
 def write(out: Path):
-    for l in LANGS:
+    for l in LANGS + ["ko"]:
         d = out if l == "en" else out / l
         d.mkdir(exist_ok=True)
         (d / "index.html").write_text(render(l), encoding="utf-8")
