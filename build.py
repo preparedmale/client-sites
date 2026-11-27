@@ -37,6 +37,9 @@ UI = {
 for _l, _k in {'en': {'book_h': 'Request a booking', 'f_checkin': 'Check-in', 'f_checkout': 'Check-out', 'f_date': 'Date', 'f_time': 'Time', 'f_guests': 'Guests', 'o_stay': 'Room', 'o_tour': 'Tour', 'o_tasting': 'Tasting', 'o_table': '', 'f_departure': 'Departure', 'f_name': 'Your name', 'f_note': 'Anything we should know?', 'est': 'Estimated total', 'send': 'Send request on WhatsApp', 'pay_note': 'No payment now. We confirm availability in a message, usually within a few hours.', 'demo_h': 'Demo only', 'demo_p': 'On a real site this opens WhatsApp with the message below, ready to send to the owner. Nothing was sent.', 'close': 'Close', 'sample_reviews': 'Sample reviews', 'hours': 'Opening hours', 'wines': 'Our wines', 'bottle': 'bottle', 'included': 'Included', 'excluded': 'Not included', 'itinerary': 'Day by day', 'menu_h': 'Menu', 'nav_book': 'Book', 'sel': 'Choose'}, 'ru': {'book_h': 'Запрос на бронирование', 'f_checkin': 'Заезд', 'f_checkout': 'Выезд', 'f_date': 'Дата', 'f_time': 'Время', 'f_guests': 'Гостей', 'o_stay': 'Номер', 'o_tour': 'Тур', 'o_tasting': 'Дегустация', 'o_table': '', 'f_departure': 'Дата выезда группы', 'f_name': 'Ваше имя', 'f_note': 'Пожелания', 'est': 'Примерная сумма', 'send': 'Отправить запрос в WhatsApp', 'pay_note': 'Сейчас платить не нужно. Мы подтвердим наличие мест в сообщении, обычно в течение нескольких часов.', 'demo_h': 'Только демо', 'demo_p': 'На настоящем сайте откроется WhatsApp с этим сообщением для владельца. Ничего не отправлено.', 'close': 'Закрыть', 'sample_reviews': 'Примеры отзывов', 'hours': 'Часы работы', 'wines': 'Наши вина', 'bottle': 'бутылка', 'included': 'Включено', 'excluded': 'Не включено', 'itinerary': 'По дням', 'menu_h': 'Меню', 'nav_book': 'Бронь', 'sel': 'Выберите'}, 'ka': {'book_h': 'დაჯავშნის მოთხოვნა', 'f_checkin': 'შესვლა', 'f_checkout': 'გასვლა', 'f_date': 'თარიღი', 'f_time': 'დრო', 'f_guests': 'სტუმრები', 'o_stay': 'ოთახი', 'o_tour': 'ტური', 'o_tasting': 'დეგუსტაცია', 'o_table': '', 'f_departure': 'გასვლის თარიღი', 'f_name': 'თქვენი სახელი', 'f_note': 'რამე, რაც უნდა ვიცოდეთ?', 'est': 'სავარაუდო ჯამი', 'send': 'მოთხოვნის გაგზავნა WhatsApp-ზე', 'pay_note': 'ახლა გადახდა არ არის საჭირო. თავისუფალ ადგილებს შეტყობინებით დაგიდასტურებთ, ჩვეულებრივ რამდენიმე საათში.', 'demo_h': 'მხოლოდ დემო', 'demo_p': 'ნამდვილ საიტზე გაიხსნება WhatsApp ამ შეტყობინებით მფლობელისთვის. არაფერი გაგზავნილა.', 'close': 'დახურვა', 'sample_reviews': 'ნიმუში შეფასებები', 'hours': 'სამუშაო საათები', 'wines': 'ჩვენი ღვინოები', 'bottle': 'ბოთლი', 'included': 'შედის', 'excluded': 'არ შედის', 'itinerary': 'დღეების მიხედვით', 'menu_h': 'მენიუ', 'nav_book': 'ჯავშანი', 'sel': 'აირჩიეთ'}}.items():
     UI[_l].update(_k)
 # sample sites: the WhatsApp demo dialog (no owner number exists, so the try button lets the visitor pick any chat)
+UI["en"]["bad_dates"] = "Check-out must be after check-in."
+UI["ru"]["bad_dates"] = "Дата выезда должна быть позже даты заезда."
+UI["ka"]["bad_dates"] = "გასვლის თარიღი შესვლის თარიღის შემდეგ უნდა იყოს."
 UI["en"].update(demo_p="On a real site this button opens a WhatsApp chat with the owner, with this message already typed. This is a sample business with no real number, so nothing was sent.", try_wa="Try it in WhatsApp", try_note="Opens WhatsApp with this message. You choose the chat (try your own number). Nothing is sent until you press send.")
 UI["ru"].update(demo_p="На настоящем сайте эта кнопка открывает чат WhatsApp с владельцем, и это сообщение уже набрано. Это пример, у него нет настоящего номера, поэтому ничего не отправлено.", try_wa="Попробовать в WhatsApp", try_note="Откроет WhatsApp с этим сообщением. Чат выбираете вы (например, свой номер). Ничего не отправится, пока вы не нажмёте «отправить».")
 UI["ka"].update(demo_p="ნამდვილ საიტზე ეს ღილაკი ხსნის WhatsApp ჩატს მფლობელთან და ეს შეტყობინება უკვე აკრეფილია. ეს საცდელი ობიექტია ნამდვილი ნომრის გარეშე, ამიტომ არაფერი გაგზავნილა.", try_wa="სცადეთ WhatsApp-ში", try_note="გაიხსნება WhatsApp ამ შეტყობინებით. ჩატს თქვენ ირჩევთ (მაგალითად, საკუთარ ნომერს). არაფერი გაიგზავნება, სანამ გაგზავნას არ დააჭერთ.")
@@ -228,7 +231,7 @@ def render(d, lang, langs, prefix):
         else: fields = [date("d1", u["f_date"]), times(), num(u["f_guests"], 12)]
         fields += [f_(u["f_name"], f'<input name="nm" autocomplete="name" data-l="{e(u["f_name"])}" required>'),
                    f'<label class="fld wide"><span>{e(u["f_note"])}</span><textarea name="note" rows="2" data-l="{e(u["f_note"])}"></textarea></label>']
-        cfg = dict(type=typ, cur=cur, wa="" if smp else wa, title=f'{u["book_h"]} · {name}', estl=u["est"])
+        cfg = dict(type=typ, cur=cur, wa="" if smp else wa, title=f'{u["book_h"]} · {name}', estl=u["est"], bad=u["bad_dates"])
         est = "" if typ == "table" else f'<p class="est">{e(u["est"])} <b>—</b></p>'
         s.append(f'<section id="book" class="book"><div class="wrap b-grid"><div class="rv"><p class="tag">{e(u["nav_book"])}</p><h2>{e(u["book_h"])}</h2>'
                  f'<p class="b-note">{e(u["pay_note"])}</p>' + (f'<p class="b-hours"><span>{e(u["hours"])}</span>{e(t(d["hours"], lang))}</p>' if d.get("hours") else "")
@@ -247,7 +250,7 @@ def render(d, lang, langs, prefix):
         mp = ""
         if geo:
             la, lo = geo
-            mp = (f'<iframe class="map" title="{e(u["map"])}" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox={lo-.025:.4f}%2C{la-.014:.4f}%2C{lo+.025:.4f}%2C{la+.014:.4f}&amp;layer=mapnik&amp;marker={la}%2C{lo}"></iframe>'
+            mp = (f'<iframe class="map" title="{e(u["getting_here"])} · OpenStreetMap" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox={lo-.025:.4f}%2C{la-.014:.4f}%2C{lo+.025:.4f}%2C{la+.014:.4f}&amp;layer=mapnik&amp;marker={la}%2C{lo}"></iframe>'
                   f'<a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query={la}%2C{lo}" target="_blank" rel="noopener">{e(u["map"])} ↗</a>')
         route = f'<aside class="route rv">{mp}<p class="tag dark">{e(u["getting_here"])}</p><p>{e(t(d.get("getting_here"), lang))}</p></aside>' if d.get("getting_here") or geo else ""
         s.append(f'<section class="faq wrap"><div><h2 class="rv">{e(u["faq"])}</h2>{faq}</div>{route}</section>')
@@ -434,7 +437,7 @@ f.querySelectorAll('input[type=date]').forEach(i=>i.min=today);
 const nights=()=>f.d1&&f.d2&&f.d1.value&&f.d2.value?Math.round((new Date(f.d2.value)-new Date(f.d1.value))/864e5):0;
 const calc=()=>{if(!out)return;const o=f.opt?f.opt.selectedOptions[0]:null,p=o?+o.dataset.price:0,n=+(f.n?f.n.value:1);
 const tot=c.type==='stay'?(nights()>0?nights()*p:0):p*n;out.textContent=tot?tot+' '+c.cur:'—';
-if(f.d2)f.d2.setCustomValidity(c.type==='stay'&&f.d2.value&&nights()<=0?'>':'')};
+if(f.d2)f.d2.setCustomValidity(c.type==='stay'&&f.d2.value&&nights()<=0?c.bad:'')};
 f.addEventListener('input',calc);f.addEventListener('change',calc);calc();
 f.addEventListener('submit',ev=>{ev.preventDefault();calc();if(!f.reportValidity())return;const L=[c.title];
 f.querySelectorAll('[data-l]').forEach(el=>{const v=el.tagName==='SELECT'?el.selectedOptions[0].text:el.value.trim();if(v)L.push(el.dataset.l+': '+v)});
