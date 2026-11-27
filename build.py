@@ -281,7 +281,7 @@ def render(d, lang, langs, prefix):
 :root{{--paper:{th['paper']};--ink:#1d1a17;--muted:#6d665e;--hair:rgba(29,26,23,.12);--accent:{th['accent']};--deep:{th['deep']};
 --display:"{th['display']}",{ka}Georgia,serif;--body:"{th['body']}",{kb}system-ui,-apple-system,"Segoe UI",sans-serif;--ease:cubic-bezier(.32,.72,0,1)}}
 *{{box-sizing:border-box}}html{{scroll-behavior:smooth;scroll-padding-top:90px}}
-body{{margin:0;background:var(--paper);color:var(--ink);font:400 16.5px/1.7 var(--body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}}
+body{{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.65 var(--body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}}
 img{{max-width:100%;display:block}}a{{color:inherit}}:focus-visible{{outline:2px solid var(--accent);outline-offset:4px;border-radius:6px}}
 .wrap{{width:min(1240px,100% - 2*clamp(20px,5vw,64px));margin-inline:auto}}
 h1,h2,h3{{font-family:var(--display);font-weight:400;letter-spacing:-.015em;text-wrap:balance;margin:0}}
@@ -293,7 +293,7 @@ background:rgba(255,255,255,.14);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,
 :lang(ka) .tag{{text-transform:none;letter-spacing:.04em}}
 .sample{{position:relative;z-index:60;background:var(--deep);color:rgba(255,255,255,.8);text-align:center;font-size:.75rem;letter-spacing:.06em;padding:.45rem 1rem}}
 /* floating nav */
-.nav{{position:fixed;top:clamp(36px,4vw,44px);left:0;right:0;z-index:50;display:flex;justify-content:center;pointer-events:none;transition:top .6s var(--ease),transform .5s var(--ease)}}
+.nav{{position:fixed;top:clamp(36px,4vw,44px);left:0;right:0;z-index:50;display:flex;justify-content:center;pointer-events:none;transition:top .6s var(--ease),transform .3s ease-out}}
 .nav[data-solid="1"]{{top:12px}}
 .pill{{pointer-events:auto;display:flex;align-items:center;gap:clamp(.8rem,2vw,1.8rem);padding:.5rem .5rem .5rem 1.4rem;border-radius:99px;color:#fff;
 background:rgba(20,16,14,.28);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);backdrop-filter:blur(18px) saturate(1.4);transition:background .6s var(--ease),color .6s var(--ease)}}
@@ -317,8 +317,8 @@ html[lang=ka] .hero h1{{font-size:clamp(2.3rem,5.6vw,5rem);line-height:1.08;max-
 .lead{{max-width:46ch;font-size:clamp(1rem,1.4vw,1.15rem);color:rgba(255,255,255,.86)}}
 .cta{{display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap}}.from{{font-size:.9rem;color:rgba(255,255,255,.8)}}.from b{{color:#fff;font-weight:600}}
 .btn{{display:inline-flex;align-items:center;gap:.9rem;padding:.45rem .45rem .45rem 1.5rem;border-radius:99px;background:#fff;color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem;
-transition:transform .5s var(--ease),background .5s var(--ease)}}.btn:active{{transform:scale(.98)}}
-.ic{{display:grid;place-items:center;width:2.4rem;height:2.4rem;border-radius:50%;background:var(--ink);color:#fff;transition:transform .5s var(--ease)}}
+transition:transform .25s var(--ease),background .25s var(--ease)}}.btn:active{{transform:scale(.98)}}
+.ic{{display:grid;place-items:center;width:2.4rem;height:2.4rem;border-radius:50%;background:var(--ink);color:#fff;transition:transform .25s var(--ease)}}
 .btn:hover .ic{{transform:translate(2px,-2px) scale(1.06)}}.btn.light{{background:#fff}}.btn.light .ic{{background:var(--accent)}}
 .scroll-cue{{position:absolute;left:50%;bottom:1.4rem;z-index:2;width:1px;height:48px;background:linear-gradient(rgba(255,255,255,.8),transparent);animation:cue 2.4s var(--ease) infinite}}
 @keyframes cue{{0%{{transform:scaleY(0);transform-origin:top}}50%{{transform:scaleY(1);transform-origin:top}}51%{{transform-origin:bottom}}100%{{transform:scaleY(0);transform-origin:bottom}}}}
@@ -333,7 +333,7 @@ transition:transform .5s var(--ease),background .5s var(--ease)}}.btn:active{{tr
 html[lang=ka] .big{{font-size:clamp(1.4rem,2.6vw,2.2rem);line-height:1.35}}
 .bezel{{margin:0;padding:.45rem;border-radius:1.6rem;background:rgba(29,26,23,.04);box-shadow:inset 0 0 0 1px rgba(29,26,23,.06)}}
 .core{{border-radius:calc(1.6rem - .45rem);overflow:hidden;box-shadow:inset 0 1px 1px rgba(255,255,255,.2)}}
-.core img{{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}}.bezel:hover .core img{{transform:scale(1.04)}}
+.core img{{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}}.bezel:hover .core img{{transform:scale(1.04)}}
 .tall .core{{aspect-ratio:4/5}}
 figcaption{{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding:.9rem .5rem .3rem}}:lang(ka) figcaption{{text-transform:none;letter-spacing:.02em}}
 /* offerings */
@@ -415,7 +415,6 @@ dialog{{max-width:min(520px,92vw);border:0;border-radius:1.4rem;padding:2rem;bac
 .fx .hero-media{{will-change:transform}}.fx .hero-in{{will-change:transform,opacity}}
 .fx .story .core img,.fx .gal .core img,.fx .o-card .core img{{transform:translate3d(0,var(--py,0),0) scale(var(--ps,1.16));transition:transform .2s linear}}
 .fx .bezel:hover .core img{{--ps:1.2}}
-.fx .bezel.rv .core{{clip-path:inset(14% 10% 14% 10% round 1.15rem);transition:clip-path 1.3s var(--ease)}}.fx .bezel.rv.in .core{{clip-path:inset(0 0 0 0 round 1.15rem)}}
 .nav[data-hide="1"]{{transform:translateY(-160%)}}
 html.lenis,html.lenis body{{height:auto}}.lenis.lenis-smooth{{scroll-behavior:auto!important}}.lenis.lenis-stopped{{overflow:hidden}}
 /* mobile booking dock */
