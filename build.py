@@ -41,6 +41,18 @@ UI["en"].update(demo_p="On a real site this button opens a WhatsApp chat with th
 UI["ru"].update(demo_p="На настоящем сайте эта кнопка открывает чат WhatsApp с владельцем, и это сообщение уже набрано. Это пример, у него нет настоящего номера, поэтому ничего не отправлено.", try_wa="Попробовать в WhatsApp", try_note="Откроет WhatsApp с этим сообщением. Чат выбираете вы (например, свой номер). Ничего не отправится, пока вы не нажмёте «отправить».")
 UI["ka"].update(demo_p="ნამდვილ საიტზე ეს ღილაკი ხსნის WhatsApp ჩატს მფლობელთან და ეს შეტყობინება უკვე აკრეფილია. ეს საცდელი ობიექტია ნამდვილი ნომრის გარეშე, ამიტომ არაფერი გაგზავნილა.", try_wa="სცადეთ WhatsApp-ში", try_note="გაიხსნება WhatsApp ამ შეტყობინებით. ჩატს თქვენ ირჩევთ (მაგალითად, საკუთარ ნომერს). არაფერი გაიგზავნება, სანამ გაგზავნას არ დააჭერთ.")
 
+def lic_url(name):
+    """Creative Commons deed URL for a licence name like 'CC BY-SA 2.0' or 'CC0'."""
+    parts = str(name).split()
+    if parts[:1] == ["CC0"]: return "https://creativecommons.org/publicdomain/zero/1.0/"
+    if len(parts) == 3 and parts[0] == "CC" and parts[1] in ("BY", "BY-SA"):
+        return f"https://creativecommons.org/licenses/{parts[1].lower()}/{parts[2]}/"
+    return ""
+
+
+for _l, _m in {"en": "Photos cropped and resized.", "ru": "Фото обрезаны и уменьшены.", "ka": "ფოტოები მოჭრილი და შემცირებულია."}.items():
+    UI[_l]["modified"] = _m
+
 CTA = {"stay": {"en": "Check dates", "ru": "Узнать о датах", "ka": "თარიღების შემოწმება"},
        "tasting": {"en": "Book a tasting", "ru": "Записаться на дегустацию", "ka": "დეგუსტაციის დაჯავშნა"},
        "tour": {"en": "Book a tour", "ru": "Забронировать тур", "ka": "ტურის დაჯავშნა"},
@@ -254,7 +266,7 @@ def render(d, lang, langs, prefix):
              f'<div class="rv">{"".join(rows)}<p class="muted">{e(u["reply"])}</p>{btn(wa_link, u["write"], "btn light") if wa else ""}</div></div>')
     creds = [p["credit"] for p in photos if p.get("credit")] + (d.get("extra_credits") or [])
     cred_line = ("" if not creds else f'<p class="credits">{e(u["photos_by"])}: ' + ", ".join(
-        f'<a href="{e(c["page"])}" target="_blank" rel="noopener">{e(c["artist"])}</a> ({e(c["license"])})' for c in creds) + "</p>")
+        f'<a href="{e(c["page"])}" target="_blank" rel="noopener">{e(c["artist"])}</a> (' + (f'<a href="{e(lic_url(c["license"]))}" target="_blank" rel="noopener license">{e(c["license"])}</a>' if lic_url(c["license"]) else e(c["license"])) + ')' for c in creds) + f'. {e(u["modified"])}</p>')
     s.append(f'<footer class="wrap"><div class="f-row"><span>© {e(name)} · {e(town)}</span><span>{e(d.get("credit", ""))}</span></div>{cred_line}</footer></section>')
 
     og_img = f'<meta property="og:image" content="{BASE_URL}/{d["slug"]}/{e(hero_img)}">' if hero_img else ""
@@ -364,9 +376,9 @@ details p{{padding:0 0 1.6rem;color:var(--muted);max-width:60ch}}
 .k{{min-width:6rem;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,239,232,.55)}}.v{{font-size:1.05rem}}
 .v.ph{{font-style:italic;color:rgba(244,239,232,.55)}}.contact .muted{{color:rgba(244,239,232,.55);border:0;font-size:.9rem;margin-bottom:1.8rem}}
 footer{{padding-block:2rem 2.4rem;border-top:1px solid rgba(255,255,255,.12);color:rgba(244,239,232,.55);font-size:.8rem}}
-.f-row{{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}}.credits{{font-size:.7rem;margin-top:1rem;opacity:.7}}
+.f-row{{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}}.credits{{font-size:.72rem;margin-top:1rem;color:rgba(244,239,232,.72)}}
 /* booking */
-.book{{background:color-mix(in srgb,var(--accent) 9%,var(--paper));color:var(--ink);padding-block:clamp(4.5rem,8vw,7.5rem)}}.book .tag{{color:var(--accent);background:transparent;box-shadow:none;backdrop-filter:none;padding:0}}
+.book{{--muted:#55504a;background:color-mix(in srgb,var(--accent) 9%,var(--paper));color:var(--ink);padding-block:clamp(4.5rem,8vw,7.5rem)}}.book .tag{{color:var(--accent);background:transparent;box-shadow:none;backdrop-filter:none;padding:0}}
 .b-grid{{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(3rem,6vw,6rem);align-items:start}}.book h2{{margin:1.4rem 0 1.6rem}}
 .b-note{{color:var(--muted);max-width:40ch}}.b-hours{{margin-top:2rem;display:grid;gap:.3rem}}.b-hours span{{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}}
 .bk{{background:rgba(255,255,255,.5);box-shadow:inset 0 0 0 1px var(--hair),0 30px 60px -40px rgba(40,30,20,.35)}}.f-in{{background:#fbf8f3;color:var(--ink);padding:clamp(1.4rem,3vw,2.4rem);display:grid;grid-template-columns:1fr 1fr;gap:1.2rem 1.4rem}}
@@ -377,7 +389,7 @@ footer{{padding-block:2rem 2.4rem;border-top:1px solid rgba(255,255,255,.12);col
 .f-in .btn{{background:var(--ink);color:#fff;justify-content:space-between;border:0;cursor:pointer;font-family:inherit}}.f-in .ic{{background:rgba(255,255,255,.16)}}
 .demo-tag{{text-align:center;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}}
 dialog{{max-width:min(520px,92vw);border:0;border-radius:1.4rem;padding:2rem;background:#fbf8f3;color:var(--ink);box-shadow:0 40px 80px -30px rgba(0,0,0,.5)}}.d-act{{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-top:1.2rem}}.d-act form{{margin:0}}.ghost-btn{{font:inherit;font-weight:600;background:none;border:0;padding:.8rem 1rem;color:var(--ink);text-decoration:underline;cursor:pointer}}.d-note{{font-size:.82rem;opacity:.7;margin-top:.9rem}}dialog::backdrop{{background:rgba(10,8,6,.55);backdrop-filter:blur(4px)}}
-#demo .tag{{color:var(--accent);background:none;backdrop-filter:none;box-shadow:inset 0 0 0 1px var(--accent)}}dialog pre{{white-space:pre-wrap;font:inherit;font-size:.92rem;background:rgba(29,26,23,.05);border-radius:.8rem;padding:1rem;margin:1.2rem 0}}dialog p{{margin-top:1rem;color:var(--muted)}}dialog .btn{{background:var(--ink);color:#fff;border:0;cursor:pointer;font-family:inherit;padding:.8rem 1.4rem}}
+#demo .tag{{color:var(--accent);background:none;backdrop-filter:none;box-shadow:none}}dialog pre{{white-space:pre-wrap;font:inherit;font-size:.92rem;background:rgba(29,26,23,.05);border-radius:.8rem;padding:1rem;margin:1.2rem 0}}dialog p{{margin-top:1rem;color:var(--muted)}}dialog .btn{{background:var(--ink);color:#fff;border:0;cursor:pointer;font-family:inherit;padding:.8rem 1.4rem}}
 /* tour details */
 .more{{margin-top:1rem;border:0}}.more summary{{font:600 .85rem/1 var(--body);padding:.8rem 0;justify-content:flex-start;gap:.6rem}}.days{{padding-left:1.1rem;margin:.2rem 0 1rem;color:var(--muted);font-size:.9rem;display:grid;gap:.4rem}}
 .incl{{display:grid;grid-template-columns:1fr 1fr;gap:1rem;font-size:.86rem}}.incl ul{{list-style:none;padding:0;margin:.4rem 0 0;display:grid;gap:.3rem;color:var(--muted)}}
@@ -391,18 +403,18 @@ dialog{{max-width:min(520px,92vw);border:0;border-radius:1.4rem;padding:2rem;bac
 .revs{{padding-block:clamp(4rem,7vw,6rem)}}.r-grid{{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,2vw,1.6rem)}}
 .r-grid figure{{margin:0;padding:1.6rem 0 0;border-top:1px solid var(--ink)}}.stars{{color:var(--accent);letter-spacing:.2em;font-size:.8rem}}
 .r-grid blockquote{{margin:1rem 0 1.4rem;font-family:var(--display);font-size:1.3rem;line-height:1.35}}.r-grid figcaption{{padding:0}}
-.map{{display:block;width:100%;aspect-ratio:4/3;border:0;border-radius:1rem;margin-bottom:.6rem;filter:saturate(.7)}}.maplink{{display:inline-block;font-size:.85rem;font-weight:600;margin-bottom:1.4rem}}
+.map{{display:block;width:100%;aspect-ratio:4/3;border:0;border-radius:1rem;margin-bottom:.6rem;filter:saturate(.7)}}.maplink{{display:block;font-size:.85rem;font-weight:600;margin-bottom:1.4rem}}
 @media (max-width:900px){{.b-grid,.m-grid,.r-grid{{grid-template-columns:1fr}}}}@media (max-width:640px){{.f-in,.incl{{grid-template-columns:1fr}}}}
 /* mobile booking dock */
-.dock{{display:none}}
+.dock{{display:none}}.dock.off{{visibility:hidden!important}}
 @media (max-width:900px){{.dock{{position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:55;display:flex;justify-content:space-between;align-items:center;
 padding:.4rem .4rem .4rem 1.3rem;border-radius:99px;background:var(--ink);color:#fff;text-decoration:none;font-weight:600;box-shadow:0 18px 40px -16px rgba(0,0,0,.5);
-transform:translateY(160%);transition:transform .6s var(--ease)}}.dock .ic{{background:var(--accent)}}
-.nav[data-solid="1"]~.dock{{transform:none}}.contact{{padding-bottom:4.5rem}}}}
+transform:translateY(160%);visibility:hidden;transition:transform .6s var(--ease),visibility 0s .6s}}.dock .ic{{background:var(--accent)}}
+.nav[data-solid="1"]~.dock{{transform:none;visibility:visible;transition:transform .6s var(--ease)}}.contact{{padding-bottom:4.5rem}}}}
 /* reveal */
 .js .rv{{opacity:0;transform:translateY(24px);transition:opacity .9s var(--ease),transform .9s var(--ease)}}
 .js .rv.in{{opacity:1;transform:none;filter:none}}
-@media (prefers-reduced-motion:reduce){{.js .rv{{opacity:1;transform:none;filter:none;transition:none}}.kb,.scroll-cue{{animation:none}}html{{scroll-behavior:auto}}}}
+@media (prefers-reduced-motion:reduce){{.js .rv{{opacity:1;transform:none;filter:none;transition:none}}.kb,.scroll-cue{{animation:none}}html{{scroll-behavior:auto}}.dock{{transition:none!important}}}}
 @media (max-width:900px){{.story.has-side,.exp-grid,.faq,.c-grid{{grid-template-columns:1fr}}.timeline,.route{{position:static}}
 .o-grid{{grid-template-columns:1fr}}.o-card:nth-child(2){{margin-top:0}}.pill nav{{display:none}}}}
 @media (max-width:640px){{body{{font-size:16px}}.mini,.scroll-cue{{display:none}}.pill{{max-width:calc(100% - 24px);padding-right:.4rem}}.facts{{grid-template-columns:1fr 1fr;gap:2rem 1rem}}.pill{{gap:.6rem;padding-left:1rem}}.brand{{font-size:1.05rem}}.langs a{{padding:.3rem .4rem}}.mini{{padding:.55rem .85rem;font-size:.78rem}}
@@ -429,7 +441,7 @@ f.querySelectorAll('[data-l]').forEach(el=>{const v=el.tagName==='SELECT'?el.sel
 if(out&&out.textContent!=='—')L.push(c.estl+': '+out.textContent);const m=L.join('\\n');
 if(c.wa)open('https://wa.me/'+c.wa+'?text='+encodeURIComponent(m),'_blank','noopener');else demo(m)})});
 if(nav&&hero)new IntersectionObserver(([x])=>nav.dataset.solid=x.isIntersecting?'0':'1',{rootMargin:'-80px 0px 0px 0px'}).observe(hero);
-const dock=document.querySelector('.dock');if(dock){const seen=new Set();const dio=new IntersectionObserver(es=>{es.forEach(x=>x.isIntersecting?seen.add(x.target):seen.delete(x.target));dock.style.visibility=seen.size?'hidden':''});
+const dock=document.querySelector('.dock');if(dock){const seen=new Set();const dio=new IntersectionObserver(es=>{es.forEach(x=>x.isIntersecting?seen.add(x.target):seen.delete(x.target));dock.classList.toggle('off',seen.size>0)});
 document.querySelectorAll('#book,#contact').forEach(el=>dio.observe(el))}});"""
     return f"""<!doctype html>
 <html lang="{lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
