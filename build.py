@@ -410,16 +410,6 @@ dialog{{max-width:min(520px,92vw);border:0;border-radius:1.4rem;padding:2rem;bac
 .r-grid blockquote{{margin:1rem 0 1.4rem;font-family:var(--display);font-size:1.3rem;line-height:1.35}}.r-grid figcaption{{padding:0}}
 .map{{display:block;width:100%;aspect-ratio:4/3;border:0;border-radius:1rem;margin-bottom:.6rem;filter:saturate(.7)}}.maplink{{display:block;font-size:.85rem;font-weight:600;margin-bottom:1.4rem}}
 @media (max-width:900px){{.b-grid,.m-grid,.r-grid{{grid-template-columns:1fr}}}}@media (max-width:640px){{.f-in,.incl{{grid-template-columns:1fr}}}}
-/* scroll experience */
-.fx .wd{{opacity:.16;transition:opacity .35s linear}}.fx .wd.lit{{opacity:1}}
-.fx .hero-media{{will-change:transform}}.fx .hero-in{{will-change:transform,opacity}}
-.fx .story .core img,.fx .gal .core img,.fx .o-card .core img{{transform:translate3d(0,var(--py,0),0) scale(var(--ps,1.16));transition:transform .2s linear}}
-.fx .bezel:hover .core img{{--ps:1.2}}
-.nav[data-hide="1"]{{transform:translateY(-160%)}}
-html.lenis,html.lenis body{{height:auto}}.lenis.lenis-smooth{{scroll-behavior:auto!important}}.lenis.lenis-stopped{{overflow:hidden}}
-@media (min-width:901px){{.fx .offer:has(.o-list),.fx .wines{{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(2rem,5vw,5rem);align-items:start}}
-.fx .offer:has(.o-list) .sec-head,.fx .wines .sec-head{{position:sticky;top:120px;margin:0}}}}
-.fx .o-list .o-row,.fx .w-list li{{opacity:var(--f,1);transition:opacity .25s linear}}
 /* mobile booking dock */
 .dock{{display:none}}.dock.off{{visibility:hidden!important}}
 @media (max-width:900px){{.dock{{position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:55;display:flex;justify-content:space-between;align-items:center;
@@ -458,29 +448,9 @@ if(c.wa)open('https://wa.me/'+c.wa+'?text='+encodeURIComponent(m),'_blank','noop
 if(nav&&hero)new IntersectionObserver(([x])=>nav.dataset.solid=x.isIntersecting?'0':'1',{rootMargin:'-80px 0px 0px 0px'}).observe(hero);
 const dock=document.querySelector('.dock');if(dock){const seen=new Set();const dio=new IntersectionObserver(es=>{es.forEach(x=>x.isIntersecting?seen.add(x.target):seen.delete(x.target));dock.classList.toggle('off',seen.size>0)});
 document.querySelectorAll('#book,#contact').forEach(el=>dio.observe(el))}
-fx()});
-/* scroll experience: hero parallax, word-by-word story, image drift, nav hides on the way down. Off with reduced motion. */
-function fx(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;const H=document.documentElement;H.classList.add('fx');
-const nav=document.querySelector('.nav'),pill=document.querySelector('.pill'),hm=document.querySelector('.hero-media'),hi=document.querySelector('.hero-in');
-const big=[...document.querySelectorAll('.big')].map(el=>{const ws=el.textContent.trim().split(/\\s+/);el.setAttribute('aria-label',el.textContent.trim());
-el.innerHTML=ws.map(w=>'<span class="wd" aria-hidden="true">'+w.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c])+'</span>').join(' ');return [el,[...el.querySelectorAll('.wd')]]});
-const imgs=[...document.querySelectorAll('.story .core img,.gal .core img,.o-card .core img')];const rows=[...document.querySelectorAll('.o-list .o-row,.w-list li')];
-let last=scrollY,ticking=false;const vh=()=>innerHeight;
-const run=()=>{ticking=false;const y=scrollY,h=vh();
-if(hm){const p=Math.min(1,y/h);hm.style.transform='translate3d(0,'+(y*.32)+'px,0)';if(hi){hi.style.opacity=String(1-p*1.25);hi.style.transform='translate3d(0,'+(-p*70)+'px,0)'}}
-big.forEach(([el,ws])=>{const r=el.getBoundingClientRect(),p=Math.max(0,Math.min(1,(h*.82-r.top)/(r.height+h*.32)));const n=Math.round(p*ws.length);
-ws.forEach((w,i)=>w.classList.toggle('lit',i<n))});
-imgs.forEach(im=>{const r=im.parentElement.getBoundingClientRect();if(r.bottom<0||r.top>h)return;const p=(r.top+r.height/2-h/2)/(h/2+r.height/2);im.style.setProperty('--py',(p*-7).toFixed(2)+'%')});
-rows.forEach(r=>{const b=r.getBoundingClientRect(),d=Math.abs(b.top+b.height/2-h*.45)/(h*.5);r.style.setProperty('--f',Math.max(.28,1-d*d*.9).toFixed(3))});
-if(nav&&!(pill&&pill.classList.contains('open'))){nav.dataset.hide=(y>last+4&&y>h*.9)?'1':(y<last-4?'0':nav.dataset.hide||'0')}last=y};
-const req=()=>{if(!ticking){ticking=true;requestAnimationFrame(run)}};addEventListener('scroll',req,{passive:true});addEventListener('resize',req);run();
-if(matchMedia('(pointer:fine)').matches&&H.dataset.lenis){const sc=document.createElement('script');sc.src=H.dataset.lenis;
-sc.onload=()=>{if(!window.Lenis)return;const l=new Lenis({lerp:.1});const raf=t=>{l.raf(t);requestAnimationFrame(raf)};requestAnimationFrame(raf);
-document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',ev=>{const t=document.querySelector(a.getAttribute('href'));if(!t)return;ev.preventDefault();
-l.scrollTo(t,{offset:-90,duration:1.2});history.replaceState(null,'',a.getAttribute('href'))}));
-document.querySelectorAll('dialog').forEach(d=>{new MutationObserver(()=>d.open?l.stop():l.start()).observe(d,{attributes:true,attributeFilter:['open']})})};document.head.appendChild(sc)}}"""
+});"""
     return f"""<!doctype html>
-<html lang="{lang}" data-lenis="{prefix}lenis.min.js"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="{lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{e(name)} · {e(town)}</title><meta name="description" content="{e(desc[:160])}"><meta name="theme-color" content="{th['deep']}">
 <link rel="canonical" href="{page_url(d['slug'], lang, langs)}">{alt_links}
 <meta property="og:type" content="website"><meta property="og:title" content="{e(name)}"><meta property="og:description" content="{e(desc[:200])}">{og_img}
@@ -490,10 +460,21 @@ document.querySelectorAll('dialog').forEach(d=>{new MutationObserver(()=>d.open?
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?{fonts}&display=swap">
 {f'<link rel="preload" as="image" href="{prefix}{e(hero_img)}">' if hero_img else ''}
 <script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False).replace("<", "\\u003c")}</script>
+<script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('fx')</script>
+<link rel="stylesheet" href="{prefix}motion.css">
+<script defer src="{prefix}gsap.min.js"></script><script defer src="{prefix}ScrollTrigger.min.js"></script><script defer src="{prefix}SplitText.min.js"></script><script defer src="{prefix}lenis.min.js"></script><script defer src="{prefix}motion.js"></script>
 <script>{js}</script>
 <style>{css}</style></head><body>
 {''.join(s)}
 </body></html>"""
+
+
+VENDOR = {
+    "lenis.min.js": "/*! Lenis 1.1.13 | MIT License | (c) 2024 darkroom.engineering | https://github.com/darkroomengineering/lenis */\n",
+    "gsap.min.js": "",  # the GSAP files carry their own GreenSock licence header
+    "ScrollTrigger.min.js": "",
+    "SplitText.min.js": "",
+}
 
 
 def build(path):
@@ -508,7 +489,10 @@ def build(path):
         target.mkdir(exist_ok=True)
         prefix = "./" if i == 0 else "../"
         (target / "index.html").write_text(render(d, lang, langs, prefix), encoding="utf-8")
-    shutil.copy(ROOT / "vendor" / "lenis.min.js", out / "lenis.min.js")  # smooth scrolling, MIT licence in vendor/
+    for f, head in VENDOR.items():  # third-party scripts, shipped with their licence notice
+        (out / f).write_text(head + (ROOT / "vendor" / f).read_text(encoding="utf-8"), encoding="utf-8")
+    for f in ("motion.js", "motion.css"):  # our scroll choreography, see assets/
+        shutil.copy(ROOT / "assets" / f, out / f)
     src = Path(path).resolve().parent / slug
     if src.is_dir():
         for f in src.iterdir():

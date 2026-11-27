@@ -1,0 +1,44 @@
+/* Scroll choreography for sample sites. Everything here sits behind .fx,
+   which is only set when the visitor has not asked for reduced motion. */
+html.lenis, html.lenis body { height: auto }
+.lenis.lenis-smooth { scroll-behavior: auto !important }
+.lenis.lenis-stopped { overflow: hidden }
+
+.fx .hero .rv { opacity: 1; transform: none; filter: none; transition: none }
+.fx .kb { animation: none }
+.fx.pre .hero h1, .fx.pre .hero .tag, .fx.pre .hero-foot, .fx.pre .nav { visibility: hidden }
+.fx .hero-media { will-change: transform, clip-path; transform-origin: 50% 40% }
+
+.fx .line-mask { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em }
+.fx .line-in { display: block; will-change: transform }
+
+.nav { transition: top .6s var(--ease), transform .3s ease-out }
+.nav[data-hide="1"] { transform: translateY(-160%) }
+.nav:focus-within { transform: none }
+
+/* rows that come into focus as they pass the middle of the screen */
+@media (min-width: 901px) and (pointer: fine) {
+  html.fx .o-list .o-row.rv, html.fx .w-list li.rv, html.fx .m-group li { opacity: var(--f, 1); transform: none; filter: none; transition: opacity .25s linear }
+  html.fx .o-list .o-row:is(:hover, :focus-within), html.fx .w-list li:is(:hover, :focus-within) { opacity: 1 }
+}
+
+/* desktop: section title stays while its list scrolls past */
+@media (min-width: 901px) {
+  .fx .offer:has(.o-list), .fx .wines, .fx .menu {
+    display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(2rem, 5vw, 5rem); align-items: start }
+  .fx .offer:has(.o-list) .sec-head, .fx .wines .sec-head, .fx .menu .sec-head { position: sticky; top: 120px; margin: 0 }
+  .fx .menu .m-grid { grid-template-columns: 1fr }
+
+  /* gallery becomes a horizontal track while pinned */
+  .fx .gal.hz { width: 100%; max-width: none; padding-inline: 0; overflow: hidden }
+  .fx .gal.hz .sec-head { width: min(1240px, 100% - 2*clamp(20px, 5vw, 64px)); margin-inline: auto }
+  .fx .gal.hz .bento { display: flex; gap: 2vw; width: max-content; padding-inline: clamp(20px, 5vw, 64px); grid-auto-rows: auto }
+  .fx .gal.hz .bento figure { width: 46vw; height: 62vh; grid-column: auto !important; grid-row: auto !important; margin: 0 }
+  .fx .gal.hz .bento figure:nth-child(even) { width: 34vw; margin-top: 8vh }
+}
+
+/* dark bands open out from a rounded card */
+.fx .exp, .fx .contact { will-change: clip-path }
+
+/* magnetic buttons */
+.fx .btn { will-change: transform }
