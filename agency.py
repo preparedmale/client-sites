@@ -269,6 +269,14 @@ def write(out: Path):
         d = out if l == "en" else out / l
         d.mkdir(exist_ok=True)
         (d / "index.html").write_text(render(l), encoding="utf-8")
+    # Cloudflare Pages serves this with status 404 for any path that does not exist (e.g. the removed /ko/)
+    (out / "404.html").write_text('''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>Page not found · Serai Studio</title>
+<style>:root{color-scheme:light}body{margin:0;min-height:100svh;display:grid;place-items:center;background:#f6f3ed;color:#191714;font:400 17px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;padding:24px}
+main{max-width:34rem}h1{font:400 2.4rem/1.1 Georgia,serif;margin:0 0 1rem}p{margin:0 0 .6rem;color:#4d4842}a{color:#14524b;font-weight:600}</style></head>
+<body><main><h1>Page not found</h1><p>This page does not exist or has moved.</p>
+<p lang="ru">Такой страницы нет или она перемещена.</p><p lang="ka">ეს გვერდი არ არსებობს ან გადატანილია.</p>
+<p><a href="/">Serai Studio</a> · <a href="/ru/">RU</a> · <a href="/ka/">KA</a></p></main></body></html>''', encoding="utf-8")
     (out / ".nojekyll").write_text("")
     from build import VENDOR
     for f, head in VENDOR.items():  # same motion kit as the samples, with licence notices
