@@ -41,6 +41,11 @@ UI["en"].update(demo_p="On a real site this button opens a WhatsApp chat with th
 UI["ru"].update(demo_p="На настоящем сайте эта кнопка открывает чат WhatsApp с владельцем, и это сообщение уже набрано. Это пример, у него нет настоящего номера, поэтому ничего не отправлено.", try_wa="Попробовать в WhatsApp", try_note="Откроет WhatsApp с этим сообщением. Чат выбираете вы (например, свой номер). Ничего не отправится, пока вы не нажмёте «отправить».")
 UI["ka"].update(demo_p="ნამდვილ საიტზე ეს ღილაკი ხსნის WhatsApp ჩატს მფლობელთან და ეს შეტყობინება უკვე აკრეფილია. ეს საცდელი ობიექტია ნამდვილი ნომრის გარეშე, ამიტომ არაფერი გაგზავნილა.", try_wa="სცადეთ WhatsApp-ში", try_note="გაიხსნება WhatsApp ამ შეტყობინებით. ჩატს თქვენ ირჩევთ (მაგალითად, საკუთარ ნომერს). არაფერი გაიგზავნება, სანამ გაგზავნას არ დააჭერთ.")
 
+CTA = {"stay": {"en": "Check dates", "ru": "Узнать о датах", "ka": "თარიღების შემოწმება"},
+       "tasting": {"en": "Book a tasting", "ru": "Записаться на дегустацию", "ka": "დეგუსტაციის დაჯავშნა"},
+       "tour": {"en": "Book a tour", "ru": "Забронировать тур", "ka": "ტურის დაჯავშნა"},
+       "table": {"en": "Reserve a table", "ru": "Забронировать столик", "ka": "მაგიდის დაჯავშნა"}}
+
 THEMES = {
     # display serif/grotesk, body sans, accent, paper, deep (contact band)
     "valley": dict(display="Cormorant Garamond", dw="300;400;500", body="Manrope", accent="#7b2a3e", paper="#f8f4ee", deep="#2a1a1c"),
@@ -90,6 +95,7 @@ def render(d, lang, langs, prefix):
     photos = d.get("photos") or []
     hero_img = photos[0].get("file") if photos else None
     home = prefix + ("" if lang == langs[0] else lang + "/")
+    cta_l = t(CTA.get((d.get("booking") or {}).get("type"), {}), lang) or u["book"]
     fam = lambda f, w: "family=" + f.replace(" ", "+") + ":wght@" + w
     fonts = "&".join([fam(th["display"], th["dw"]), fam(th["body"], "400;500;600")]
                      + ([fam("Noto Serif Georgian", "300;400;500"), fam("Noto Sans Georgian", "400;500;600")] if "ka" in langs else []))
@@ -122,13 +128,14 @@ def render(d, lang, langs, prefix):
     if smp: s.append(f'<div class="sample">{e(u["sample"])}</div>')
     s.append(f'<header class="nav" data-solid="0"><div class="pill"><a class="brand" href="{home}">{e(name)}</a>'
              f'<nav id="mnav" aria-label="{e(u["menu"])}">' + "".join(f'<a href="#{k}">{e(v)}</a>' for k, v in nav) + f"</nav>{switch}"
-             + (f'<a class="mini" href="#book">{e(u["book"])}</a>' if d.get("booking") else "") + '<button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="{e(u["menu"])}"><span></span><span></span></button></div></header>')
+             + (f'<a class="mini" href="#book">{e(cta_l)}</a>' if d.get("booking") else "") + '<button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="{e(u["menu"])}"><span></span><span></span></button></div></header>')
+    if d.get("booking"): s.append(f'<a class="dock" href="#book"><span>{e(cta_l)}</span>{ARROW}</a>')
 
     # 1. hero
     s.append('<section class="hero">' + (f'<div class="hero-media">{img(photos[0], "kb", lazy=False)}</div>' if hero_img else "")
              + f'<div class="hero-in wrap"><p class="tag rv">{e(t(d.get("location_line"), lang))}</p>'
              f'<h1 class="rv">{e(t(d.get("headline"), lang))}</h1><div class="hero-foot rv"><p class="lead">{e(desc)}</p>'
-             f'<div class="cta">{btn("#book" if d.get("booking") else wa_link, u["book"]) if wa else ""}{price_from}</div></div></div>'
+             f'<div class="cta">{btn("#book" if d.get("booking") else wa_link, cta_l) if wa else ""}{price_from}</div></div></div>'
              '<span class="scroll-cue" aria-hidden="true"></span></section>')
 
     # 2. facts
@@ -175,6 +182,13 @@ def render(d, lang, langs, prefix):
         ws = "".join(f'<li class="rv"><div><h3>{e(w["name"])}</h3><p>{e(t(w.get("style"), lang))}</p></div><p class="price"><b>{e(w["price"])} {e(cur)}</b><span>{e(u["bottle"])}</span></p></li>' for w in d["wines"])
         s.append(f'<section id="wines" class="wines wrap"><div class="sec-head rv"><p class="tag dark">Qvevri</p><h2>{e(u["wines"])}</h2></div><ul class="w-list">{ws}</ul></section>')
 
+    # 6. gallery bento
+    if len(photos) > 2:
+        g = photos[2:6]
+        s.append(f'<section id="gallery" class="gal wrap"><div class="sec-head rv"><h2>{e(u["gallery"])}</h2></div><div class="bento n{len(g)}">'
+                 + "".join(f'<figure class="bezel rv"><div class="core">{img(p)}</div><figcaption>{e(t(p.get("alt"), lang))}</figcaption></figure>' for p in g)
+                 + "</div></section>")
+
     # 5. experiences
     if d.get("experiences"):
         items = "".join(f'<article class="x rv"><h3>{e(t(x.get("name"), lang))}</h3><p>{e(t(x.get("text"), lang))}</p>'
@@ -209,13 +223,6 @@ def render(d, lang, langs, prefix):
                  + f'</div><form class="bk bezel rv" data-cfg="{e(json.dumps(cfg, ensure_ascii=False))}" novalidate><div class="core f-in">{"".join(fields)}{est}'
                  f'<button class="btn" type="submit"><span>{e(u["send"])}</span>{ARROW}</button>' + (f'<p class="demo-tag">{e(u["demo_h"])}</p>' if smp else "") + "</div></form></div>"
                  + "</section>")
-
-    # 6. gallery bento
-    if len(photos) > 2:
-        g = photos[2:6]
-        s.append(f'<section id="gallery" class="gal wrap"><div class="sec-head rv"><h2>{e(u["gallery"])}</h2></div><div class="bento n{len(g)}">'
-                 + "".join(f'<figure class="bezel rv"><div class="core">{img(p)}</div><figcaption>{e(t(p.get("alt"), lang))}</figcaption></figure>' for p in g)
-                 + "</div></section>")
 
     if d.get("reviews"):
         s.append(f'<section class="revs wrap"><div class="sec-head rv"><p class="tag dark">{e(u["sample_reviews"]) if smp else "★★★★★"}</p><h2>{e(u["reviews"])}</h2></div><div class="r-grid">' + "".join(
@@ -258,7 +265,6 @@ def render(d, lang, langs, prefix):
 --display:"{th['display']}",{ka}Georgia,serif;--body:"{th['body']}",{kb}system-ui,-apple-system,"Segoe UI",sans-serif;--ease:cubic-bezier(.32,.72,0,1)}}
 *{{box-sizing:border-box}}html{{scroll-behavior:smooth;scroll-padding-top:90px}}
 body{{margin:0;background:var(--paper);color:var(--ink);font:400 16.5px/1.7 var(--body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}}
-body::after{{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}}
 img{{max-width:100%;display:block}}a{{color:inherit}}:focus-visible{{outline:2px solid var(--accent);outline-offset:4px;border-radius:6px}}
 .wrap{{width:min(1240px,100% - 2*clamp(20px,5vw,64px));margin-inline:auto}}
 h1,h2,h3{{font-family:var(--display);font-weight:400;letter-spacing:-.015em;text-wrap:balance;margin:0}}
@@ -266,7 +272,7 @@ h2{{font-size:clamp(2.4rem,5.4vw,4.6rem);line-height:1}}h3{{font-size:clamp(1.5r
 p{{margin:0}}.muted{{color:var(--muted)}}
 .tag{{display:inline-flex;align-items:center;gap:.5rem;font:500 .7rem/1 var(--body);letter-spacing:.22em;text-transform:uppercase;padding:.55rem .9rem;border-radius:99px;
 background:rgba(255,255,255,.14);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.28);backdrop-filter:blur(8px)}}
-.tag.dark{{background:transparent;color:var(--accent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 35%,transparent);backdrop-filter:none}}
+.tag.dark{{background:transparent;color:var(--accent);box-shadow:none;backdrop-filter:none;padding:0}}.tag.dark::before{{content:"";width:1.6rem;height:1px;background:currentColor}}
 :lang(ka) .tag{{text-transform:none;letter-spacing:.04em}}
 .sample{{position:relative;z-index:60;background:var(--deep);color:rgba(255,255,255,.8);text-align:center;font-size:.75rem;letter-spacing:.06em;padding:.45rem 1rem}}
 /* floating nav */
@@ -286,11 +292,11 @@ background:rgba(20,16,14,.28);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);b
 .hero{{position:relative;min-height:100svh;display:flex;align-items:flex-end;color:#fff;background:var(--deep);overflow:hidden;margin-top:-1px}}
 .hero-media{{position:absolute;inset:0}}.hero-media img{{width:100%;height:100%;object-fit:cover}}
 .kb{{animation:kb 22s var(--ease) both}}@keyframes kb{{from{{transform:scale(1.12)}}to{{transform:scale(1)}}}}
-.hero::after{{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,8,6,.35) 0%,rgba(10,8,6,0) 28%,rgba(10,8,6,.1) 50%,rgba(10,8,6,.78) 100%)}}
+.hero::after{{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,8,6,.35) 0%,rgba(10,8,6,0) 26%,rgba(10,8,6,.12) 45%,rgba(10,8,6,.8) 100%),linear-gradient(90deg,rgba(10,8,6,.35),rgba(10,8,6,0) 60%)}}
 .hero-in{{position:relative;z-index:2;padding-block:9rem clamp(3rem,7vw,5.5rem)}}
-.hero h1{{font-size:clamp(3rem,8.6vw,8.2rem);line-height:.94;max-width:13ch;margin:1.4rem 0 2.2rem;font-weight:300}}
+.hero h1{{font-size:clamp(2.8rem,6.6vw,6.2rem);line-height:.98;max-width:15ch;margin:1.2rem 0 1.6rem;font-weight:300}}
 html[lang=ka] .hero h1{{font-size:clamp(2.3rem,5.6vw,5rem);line-height:1.08;max-width:16ch}}
-.hero-foot{{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem 4rem;flex-wrap:wrap}}
+.hero-foot{{display:flex;flex-direction:column;align-items:flex-start;gap:1.8rem}}
 .lead{{max-width:46ch;font-size:clamp(1rem,1.4vw,1.15rem);color:rgba(255,255,255,.86)}}
 .cta{{display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap}}.from{{font-size:.9rem;color:rgba(255,255,255,.8)}}.from b{{color:#fff;font-weight:600}}
 .btn{{display:inline-flex;align-items:center;gap:.9rem;padding:.45rem .45rem .45rem 1.5rem;border-radius:99px;background:#fff;color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem;
@@ -304,7 +310,7 @@ transition:transform .5s var(--ease),background .5s var(--ease)}}.btn:active{{tr
 .facts b{{display:block;white-space:nowrap;font-family:var(--display);font-weight:300;font-size:clamp(2rem,3.2vw,3.2rem);line-height:1;margin-bottom:.6rem}}
 .facts span{{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}}:lang(ka) .facts span{{text-transform:none;letter-spacing:.02em}}
 /* story */
-.story{{padding-block:clamp(6rem,12vw,11rem);display:grid;gap:clamp(3rem,7vw,7rem)}}
+.story{{padding-block:clamp(4.5rem,8vw,7.5rem);display:grid;gap:clamp(3rem,7vw,7rem)}}
 .story.has-side{{grid-template-columns:1.25fr .75fr;align-items:center}}
 .big{{font-family:var(--display);font-weight:300;font-size:clamp(1.7rem,3.3vw,3rem);line-height:1.18;margin-top:2rem;letter-spacing:-.01em}}
 html[lang=ka] .big{{font-size:clamp(1.4rem,2.6vw,2.2rem);line-height:1.35}}
@@ -314,7 +320,7 @@ html[lang=ka] .big{{font-size:clamp(1.4rem,2.6vw,2.2rem);line-height:1.35}}
 .tall .core{{aspect-ratio:4/5}}
 figcaption{{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding:.9rem .5rem .3rem}}:lang(ka) figcaption{{text-transform:none;letter-spacing:.02em}}
 /* offerings */
-.offer{{padding-block:clamp(4rem,8vw,7rem) clamp(6rem,10vw,9rem)}}
+.offer{{padding-block:clamp(4.5rem,8vw,7.5rem)}}
 .sec-head{{display:flex;flex-direction:column;align-items:flex-start;gap:1.4rem;margin-bottom:clamp(2.5rem,5vw,4.5rem)}}
 .o-list{{border-top:1px solid var(--hair)}}
 .o-row{{display:grid;grid-template-columns:1fr auto;gap:2rem;padding-block:2.4rem;border-bottom:1px solid var(--hair);align-items:start;transition:padding .6s var(--ease)}}
@@ -329,7 +335,7 @@ figcaption{{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color
 .o-card .price{{text-align:left;margin-top:auto;padding-top:1rem;border-top:1px solid var(--hair)}}.o-card .price b{{display:inline;margin-right:.5rem}}
 .o-card:nth-child(2){{margin-top:clamp(0rem,6vw,5rem)}}
 /* experiences */
-.exp{{background:var(--deep);color:#f4efe8;padding-block:clamp(6rem,11vw,10rem)}}
+.exp{{background:var(--deep);color:#f4efe8;padding-block:clamp(4.5rem,8vw,7.5rem)}}
 .exp .tag{{color:#f4efe8}}.exp-grid{{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(3rem,7vw,7rem);align-items:start}}
 .xs{{display:grid;gap:2.6rem}}.solo{{grid-template-columns:1fr}}.solo .xs{{grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:2.6rem 4rem}}.x{{padding-top:1.6rem;border-top:1px solid rgba(255,255,255,.14)}}.x p{{color:rgba(244,239,232,.7);margin-top:.7rem;max-width:52ch}}
 .x .price span{{color:rgba(244,239,232,.6)}}
@@ -337,22 +343,22 @@ figcaption{{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color
 .timeline li{{display:grid;grid-template-columns:4.2rem 1fr;gap:1rem;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,.1)}}.timeline li:last-child{{border:0}}
 .timeline time{{font-family:var(--display);font-size:1.3rem;color:color-mix(in srgb,var(--accent) 45%,#fff)}}
 /* gallery */
-.gal{{padding-block:clamp(6rem,11vw,10rem)}}
+.gal{{padding-block:clamp(1rem,3vw,2rem) clamp(4.5rem,8vw,7.5rem)}}
 .bento{{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:clamp(150px,17vw,250px);gap:clamp(.8rem,1.6vw,1.4rem)}}
 .bento .bezel{{display:flex;flex-direction:column}}.bento .core{{flex:1;min-height:0}}
 .bento figure:nth-child(1){{grid-column:span 7;grid-row:span 2}}.bento figure:nth-child(2){{grid-column:span 5;grid-row:span 1}}
 .bento figure:nth-child(3){{grid-column:span 5;grid-row:span 1}}.bento figure:nth-child(4){{grid-column:3/span 8;grid-row:span 2}}
 .bento figcaption{{padding:.6rem .4rem .1rem}}
 /* faq */
-.faq{{display:grid;grid-template-columns:1.3fr .7fr;gap:clamp(3rem,7vw,7rem);padding-block:clamp(4rem,8vw,7rem) clamp(6rem,10vw,9rem);align-items:start}}
+.faq{{display:grid;grid-template-columns:1.3fr .7fr;gap:clamp(3rem,7vw,7rem);padding-block:clamp(4.5rem,8vw,7.5rem);align-items:start}}
 .faq h2{{margin-bottom:2.5rem}}
 details{{border-bottom:1px solid var(--hair)}}summary{{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:1rem;align-items:center;padding:1.5rem 0;font-family:var(--display);font-size:clamp(1.2rem,1.8vw,1.5rem)}}
 summary::-webkit-details-marker{{display:none}}.pl{{flex:none;transition:transform .5s var(--ease);color:var(--accent)}}details[open] .pl{{transform:rotate(45deg)}}
 details p{{padding:0 0 1.6rem;color:var(--muted);max-width:60ch}}
 .route{{padding:2rem;border-radius:1.6rem;background:rgba(29,26,23,.04);box-shadow:inset 0 0 0 1px rgba(29,26,23,.06);position:sticky;top:110px}}.route p:last-child{{margin-top:1.2rem;color:var(--muted)}}
 /* contact */
-.contact{{background:var(--deep);color:#f4efe8;padding-top:clamp(6rem,12vw,11rem)}}
-.c-grid{{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem 6rem;align-items:end;padding-bottom:clamp(5rem,9vw,8rem)}}
+.contact{{background:var(--deep);color:#f4efe8;padding-top:clamp(4.5rem,9vw,8rem)}}
+.c-grid{{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem 6rem;align-items:end;padding-bottom:clamp(4rem,7vw,6rem)}}
 .contact h2{{font-size:clamp(3rem,8vw,7.4rem);font-weight:300;line-height:.95}}
 .c-grid p{{display:flex;gap:1.2rem;align-items:baseline;padding:.9rem 0;border-bottom:1px solid rgba(255,255,255,.12)}}
 .k{{min-width:6rem;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,239,232,.55)}}.v{{font-size:1.05rem}}
@@ -360,10 +366,10 @@ details p{{padding:0 0 1.6rem;color:var(--muted);max-width:60ch}}
 footer{{padding-block:2rem 2.4rem;border-top:1px solid rgba(255,255,255,.12);color:rgba(244,239,232,.55);font-size:.8rem}}
 .f-row{{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}}.credits{{font-size:.7rem;margin-top:1rem;opacity:.7}}
 /* booking */
-.book{{background:var(--deep);color:#f4efe8;padding-block:clamp(6rem,11vw,10rem)}}.book .tag{{color:#f4efe8}}
+.book{{background:color-mix(in srgb,var(--accent) 9%,var(--paper));color:var(--ink);padding-block:clamp(4.5rem,8vw,7.5rem)}}.book .tag{{color:var(--accent);background:transparent;box-shadow:none;backdrop-filter:none;padding:0}}
 .b-grid{{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(3rem,6vw,6rem);align-items:start}}.book h2{{margin:1.4rem 0 1.6rem}}
-.b-note{{color:rgba(244,239,232,.7);max-width:40ch}}.b-hours{{margin-top:2rem;display:grid;gap:.3rem}}.b-hours span{{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,239,232,.5)}}
-.bk{{background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}}.f-in{{background:#fbf8f3;color:var(--ink);padding:clamp(1.4rem,3vw,2.4rem);display:grid;grid-template-columns:1fr 1fr;gap:1.2rem 1.4rem}}
+.b-note{{color:var(--muted);max-width:40ch}}.b-hours{{margin-top:2rem;display:grid;gap:.3rem}}.b-hours span{{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}}
+.bk{{background:rgba(255,255,255,.5);box-shadow:inset 0 0 0 1px var(--hair),0 30px 60px -40px rgba(40,30,20,.35)}}.f-in{{background:#fbf8f3;color:var(--ink);padding:clamp(1.4rem,3vw,2.4rem);display:grid;grid-template-columns:1fr 1fr;gap:1.2rem 1.4rem}}
 .fld{{display:grid;gap:.35rem}}.fld.wide,.f-in .btn,.est,.demo-tag{{grid-column:1/-1}}.fld span{{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}}:lang(ka) .fld span{{text-transform:none;letter-spacing:.02em}}
 .fld input,.fld select,.fld textarea{{font:inherit;color:inherit;background:transparent;border:0;border-bottom:1px solid var(--hair);padding:.55rem 0;border-radius:0;width:100%;min-width:0}}
 .fld input:focus,.fld select:focus,.fld textarea:focus{{outline:none;border-bottom-color:var(--accent)}}
@@ -377,18 +383,24 @@ dialog{{max-width:min(520px,92vw);border:0;border-radius:1.4rem;padding:2rem;bac
 .incl{{display:grid;grid-template-columns:1fr 1fr;gap:1rem;font-size:.86rem}}.incl ul{{list-style:none;padding:0;margin:.4rem 0 0;display:grid;gap:.3rem;color:var(--muted)}}
 .yes li::before{{content:"✓ ";color:var(--accent)}}.no li::before{{content:"– ";color:#a04a3a}}.lbl{{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase}}
 /* menu + wines */
-.menu,.wines{{padding-block:clamp(4rem,8vw,7rem)}}.m-grid{{display:grid;grid-template-columns:1fr 1fr;gap:3rem clamp(3rem,6vw,6rem)}}
+.menu,.wines{{padding-block:clamp(4rem,7vw,6rem)}}.m-grid{{display:grid;grid-template-columns:1fr 1fr;gap:3rem clamp(3rem,6vw,6rem)}}
 .m-group h3{{margin-bottom:1rem;padding-bottom:.8rem;border-bottom:1px solid var(--ink)}}.m-group ul{{list-style:none;padding:0;margin:0;display:grid;gap:.85rem}}
 .m-group li{{display:flex;align-items:baseline;gap:.6rem}}.m-group i{{flex:1;border-bottom:1px dotted var(--hair);transform:translateY(-4px)}}.m-group b{{font-weight:600;white-space:nowrap}}
 .w-list{{list-style:none;padding:0;margin:0;border-top:1px solid var(--hair)}}.w-list li{{display:flex;justify-content:space-between;gap:2rem;padding:1.8rem 0;border-bottom:1px solid var(--hair)}}.w-list li p{{color:var(--muted);margin-top:.4rem}}
 /* reviews + map */
-.revs{{padding-block:clamp(4rem,8vw,7rem)}}.r-grid{{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,2vw,1.6rem)}}
-.r-grid figure{{margin:0;padding:2rem;border-radius:1.6rem;background:#fffdf9;box-shadow:inset 0 0 0 1px rgba(29,26,23,.07)}}.stars{{color:var(--accent);letter-spacing:.2em;font-size:.8rem}}
+.revs{{padding-block:clamp(4rem,7vw,6rem)}}.r-grid{{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,2vw,1.6rem)}}
+.r-grid figure{{margin:0;padding:1.6rem 0 0;border-top:1px solid var(--ink)}}.stars{{color:var(--accent);letter-spacing:.2em;font-size:.8rem}}
 .r-grid blockquote{{margin:1rem 0 1.4rem;font-family:var(--display);font-size:1.3rem;line-height:1.35}}.r-grid figcaption{{padding:0}}
 .map{{display:block;width:100%;aspect-ratio:4/3;border:0;border-radius:1rem;margin-bottom:.6rem;filter:saturate(.7)}}.maplink{{display:inline-block;font-size:.85rem;font-weight:600;margin-bottom:1.4rem}}
 @media (max-width:900px){{.b-grid,.m-grid,.r-grid{{grid-template-columns:1fr}}}}@media (max-width:640px){{.f-in,.incl{{grid-template-columns:1fr}}}}
+/* mobile booking dock */
+.dock{{display:none}}
+@media (max-width:900px){{.dock{{position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:55;display:flex;justify-content:space-between;align-items:center;
+padding:.4rem .4rem .4rem 1.3rem;border-radius:99px;background:var(--ink);color:#fff;text-decoration:none;font-weight:600;box-shadow:0 18px 40px -16px rgba(0,0,0,.5);
+transform:translateY(160%);transition:transform .6s var(--ease)}}.dock .ic{{background:var(--accent)}}
+.nav[data-solid="1"]~.dock{{transform:none}}.contact{{padding-bottom:4.5rem}}}}
 /* reveal */
-.js .rv{{opacity:0;transform:translateY(40px);filter:blur(6px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease),filter 1.1s var(--ease)}}
+.js .rv{{opacity:0;transform:translateY(24px);transition:opacity .9s var(--ease),transform .9s var(--ease)}}
 .js .rv.in{{opacity:1;transform:none;filter:none}}
 @media (prefers-reduced-motion:reduce){{.js .rv{{opacity:1;transform:none;filter:none;transition:none}}.kb,.scroll-cue{{animation:none}}html{{scroll-behavior:auto}}}}
 @media (max-width:900px){{.story.has-side,.exp-grid,.faq,.c-grid{{grid-template-columns:1fr}}.timeline,.route{{position:static}}
@@ -416,7 +428,9 @@ f.addEventListener('submit',ev=>{ev.preventDefault();calc();if(!f.reportValidity
 f.querySelectorAll('[data-l]').forEach(el=>{const v=el.tagName==='SELECT'?el.selectedOptions[0].text:el.value.trim();if(v)L.push(el.dataset.l+': '+v)});
 if(out&&out.textContent!=='—')L.push(c.estl+': '+out.textContent);const m=L.join('\\n');
 if(c.wa)open('https://wa.me/'+c.wa+'?text='+encodeURIComponent(m),'_blank','noopener');else demo(m)})});
-if(nav&&hero)new IntersectionObserver(([x])=>nav.dataset.solid=x.isIntersecting?'0':'1',{rootMargin:'-80px 0px 0px 0px'}).observe(hero)});"""
+if(nav&&hero)new IntersectionObserver(([x])=>nav.dataset.solid=x.isIntersecting?'0':'1',{rootMargin:'-80px 0px 0px 0px'}).observe(hero);
+const dock=document.querySelector('.dock');if(dock){const seen=new Set();const dio=new IntersectionObserver(es=>{es.forEach(x=>x.isIntersecting?seen.add(x.target):seen.delete(x.target));dock.style.visibility=seen.size?'hidden':''});
+document.querySelectorAll('#book,#contact').forEach(el=>dio.observe(el))}});"""
     return f"""<!doctype html>
 <html lang="{lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{e(name)} · {e(town)}</title><meta name="description" content="{e(desc[:160])}"><meta name="theme-color" content="{th['deep']}">
