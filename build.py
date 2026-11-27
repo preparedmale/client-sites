@@ -417,6 +417,9 @@ dialog{{max-width:min(520px,92vw);border:0;border-radius:1.4rem;padding:2rem;bac
 .fx .bezel:hover .core img{{--ps:1.2}}
 .nav[data-hide="1"]{{transform:translateY(-160%)}}
 html.lenis,html.lenis body{{height:auto}}.lenis.lenis-smooth{{scroll-behavior:auto!important}}.lenis.lenis-stopped{{overflow:hidden}}
+@media (min-width:901px){{.fx .offer:has(.o-list),.fx .wines{{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(2rem,5vw,5rem);align-items:start}}
+.fx .offer:has(.o-list) .sec-head,.fx .wines .sec-head{{position:sticky;top:120px;margin:0}}}}
+.fx .o-list .o-row,.fx .w-list li{{opacity:var(--f,1);transition:opacity .25s linear}}
 /* mobile booking dock */
 .dock{{display:none}}.dock.off{{visibility:hidden!important}}
 @media (max-width:900px){{.dock{{position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:55;display:flex;justify-content:space-between;align-items:center;
@@ -461,13 +464,14 @@ function fx(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;c
 const nav=document.querySelector('.nav'),pill=document.querySelector('.pill'),hm=document.querySelector('.hero-media'),hi=document.querySelector('.hero-in');
 const big=[...document.querySelectorAll('.big')].map(el=>{const ws=el.textContent.trim().split(/\\s+/);el.setAttribute('aria-label',el.textContent.trim());
 el.innerHTML=ws.map(w=>'<span class="wd" aria-hidden="true">'+w.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c])+'</span>').join(' ');return [el,[...el.querySelectorAll('.wd')]]});
-const imgs=[...document.querySelectorAll('.story .core img,.gal .core img,.o-card .core img')];
+const imgs=[...document.querySelectorAll('.story .core img,.gal .core img,.o-card .core img')];const rows=[...document.querySelectorAll('.o-list .o-row,.w-list li')];
 let last=scrollY,ticking=false;const vh=()=>innerHeight;
 const run=()=>{ticking=false;const y=scrollY,h=vh();
 if(hm){const p=Math.min(1,y/h);hm.style.transform='translate3d(0,'+(y*.32)+'px,0)';if(hi){hi.style.opacity=String(1-p*1.25);hi.style.transform='translate3d(0,'+(-p*70)+'px,0)'}}
 big.forEach(([el,ws])=>{const r=el.getBoundingClientRect(),p=Math.max(0,Math.min(1,(h*.82-r.top)/(r.height+h*.32)));const n=Math.round(p*ws.length);
 ws.forEach((w,i)=>w.classList.toggle('lit',i<n))});
 imgs.forEach(im=>{const r=im.parentElement.getBoundingClientRect();if(r.bottom<0||r.top>h)return;const p=(r.top+r.height/2-h/2)/(h/2+r.height/2);im.style.setProperty('--py',(p*-7).toFixed(2)+'%')});
+rows.forEach(r=>{const b=r.getBoundingClientRect(),d=Math.abs(b.top+b.height/2-h*.45)/(h*.5);r.style.setProperty('--f',Math.max(.28,1-d*d*.9).toFixed(3))});
 if(nav&&!(pill&&pill.classList.contains('open'))){nav.dataset.hide=(y>last+4&&y>h*.9)?'1':(y<last-4?'0':nav.dataset.hide||'0')}last=y};
 const req=()=>{if(!ticking){ticking=true;requestAnimationFrame(run)}};addEventListener('scroll',req,{passive:true});addEventListener('resize',req);run();
 if(matchMedia('(pointer:fine)').matches&&H.dataset.lenis){const sc=document.createElement('script');sc.src=H.dataset.lenis;
