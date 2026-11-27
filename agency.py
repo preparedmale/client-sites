@@ -20,11 +20,11 @@ T = {
   lead="We build websites for family guesthouses, wineries, tour guides and small restaurants. Your rooms, prices and story in English and Russian, with one button that brings guests straight to your WhatsApp.",
   cta="Ask for a free preview", cta2="See our work",
   proof=[("Free", "preview before you pay"), ("3 days", "to a private preview"), ("2+", "languages on every site"), ("0", "booking commission")],
-  work_h="Recent work", work_note="These are sample sites for fictional businesses, made to show what we build.",
+  work_h="Recent work", work_note="These are sample sites for fictional businesses, made to show what we build. Each one shows the Complete package.",
   prices_h="Pick your website", prices_note="One payment, after you approve the preview. After the first year you choose: Care at $90 (240 GEL) a year for small updates and a monthly check, or we hand over all site files for free. The domain name (about $10 to $15 a year) is registered in your name and we connect it, so the site always belongs to you.",
   plans=[
-   ("Booking · Recommended", "$250", "or 680 GEL, one time", ["Everything in Essential", "Booking request form: the guest's dates arrive in your WhatsApp", "Photo gallery and a guest reviews section", "Extra sections for a menu, wine list or day-by-day tour", "Help adding your site to Google Maps and Instagram"]),
-   ("Essential", "$150", "or 400 GEL, one time", ["One page: your rooms or tours, prices and photos", "English and Russian, plus Georgian after you check it", "WhatsApp button and Google Maps link", "Looks right on every phone", "First year looked after: free hosting in your name, small fixes"]),
+   ("Complete · Recommended", "$250", "or 680 GEL, one time", ["Everything in Essential", "Booking request form: the guest's dates arrive in your WhatsApp", "Photo gallery and a guest reviews section", "Extra sections for a menu, wine list or day-by-day tour", "Help adding your site to Google Maps and Instagram"]),
+   ("Essential", "$150", "or 400 GEL, one time", ["One page: your rooms or tours, prices and photos", "English and Russian, plus Georgian after you check it", "WhatsApp button and Google Maps link", "Looks right on every phone", "First year looked after: free hosting in your name, and we fix anything we built that stops working"]),
   ],
   steps_h="How it works",
   steps=[("Write to us", "Send your business name and a link to your Google Maps, Instagram or Booking.com page."),
@@ -50,11 +50,11 @@ T = {
   lead="Мы делаем сайты для семейных гостевых домов, виноделен, гидов и небольших ресторанов. Ваши номера, цены и история на английском и русском, и одна кнопка, которая ведёт гостей прямо в ваш WhatsApp.",
   cta="Получить бесплатный пример", cta2="Посмотреть работы",
   proof=[("Бесплатно", "пример до оплаты"), ("3 дня", "до закрытого примера"), ("2+", "языка на каждом сайте"), ("0", "комиссии с бронирований")],
-  work_h="Наши работы", work_note="Это примеры сайтов для вымышленных заведений, чтобы показать, что мы делаем.",
+  work_h="Наши работы", work_note="Это примеры сайтов для вымышленных заведений, чтобы показать, что мы делаем. Каждый показывает пакет «Полный».",
   prices_h="Выберите свой сайт", prices_note="Одна оплата, после того как вы одобрите пример. После первого года выбираете вы: «Поддержка» за $90 (240 лари) в год, это мелкие правки и ежемесячная проверка, или бесплатная передача всех файлов сайта. Домен (примерно $10–15 в год) регистрируется на ваше имя, мы его подключаем, и сайт всегда принадлежит вам.",
   plans=[
-   ("Бронирование · Рекомендуем", "$250", "или 680 лари, один раз", ["Всё из «Базового»", "Форма запроса брони: даты гостя приходят вам в WhatsApp", "Фотогалерея и раздел отзывов гостей", "Дополнительные разделы: меню, винная карта или тур по дням", "Поможем добавить сайт в Google Maps и Instagram"]),
-   ("Базовый", "$150", "или 400 лари, один раз", ["Одна страница: номера или туры, цены и фото", "Английский и русский, плюс грузинский после вашей проверки", "Кнопка WhatsApp и ссылка на Google Maps", "Удобно на любом телефоне", "Первый год под нашим присмотром: бесплатный хостинг на ваше имя, мелкие правки"]),
+   ("Полный · Рекомендуем", "$250", "или 680 лари, один раз", ["Всё из «Базового»", "Форма запроса брони: даты гостя приходят вам в WhatsApp", "Фотогалерея и раздел отзывов гостей", "Дополнительные разделы: меню, винная карта или тур по дням", "Поможем добавить сайт в Google Maps и Instagram"]),
+   ("Базовый", "$150", "или 400 лари, один раз", ["Одна страница: номера или туры, цены и фото", "Английский и русский, плюс грузинский после вашей проверки", "Кнопка WhatsApp и ссылка на Google Maps", "Удобно на любом телефоне", "Первый год под нашим присмотром: бесплатный хостинг на ваше имя, и мы чиним всё сделанное нами, если оно перестанет работать"]),
   ],
   steps_h="Как это работает",
   steps=[("Напишите нам", "Пришлите название и ссылку на вашу страницу в Google Maps, Instagram или Booking.com."),
@@ -119,7 +119,7 @@ def render(lang):
         labels.append(label)
 
     plans = "".join(f'''<article class="plan{" dark" if i == 0 else ""} rv"><div class="p-in"><p class="p-name">{e(n)}</p><p class="amt"><b>{e(p)}</b><span>{e(unit)}</span></p>
-<ul>{"".join(f"<li>{e(x)}</li>" for x in items)}</ul><a class="btn" href="{mail}"><span>{e(c["cta"])}</span>{ARROW}</a></div></article>''' for i, (n, p, unit, items) in enumerate(c["plans"]))
+<ul>{"".join(f"<li>{e(x)}</li>" for x in items)}</ul><a class="btn" href="mailto:{EMAIL}?subject={urllib.parse.quote(c["mail_subject"] + " · " + n.split(" · ")[0])}"><span>{e(c["cta"])}</span>{ARROW}</a></div></article>''' for i, (n, p, unit, items) in enumerate(c["plans"]))
     su = SUI.get(lang, SUI["en"])
     link = lambda c: f'<a href="{e(c["page"])}" target="_blank" rel="noopener">{e(c["artist"])}</a> (' + (
         f'<a href="{e(lic_url(c["license"]))}" target="_blank" rel="noopener license">{e(c["license"])}</a>' if lic_url(c["license"]) else e(c["license"])) + ")"
