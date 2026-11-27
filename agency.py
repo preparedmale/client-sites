@@ -100,12 +100,15 @@ def render(lang):
     switch = '<div class="langs">' + "".join(f'<a href="{pre}{sub_dir(l)}" hreflang="{l}"{" aria-current=\"page\"" if l == lang else ""}>{l.upper()}</a>' for l in LANGS) + "</div>"
     mail = f"mailto:{EMAIL}?subject=" + urllib.parse.quote(c["mail_subject"])
 
-    cards, heroes = [], []
+    from build import UI as SUI, lic_url
+    cards, heroes, creds = [], [], []
     for slug, name, sub in WORK:
         cl = json.loads((HERE / "clients" / f"{slug}.json").read_text(encoding="utf-8"))
         langs = cl.get("languages") or ["en"]
         href = f"{pre}{slug}/" + ("" if lang == langs[0] or lang not in langs else lang + "/")
         photo = (cl.get("photos") or [{}])[0].get("file")
+        cr = (cl.get("photos") or [{}])[0].get("credit")
+        if cr and cr not in creds: creds.append(cr)
         src = f"{pre}{slug}/{photo}" if photo else ""
         heroes.append(src)
         label = c.get("work_sub", {}).get(slug) or sub.get(lang) or sub["en"]
@@ -115,6 +118,10 @@ def render(lang):
 
     plans = "".join(f'''<article class="plan{" dark" if i == 0 else ""} rv"><div class="p-in"><p class="p-name">{e(n)}</p><p class="amt"><b>{e(p)}</b><span>{e(unit)}</span></p>
 <ul>{"".join(f"<li>{e(x)}</li>" for x in items)}</ul>{f'<a class="btn" href="{mail}"><span>{e(c["cta"])}</span>{ARROW}</a>' if i == 0 else ""}</div></article>''' for i, (n, p, unit, items) in enumerate(c["plans"]))
+    su = SUI.get(lang, SUI["en"])
+    link = lambda c: f'<a href="{e(c["page"])}" target="_blank" rel="noopener">{e(c["artist"])}</a> (' + (
+        f'<a href="{e(lic_url(c["license"]))}" target="_blank" rel="noopener license">{e(c["license"])}</a>' if lic_url(c["license"]) else e(c["license"])) + ")"
+    credits = "" if not creds else f'<p class="credits">{e(su["photos_by"])}: ' + ", ".join(link(c) for c in creds) + f'. {e(su["modified"])}</p>'
     steps = "".join(f'<li class="rv"><span class="n">0{i}</span><h3>{e(a)}</h3><p>{e(b)}</p></li>' for i, (a, b) in enumerate(c["steps"], 1))
     faq = "".join(f'<details class="rv"><summary>{e(q)}{PLUS}</summary><p>{e(a)}</p></details>' for q, a in c["faq"])
     proof = "".join(f'<div class="rv"><b>{e(a)}</b><span>{e(b)}</span></div>' for a, b in c["proof"])
@@ -199,7 +206,7 @@ summary::-webkit-details-marker{{display:none}}.pl{{flex:none;color:var(--gold);
 .c-grid{{display:grid;grid-template-columns:1.2fr .8fr;gap:3rem;align-items:end;padding-bottom:clamp(5rem,9vw,8rem)}}
 .c-grid p{{color:rgba(239,233,224,.7);max-width:44ch}}.mail{{display:block;font-family:var(--serif);font-size:clamp(1.5rem,2.6vw,2.2rem);color:#efe9e0;margin:1.6rem 0 2rem;user-select:all;overflow-wrap:anywhere}}
 .contact .btn{{background:#efe9e0;color:var(--ink)}}.contact .ic{{background:var(--accent);color:#fff}}
-footer{{border-top:1px solid rgba(239,233,224,.14);padding-block:2rem;color:rgba(239,233,224,.5);font-size:.82rem}}
+footer{{border-top:1px solid rgba(239,233,224,.14);padding-block:2rem;color:rgba(239,233,224,.5);font-size:.82rem}}.credits{{margin-top:1rem;font-size:.72rem;color:rgba(239,233,224,.72)}}
 .js .rv{{opacity:0;transform:translateY(40px);filter:blur(6px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease),filter 1.1s var(--ease)}}.js .rv.in{{opacity:1;transform:none;filter:none}}
 @media (prefers-reduced-motion:reduce){{.js .rv{{opacity:1;transform:none;filter:none;transition:none}}html{{scroll-behavior:auto}}}}
 @media (max-width:960px){{.hero,.faq-grid,.c-grid{{grid-template-columns:1fr}}.hero{{padding-top:7rem;min-height:auto}}.stack{{height:min(110vw,560px)}}.faq-grid .head{{position:static}}
@@ -220,7 +227,7 @@ footer{{border-top:1px solid rgba(239,233,224,.14);padding-block:2rem;color:rgba
 <section id="faq" class="wrap faq-grid"><div class="head rv"><h2>{e(c["faq_h"])}</h2></div><div>{faq}</div></section>
 <section id="contact" class="contact"><div class="wrap c-grid"><h2 class="rv">{e(c["contact_h"])}</h2><div class="rv"><p>{e(c["contact_p"])}</p>
 <span class="mail">{EMAIL}</span><a class="btn" href="{mail}"><span>{e(c["cta"])}</span>{ARROW}</a></div></div>
-<footer class="wrap">© Serai Studio</footer></section>
+<footer class="wrap">© Serai Studio{credits}</footer></section>
 </main></body></html>'''
 
 
