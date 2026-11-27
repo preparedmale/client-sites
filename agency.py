@@ -1,12 +1,14 @@
 """Serai Studio's own website: site/index.html (English), site/ru/ and site/ka/ (Georgian)."""
 import html
 import json
+import os
 import urllib.parse
 from pathlib import Path
 
 HERE = Path(__file__).parent
 EMAIL = "seraistudio.web@gmail.com"
-BASE = "https://preparedmale.github.io/client-sites"
+# Public address of the site. Set SITE_BASE to override (no trailing slash).
+BASE = os.environ.get("SITE_BASE", "https://serai-studio.pages.dev").rstrip("/")
 
 T = {
  "en": dict(

@@ -10,13 +10,15 @@ needed to read the page. Photos live in clients/<slug>/ and are copied over.
 """
 import html
 import json
+import os
 import shutil
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "site"
-BASE_URL = "https://preparedmale.github.io/client-sites"
+# Public address of the site. Set SITE_BASE to override (no trailing slash).
+BASE_URL = os.environ.get("SITE_BASE", "https://serai-studio.pages.dev").rstrip("/")
 
 UI = {
     "en": dict(rooms="Rooms", stay="Stay", experiences="Experiences", gallery="Photos", reviews="Guests say",
