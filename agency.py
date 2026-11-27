@@ -21,10 +21,10 @@ T = {
   cta="Ask for a free preview", cta2="See our work",
   proof=[("Free", "preview before you pay"), ("3 days", "to a private preview"), ("2+", "languages on every site"), ("0", "booking commission")],
   work_h="Recent work", work_note="These are sample sites for fictional businesses, made to show what we build.",
-  prices_h="Two simple prices", prices_note="Prices are one time. We set up free hosting on a Cloudflare account in your name, and we look after it for the first year. The domain name (about $10 to $15 a year) is registered in your name, so the site always belongs to you.",
+  prices_h="Pick your website", prices_note="One payment, after you approve the preview. After the first year you choose: Care at $90 (240 GEL) a year for small updates and a monthly check, or we hand over all site files for free. The domain name (about $10 to $15 a year) is registered in your name and we connect it, so the site always belongs to you.",
   plans=[
-   ("Starter", "$150", "or 400 GEL, one time", ["One-page website", "English + Russian. Georgian too, after you check the Georgian text", "Rooms, prices and photos", "WhatsApp button and Google Maps link", "Works on every phone", "Free hosting set up on a Cloudflare account in your name, looked after by us for the first year, and domain setup", "Private preview within 3 working days after we get your info and photos"]),
-   ("Care", "$150", "per year, from the second year", ["Keeping the site running and updated", "Price, photo and text updates (up to 30 minutes a month)", "Domain renewal reminders", "We check every month that the site works", "Answer within one working day"]),
+   ("Booking · Recommended", "$250", "or 680 GEL, one time", ["Everything in Essential", "Booking request form: the guest's dates arrive in your WhatsApp", "Photo gallery and a guest reviews section", "Extra sections for a menu, wine list or day-by-day tour", "Help adding your site to Google Maps and Instagram"]),
+   ("Essential", "$150", "or 400 GEL, one time", ["One page: your rooms or tours, prices and photos", "English and Russian, plus Georgian after you check it", "WhatsApp button and Google Maps link", "Looks right on every phone", "First year looked after: free hosting in your name, small fixes"]),
   ],
   steps_h="How it works",
   steps=[("Write to us", "Send your business name and a link to your Google Maps, Instagram or Booking.com page."),
@@ -35,10 +35,10 @@ T = {
   faq=[("Why do I need a website if I am on Booking.com?", "Booking.com takes a commission on every booking and shows guests your competitors next to you. Your own site lets guests contact you directly and see everything you offer."),
        ("How do we talk?", "We work in writing, by email. Every price and change is written down, nothing gets lost in translation, and you can answer when it suits you. You may also write to us in Georgian."),
        ("How do I pay?", "By PayPal payment link, after you approve the preview."),
-       ("What happens after the first year?", "You choose: the Care plan at $150 a year, or we hand over all site files for free."),
+       ("What happens after the first year?", "You choose: Care at $90 a year for small updates and a monthly check, or we hand over all site files for free."),
        ("Can you use photos from my Booking.com or Google page?", "Only photos you own or have permission to use. Please send the original files and tell us who took them."),
        ("Who owns the website?", "You do. The domain and the hosting account are registered in your name."),
-       ("Can you add Georgian, Armenian or another language?", "Every site is in English and Russian. Georgian is added at no cost, after you check the Georgian text.")],
+       ("Can you add Georgian, Armenian or another language?", "Every site is in English and Russian. Georgian is included at no cost, after you check the Georgian text. Ask us about Armenian or another language.")],
   contact_h="Let's make your preview", contact_p="Send us your business name and one link where guests can find you today. We answer within one working day.",
   email_l="Email", sample_l="Open sample", mail_subject="Website preview", privacy="We use what you send us only to answer you and build your site.", langs="Language", hero_tag="Serai Studio"),
  "ru": dict(
@@ -51,10 +51,10 @@ T = {
   cta="Получить бесплатный пример", cta2="Посмотреть работы",
   proof=[("Бесплатно", "пример до оплаты"), ("3 дня", "до закрытого примера"), ("2+", "языка на каждом сайте"), ("0", "комиссии с бронирований")],
   work_h="Наши работы", work_note="Это примеры сайтов для вымышленных заведений, чтобы показать, что мы делаем.",
-  prices_h="Две простые цены", prices_note="Цены разовые. Мы бесплатно настраиваем хостинг (Cloudflare) на аккаунте на ваше имя и первый год следим за ним. Домен (примерно $10–15 в год) регистрируется на ваше имя, поэтому сайт всегда принадлежит вам.",
+  prices_h="Выберите свой сайт", prices_note="Одна оплата, после того как вы одобрите пример. После первого года выбираете вы: «Поддержка» за $90 (240 лари) в год, это мелкие правки и ежемесячная проверка, или бесплатная передача всех файлов сайта. Домен (примерно $10–15 в год) регистрируется на ваше имя, мы его подключаем, и сайт всегда принадлежит вам.",
   plans=[
-   ("Старт", "$150", "или 400 лари, один раз", ["Одностраничный сайт", "Английский и русский. Грузинский тоже, после того как вы проверите текст", "Номера, цены и фото", "Кнопка WhatsApp и ссылка на Google Maps", "Удобно на любом телефоне", "Бесплатный хостинг на аккаунте Cloudflare на ваше имя, первый год под нашим присмотром, и подключение домена", "Закрытый пример через 3 рабочих дня после получения данных и фото"]),
-   ("Поддержка", "$150", "в год, со второго года", ["Работа сайта и его обновление", "Обновление цен, фото и текстов (до 30 минут в месяц)", "Напоминания о продлении домена", "Ежемесячная проверка работы сайта", "Ответ в течение рабочего дня"]),
+   ("Бронирование · Рекомендуем", "$250", "или 680 лари, один раз", ["Всё из «Базового»", "Форма запроса брони: даты гостя приходят вам в WhatsApp", "Фотогалерея и раздел отзывов гостей", "Дополнительные разделы: меню, винная карта или тур по дням", "Поможем добавить сайт в Google Maps и Instagram"]),
+   ("Базовый", "$150", "или 400 лари, один раз", ["Одна страница: номера или туры, цены и фото", "Английский и русский, плюс грузинский после вашей проверки", "Кнопка WhatsApp и ссылка на Google Maps", "Удобно на любом телефоне", "Первый год под нашим присмотром: бесплатный хостинг на ваше имя, мелкие правки"]),
   ],
   steps_h="Как это работает",
   steps=[("Напишите нам", "Пришлите название и ссылку на вашу страницу в Google Maps, Instagram или Booking.com."),
@@ -65,10 +65,10 @@ T = {
   faq=[("Зачем сайт, если я есть на Booking.com?", "Booking.com берёт комиссию с каждой брони и показывает гостям конкурентов рядом с вами. Свой сайт позволяет гостям писать вам напрямую и видеть всё, что вы предлагаете."),
        ("Как мы общаемся?", "Мы работаем письменно, по электронной почте. Все цены и правки записаны, ничего не теряется при переводе, и вы отвечаете, когда удобно. Можно писать и по-грузински."),
        ("Как оплатить?", "Через ссылку на оплату PayPal, после того как вы одобрите пример."),
-       ("Что после первого года?", "Выбираете вы: «Поддержка» за $150 в год или бесплатная передача всех файлов сайта."),
+       ("Что после первого года?", "Выбираете вы: «Поддержка» за $90 в год (мелкие правки и ежемесячная проверка) или бесплатная передача всех файлов сайта."),
        ("Можно взять фото с моей страницы Booking.com или Google?", "Только фото, которые принадлежат вам или на которые у вас есть разрешение. Пришлите оригиналы и напишите, кто снимал."),
        ("Кому принадлежит сайт?", "Вам. Домен и аккаунт хостинга регистрируются на ваше имя."),
-       ("Можно добавить грузинский, армянский или другой язык?", "Каждый сайт на английском и русском. Грузинский добавляем бесплатно, после того как вы проверите текст.")],
+       ("Можно добавить грузинский, армянский или другой язык?", "Каждый сайт на английском и русском. Грузинский бесплатно, после того как вы проверите текст. Про армянский или другой язык спросите нас.")],
   contact_h="Сделаем ваш пример", contact_p="Пришлите название и одну ссылку, где гости находят вас сейчас. Отвечаем в течение рабочего дня.",
   email_l="Почта", sample_l="Открыть пример", mail_subject="Пример сайта", privacy="Всё, что вы нам присылаете, мы используем только чтобы ответить вам и сделать ваш сайт.", langs="Язык", hero_tag="Serai Studio"),
 }
@@ -119,7 +119,7 @@ def render(lang):
         labels.append(label)
 
     plans = "".join(f'''<article class="plan{" dark" if i == 0 else ""} rv"><div class="p-in"><p class="p-name">{e(n)}</p><p class="amt"><b>{e(p)}</b><span>{e(unit)}</span></p>
-<ul>{"".join(f"<li>{e(x)}</li>" for x in items)}</ul>{f'<a class="btn" href="{mail}"><span>{e(c["cta"])}</span>{ARROW}</a>' if i == 0 else ""}</div></article>''' for i, (n, p, unit, items) in enumerate(c["plans"]))
+<ul>{"".join(f"<li>{e(x)}</li>" for x in items)}</ul><a class="btn" href="{mail}"><span>{e(c["cta"])}</span>{ARROW}</a></div></article>''' for i, (n, p, unit, items) in enumerate(c["plans"]))
     su = SUI.get(lang, SUI["en"])
     link = lambda c: f'<a href="{e(c["page"])}" target="_blank" rel="noopener">{e(c["artist"])}</a> (' + (
         f'<a href="{e(lic_url(c["license"]))}" target="_blank" rel="noopener license">{e(c["license"])}</a>' if lic_url(c["license"]) else e(c["license"])) + ")"
@@ -181,7 +181,7 @@ section{{padding-block:clamp(5rem,10vw,9rem)}}.head{{display:flex;flex-direction
 .plan.dark .p-in{{background:var(--deep);color:#efe9e0}}.dark .p-name{{color:var(--gold)}}.plan.dark .amt span,.plan.dark li{{color:rgba(239,233,224,.72)}}.plan.dark .btn{{background:#efe9e0;color:var(--ink);margin-top:2rem;align-self:flex-start}}.plan.dark .ic{{background:var(--ink);color:#fff}}
 .p-name{{font:500 .72rem/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--gold-t)}}:lang(ka) .p-name{{text-transform:none;letter-spacing:.04em}}
 .amt{{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap;margin:1.2rem 0 1.6rem}}.amt b{{font-family:var(--serif);font-weight:400;font-size:clamp(3.6rem,6vw,5.2rem);line-height:.9}}.amt span{{color:var(--muted);font-size:.92rem}}
-.plan ul{{list-style:none;padding:0;margin:0;display:grid;gap:.7rem}}.plan li{{padding-left:1.6rem;position:relative;color:var(--muted)}}
+.plan ul{{list-style:none;padding:0;margin:0 0 2rem;display:grid;gap:.7rem}}.plan .btn{{margin-top:auto!important;align-self:flex-start}}.plan li{{padding-left:1.6rem;position:relative;color:var(--muted)}}
 .plan li::before{{content:"";position:absolute;left:0;top:.8em;width:.8rem;height:1px;background:var(--gold)}}
 .prices .note{{margin-top:1.6rem;font-size:.92rem}}
 .how{{background:var(--deep);color:#efe9e0}}.how .tag{{color:#d7b57a}}
