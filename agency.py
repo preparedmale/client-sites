@@ -34,7 +34,7 @@ T = {
   faq_h="Questions",
   faq=[("Why do I need a website if I am on Booking.com?", "Booking.com takes a commission on every booking and shows guests your competitors next to you. Your own site lets guests contact you directly and see everything you offer."),
        ("How do we talk?", "We work in writing, by email. Every price and change is written down, nothing gets lost in translation, and you can answer when it suits you. We work remotely from Seoul. You may also write to us in Georgian."),
-       ("How do I pay?", "By PayPal payment link (you can pay by card), after you approve the preview."),
+       ("How do I pay?", "By PayPal payment link, after you approve the preview."),
        ("What happens after the first year?", "You choose: the Care plan at $150 a year, or we hand over all site files for free."),
        ("Can you use photos from my Booking.com or Google page?", "Only photos you own or have permission to use. Please send the original files and tell us who took them."),
        ("Who owns the website?", "You do. The domain and the hosting account are registered in your name."),
@@ -64,7 +64,7 @@ T = {
   faq_h="Вопросы",
   faq=[("Зачем сайт, если я есть на Booking.com?", "Booking.com берёт комиссию с каждой брони и показывает гостям конкурентов рядом с вами. Свой сайт позволяет гостям писать вам напрямую и видеть всё, что вы предлагаете."),
        ("Как мы общаемся?", "Мы работаем письменно, по электронной почте. Все цены и правки записаны, ничего не теряется при переводе, и вы отвечаете, когда удобно. Мы работаем удалённо из Сеула. Можно писать и по-грузински."),
-       ("Как оплатить?", "Через ссылку на оплату PayPal (можно картой), после того как вы одобрите пример."),
+       ("Как оплатить?", "Через ссылку на оплату PayPal, после того как вы одобрите пример."),
        ("Что после первого года?", "Выбираете вы: «Поддержка» за $150 в год или бесплатная передача всех файлов сайта."),
        ("Можно взять фото с моей страницы Booking.com или Google?", "Только фото, которые принадлежат вам или на которые у вас есть разрешение. Пришлите оригиналы и напишите, кто снимал."),
        ("Кому принадлежит сайт?", "Вам. Домен и аккаунт хостинга регистрируются на ваше имя."),
@@ -114,7 +114,7 @@ def render(lang):
         src = f"{pre}{slug}/{photo}" if photo else ""
         heroes.append(src)
         label = c.get("work_sub", {}).get(slug) or sub.get(lang) or sub["en"]
-        cards.append(f'<a class="slide" href="{href}"><img src="{src}" alt="" loading="lazy" decoding="async">'
+        cards.append(f'<a class="slide" href="{href}" aria-label="{e(name)}, {e(c["sample_l"])}"><img src="{src}" alt="" loading="lazy" decoding="async">'
                      f'<div class="cap"><div><p class="w-sub">{e(label)}</p><h3>{e(name)}</h3></div><span class="go">{e(c["sample_l"])} {ARROW}</span></div></a>')
         labels.append(label)
 
@@ -161,12 +161,12 @@ html[lang=ka] h1,html[lang=ka] h2,html[lang=ka] h3{{font-weight:300;letter-spaci
 .tag{{display:inline-flex;font:500 .7rem/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;padding:.55rem .9rem;border-radius:99px;color:var(--gold-t);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold) 40%,transparent)}}.how .tag{{color:var(--gold)}}
 :lang(ka) .tag{{text-transform:none;letter-spacing:.04em}}
 .nav{{position:fixed;top:18px;left:0;right:0;z-index:50;display:flex;justify-content:center;pointer-events:none}}
-.pill{{pointer-events:auto;display:flex;align-items:center;gap:clamp(.8rem,2vw,1.8rem);padding:.45rem .45rem .45rem 1.3rem;border-radius:99px;background:rgba(246,243,237,.72);
+.pill{{pointer-events:auto;display:flex;align-items:center;gap:clamp(.8rem,2vw,1.8rem);padding:.45rem .45rem .45rem 1.3rem;border-radius:99px;background:rgba(246,243,237,.94);
 box-shadow:inset 0 0 0 1px var(--hair);backdrop-filter:blur(18px) saturate(1.4);transition:box-shadow .6s var(--ease),background .6s var(--ease)}}
 .nav[data-solid="1"] .pill{{background:rgba(246,243,237,.9);box-shadow:inset 0 0 0 1px var(--hair),0 24px 48px -28px rgba(40,30,20,.35)}}
 .logo{{display:flex;align-items:center;gap:.5rem;font-family:var(--serif);font-size:1.35rem;text-decoration:none;white-space:nowrap}}.logo svg{{color:var(--gold)}}
-.pill nav{{display:flex;gap:1.3rem;font-size:.88rem}}.pill nav a{{text-decoration:none;opacity:.72;transition:opacity .3s}}.pill nav a:hover{{opacity:1}}
-.langs{{display:flex;gap:.1rem}}.langs a{{font-size:.7rem;font-weight:600;letter-spacing:.08em;text-decoration:none;padding:.35rem .5rem;border-radius:99px;opacity:.6}}.langs a[aria-current]{{opacity:1;box-shadow:inset 0 0 0 1px currentColor}}
+.pill nav{{display:flex;gap:1.3rem;font-size:.88rem}}.pill nav a{{text-decoration:none;color:var(--ink);transition:color .3s}}.pill nav a:hover{{color:var(--accent)}}
+.langs{{display:flex;gap:.1rem}}.langs a{{font-size:.7rem;font-weight:600;letter-spacing:.08em;text-decoration:none;padding:.35rem .5rem;border-radius:99px;color:#5c574f}}.langs a[aria-current]{{color:var(--ink);box-shadow:inset 0 0 0 1px currentColor}}
 .mini{{font-size:.82rem;font-weight:600;text-decoration:none;padding:.65rem 1.1rem;border-radius:99px;background:var(--ink);color:#fff;white-space:nowrap}}
 .btn{{display:inline-flex;align-items:center;gap:.9rem;padding:.45rem .45rem .45rem 1.5rem;border-radius:99px;background:var(--ink);color:#fff;text-decoration:none;font-weight:600;font-size:.95rem;transition:transform .5s var(--ease)}}
 .btn:active{{transform:scale(.98)}}.ic{{display:grid;place-items:center;flex:none;width:2.4rem;height:2.4rem;border-radius:50%;background:rgba(255,255,255,.14);transition:transform .5s var(--ease)}}
