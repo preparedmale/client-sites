@@ -204,7 +204,7 @@ footer{{border-top:1px solid rgba(239,233,224,.14);padding-block:2rem;color:rgba
 .hero::before{{content:"";position:absolute;inset:-20% -10% auto auto;width:70vw;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(181,135,58,.22),transparent);pointer-events:none}}
 .hero .tag{{color:#d7b57a;box-shadow:inset 0 0 0 1px rgba(215,181,122,.35)}}
 .hero h1{{font-size:clamp(3.4rem,9.4vw,10.5rem);line-height:.9;letter-spacing:-.03em;margin:1.6rem 0 clamp(2rem,4vw,3.4rem);max-width:12ch}}
-html[lang=ru] .hero h1{{font-size:clamp(2.2rem,7vw,7.6rem);max-width:14ch;hyphens:auto}}html[lang=ka] .hero h1{{font-size:clamp(1.85rem,5.6vw,5.6rem);line-height:1.1;max-width:20ch;letter-spacing:0;overflow-wrap:break-word}}
+html[lang=ru] .hero h1{{font-size:clamp(2.2rem,7vw,7.6rem);max-width:14ch;hyphens:auto}}html[lang=ko] .hero h1{{font-size:clamp(2.4rem,6.2vw,6.8rem);line-height:1.12;max-width:16ch;letter-spacing:-.01em;word-break:keep-all}}html[lang=ka] .hero h1{{font-size:clamp(1.85rem,5.6vw,5.6rem);line-height:1.1;max-width:20ch;letter-spacing:0;overflow-wrap:break-word}}
 .hero-row{{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem 4rem;flex-wrap:wrap;padding-top:2rem;border-top:1px solid rgba(239,233,224,.16)}}
 .hero .lead{{max-width:46ch;color:rgba(239,233,224,.74)}}.ctas{{display:flex;gap:.8rem;flex-wrap:wrap}}
 .hero .btn{{background:#efe9e0;color:var(--ink)}}.hero .btn .ic{{background:var(--gold);color:#fff}}.hero .ghost{{color:#efe9e0;box-shadow:inset 0 0 0 1px rgba(239,233,224,.3)}}
